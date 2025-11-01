@@ -1,0 +1,4 @@
+feedparser
+markdownify
+requests
+beautifulsoup4
