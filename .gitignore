@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,phpstorm+all,composer,python
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,visualstudiocode,phpstorm+all,composer,python
+# Created by https://www.toptal.com/developers/gitignore/api/macos,python,composer,phpstorm+all,visualstudiocode,hugo
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,python,composer,phpstorm+all,visualstudiocode,hugo
 
 ### Composer ###
 composer.phar
@@ -8,6 +8,21 @@ composer.phar
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
+
+### Hugo ###
+# Generated files by hugo
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+hugo_stats.json
+
+# Executable may be added to repository
+hugo.exe
+hugo.darwin
+hugo.linux
+
+# Temporary lock file while building
+/.hugo_build.lock
 
 ### macOS ###
 # General
@@ -321,4 +336,4 @@ pyrightconfig.json
 .history
 .ionide
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,phpstorm+all,composer,python
+# End of https://www.toptal.com/developers/gitignore/api/macos,python,composer,phpstorm+all,visualstudiocode,hugo
