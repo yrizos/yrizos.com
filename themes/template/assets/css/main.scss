@@ -20,6 +20,7 @@ $post-link-padding: 1rem;
 $border-width: 1px;
 $all-posts-link-margin-top: 1rem;
 $all-posts-link-icon-gap: 0.5rem;
+$avatar-size: 128px;
 
 html {
   background-color: $color-dark;
@@ -126,6 +127,25 @@ i {
 
 main {
   flex: 1;
+}
+
+.hero {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.hero p {
+  margin: 0;
+}
+
+.hero .avatar {
+  width: $avatar-size;
+  height: $avatar-size;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
 }
 
 .social-icons {
