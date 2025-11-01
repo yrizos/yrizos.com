@@ -4,10 +4,7 @@ date = 2025-03-15T10:00:00-07:00
 draft = false
 image = '/images/demo-post-image.jpg'
 imageAlt = 'Abstract landscape showing exploration paths'
-licenseText = 'CC BY 4.0'
-licenseURL = 'https://creativecommons.org/licenses/by/4.0/'
-tags = ['adventure', 'exploration', 'discovery']
-originalURL = ''
+originalURL = 'https://example.com/exploring-new-horizons'
 +++
 
 The journey of discovery begins with a single step. Every new adventure brings challenges and opportunities that shape our understanding of the world around us.

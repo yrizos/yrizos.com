@@ -27,9 +27,7 @@
 
 // Post Header
 .post-header {
-  margin-bottom: $spacing-xl;
-  padding-bottom: $spacing-xl;
-  border-bottom: 1px solid $color-border-secondary;
+  margin-bottom: 0;
 }
 
 .post .post-title {
@@ -40,7 +38,8 @@
 
 .post-meta {
   display: flex;
-  gap: $spacing-md;
+  gap: $spacing-sm;
+  align-items: center;
   font-size: $font-size-xs;
   color: $color-text-muted;
 }
@@ -50,9 +49,17 @@
   color: $color-text-muted;
 }
 
+.post-meta-separator {
+  color: $color-border-secondary;
+}
+
 // Post Content
 .post-content {
-  margin-bottom: $spacing-2xl;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-xl;
+  padding-bottom: $spacing-xl;
+  border-top: 1px solid $color-border-secondary;
+  border-bottom: 1px solid $color-border-secondary;
 }
 
 .post .post-content h2,
@@ -87,7 +94,14 @@
 .post .post-content p,
 .post .post-content ul,
 .post .post-content ol {
+  margin-top: 0;
   margin-bottom: $spacing-xl;
+}
+
+.post .post-content p:last-child,
+.post .post-content ul:last-child,
+.post .post-content ol:last-child {
+  margin-bottom: 0;
 }
 
 .post .post-content ul,
@@ -116,22 +130,20 @@
 
 // Post Footer
 .post-footer {
-  border-top: 1px solid $color-border-secondary;
-  padding-top: $spacing-xl;
+  margin-top: $spacing-xl;
+  font-size: $font-size-xs;
 }
 
 // Original URL Notice
 .post-original-notice {
   margin-bottom: $spacing-xl;
-  padding: $spacing-md;
-  background-color: lighten($color-background-primary, 3%);
-  border-left: 3px solid $color-text-accent;
-  font-size: $font-size-xs;
+  text-align: center;
+  font-style: italic;
   color: $color-text-muted;
 }
 
 .post-original-notice a {
-  color: $color-text-accent;
+  color: $color-text-muted;
   text-decoration: underline;
 }
 
@@ -141,7 +153,7 @@
 
 // License
 .post-license {
-  font-size: $font-size-xs;
+  text-align: center;
   color: $color-text-muted;
 }
 
@@ -155,8 +167,5 @@
 
 .post-license a:hover {
   color: $color-text-primary;
-}
-
-.post-license i {
-  font-size: $font-size-sm;
+  text-decoration: underline;
 }

@@ -4,10 +4,7 @@ date = 2024-08-15T07:45:00-07:00
 draft = false
 image = '/images/demo-post-image.jpg'
 imageAlt = 'Peaceful morning landscape'
-licenseText = 'CC BY 4.0'
-licenseURL = 'https://creativecommons.org/licenses/by/4.0/'
-tags = ['reflection', 'mindfulness', 'morning']
-originalURL = ''
+originalURL = 'https://example.com/morning-reflections'
 +++
 
 Early mornings offer a quiet moment for reflection. The stillness before the day begins provides clarity and perspective.

@@ -4,10 +4,7 @@ date = 2024-05-05T16:20:00-07:00
 draft = false
 image = '/images/demo-post-image.jpg'
 imageAlt = 'Educational books and materials'
-licenseText = 'CC BY 4.0'
-licenseURL = 'https://creativecommons.org/licenses/by/4.0/'
-tags = ['education', 'learning', 'growth']
-originalURL = ''
+originalURL = 'https://example.com/learning-never-ends'
 +++
 
 Every day brings opportunities to learn something new. Whether it's a new skill, concept, or perspective, knowledge expands our capabilities.

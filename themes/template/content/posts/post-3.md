@@ -4,10 +4,7 @@ date = 2024-11-20T09:15:00-07:00
 draft = false
 image = '/images/demo-post-image.jpg'
 imageAlt = 'Futuristic technology visualization'
-licenseText = 'CC BY 4.0'
-licenseURL = 'https://creativecommons.org/licenses/by/4.0/'
-tags = ['technology', 'innovation', 'future']
-originalURL = ''
+originalURL = 'https://example.com/thoughts-on-technology'
 +++
 
 Technology continues to evolve at an incredible pace. With each advancement, we find new ways to solve problems and improve our daily lives.

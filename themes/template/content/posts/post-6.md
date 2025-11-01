@@ -4,10 +4,7 @@ date = 2024-02-12T11:30:00-07:00
 draft = false
 image = '/images/demo-post-image.jpg'
 imageAlt = 'Natural landscape showing ecological balance'
-licenseText = 'CC BY 4.0'
-licenseURL = 'https://creativecommons.org/licenses/by/4.0/'
-tags = ['nature', 'balance', 'ecology']
-originalURL = ''
+originalURL = 'https://example.com/natures-balance'
 +++
 
 Nature demonstrates perfect balance in all things. Seasons change, cycles complete, and life finds its rhythm.

@@ -4,10 +4,7 @@ date = 2025-02-10T14:30:00-07:00
 draft = false
 image = '/images/demo-post-image.jpg'
 imageAlt = 'Minimalist design elements representing simplicity'
-licenseText = 'CC BY 4.0'
-licenseURL = 'https://creativecommons.org/licenses/by/4.0/'
-tags = ['design', 'simplicity', 'minimalism']
-originalURL = ''
+originalURL = 'https://example.com/art-of-simplicity'
 +++
 
 Simplicity is the ultimate sophistication. In a world filled with complexity, finding the essence of things becomes a valuable skill.

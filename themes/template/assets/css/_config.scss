@@ -8,13 +8,13 @@ $color-background-hover: #715A5A;
 
 // Text colors
 $color-text-primary: #D3DAD9;
-$color-text-muted: #44444E;
+$color-text-muted: darken($color-text-primary, 10%);
 $color-text-accent: #715A5A;
 
 // Border colors
 $color-border-primary: #715A5A;
-$color-border-secondary: #3A3841;
-$color-separator: $color-text-muted;
+$color-border-secondary: lighten(#3A3841, 5%);
+$color-separator: #44444E;
 
 // ============================================
 // SPACING

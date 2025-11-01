@@ -4,10 +4,7 @@ date = 2023-12-18T13:00:00-07:00
 draft = false
 image = '/images/demo-post-image.jpg'
 imageAlt = 'Artistic tools and creative workspace'
-licenseText = 'CC BY 4.0'
-licenseURL = 'https://creativecommons.org/licenses/by/4.0/'
-tags = ['creativity', 'art', 'expression']
-originalURL = ''
+originalURL = 'https://example.com/creative-expression'
 +++
 
 Creativity flows through various forms of expression. Each medium offers unique ways to share ideas and emotions.
