@@ -2,6 +2,7 @@ $color-dark: #37353E;
 $color-medium-dark: #44444E;
 $color-accent: #715A5A;
 $color-light: #D3DAD9;
+$color-separator: lighten($color-dark, 5%);
 
 $font-size-normal: 1rem;
 $font-size-h1: 2rem;
@@ -22,6 +23,7 @@ $all-posts-link-margin-top: 1rem;
 $all-posts-link-icon-gap: 0.5rem;
 $avatar-size: 128px;
 $posts-list-margin-bottom: 4rem;
+$header-height: calc((#{$container-padding} * 2) + #{$icon-font-size});
 
 html {
   background-color: $color-dark;
@@ -125,8 +127,45 @@ i {
   color: $color-light;
 }
 
+.hamburger-menu i {
+  color: $color-accent;
+}
+
+.hamburger-menu i.fa-bars {
+  color: $color-accent;
+}
+
 header {
   position: relative;
+  z-index: 1000;
+}
+
+.hamburger-nav {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.hamburger-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.hamburger-menu-list li {
+  padding: $container-padding;
+  border-top: 1px solid $color-separator;
+}
+
+.hamburger-menu-list li:hover {
+  background-color: $color-accent;
+}
+
+.hamburger-menu-list a {
+  font-family: $heading-font-family;
+  font-size: $font-size-h3;
+  font-weight: normal;
+  color: $color-light;
+  text-decoration: none;
 }
 
 main {
