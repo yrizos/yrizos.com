@@ -27,6 +27,9 @@
   border-bottom: 1px solid $color-border-primary;
   padding-top: $spacing-md;
   padding-bottom: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
 }
 
 .posts-list li:first-child {
@@ -46,6 +49,25 @@
 
 .post-title a:hover {
   text-decoration: underline;
+}
+
+.post-date {
+  display: none;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .posts-list li {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .post-date {
+    display: block;
+  }
 }
 
 .all-posts-link {
