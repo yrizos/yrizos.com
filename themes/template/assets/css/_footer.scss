@@ -1,0 +1,23 @@
+// ============================================
+// FOOTER
+// ============================================
+
+// ============================================
+// SOCIAL ICONS
+// ============================================
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-md;
+  align-items: center;
+}
+
+.social-icons i {
+  color: $color-text-accent;
+  font-size: $icon-size-primary;
+}
+
+.social-icons a:hover i {
+  color: $color-text-primary;
+}

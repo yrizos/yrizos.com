@@ -1,5 +1,6 @@
 @import 'config';
 @import 'header';
+@import 'footer';
 
 html {
   background-color: $color-background-primary;
@@ -87,22 +88,6 @@ main {
   object-fit: cover;
   display: block;
   margin: 0 auto;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: $spacing-md;
-  align-items: center;
-}
-
-.social-icons i {
-  color: $color-text-accent;
-  font-size: $icon-size-primary;
-}
-
-.social-icons a:hover i {
-  color: $color-text-primary;
 }
 
 article ul,
