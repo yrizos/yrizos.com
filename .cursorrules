@@ -21,7 +21,17 @@ Before working on any task, read README.md to understand:
    - Do not assume user preferences or constraints
    - Do not assume technical decisions without verification
 
-2. **Do the minimum requested**
+2. **95% confidence threshold before action**
+
+   - You must be 95% confident you understand exactly what the user wants before making any changes
+   - If you have any doubt about the request, ask clarifying questions first
+   - Uncertainty about scope, approach, or requirements means STOP and ask
+   - Do not proceed with "I think you mean..." or "I assume you want..." - ask instead
+   - **It is always better to do NOTHING and ask than to do the wrong thing**
+   - Doing the wrong thing wastes the user's time and creates more work
+   - Taking no action is preferable to taking incorrect action
+
+3. **Do the minimum requested**
 
    - Complete only what the user explicitly asks for
    - Do not add extra features, files, or improvements
@@ -30,19 +40,51 @@ Before working on any task, read README.md to understand:
    - Excessive actions waste time and add complexity
    - Better to do less than more
 
-3. **Answer questions, do not take action**
+4. **Answer questions, do not take action**
 
    - If the user asks a question, provide an answer
    - Do not implement changes when user is asking for information
    - Do not create files or modify code when user is seeking clarification
    - User questions expect answers, not actions
 
-4. **Never commit without explicit request**
+5. **Never commit without explicit request**
 
    - Do not create commits automatically after making changes
    - Do not commit unless the user explicitly asks you to commit
    - Only run `git commit` when directly instructed by the user
    - Making changes does not imply permission to commit them
+
+### When to ask for clarification
+
+Ask clarifying questions when:
+
+- The request is ambiguous or could be interpreted multiple ways
+- You don't know which files or components to modify
+- Multiple approaches exist and the preferred one is unclear
+- The scope of changes is undefined (how much to change, what to include)
+- Technical decisions need to be made (libraries, patterns, architectures)
+- You're unsure about edge cases or error handling requirements
+- The request conflicts with existing code or patterns
+- You're below 95% confidence about what to do
+
+### Example: The hamburger menu trap
+
+**Bad approach (wastes time):**
+User: "Add a hamburger menu"
+Agent: _Proceeds to create a menu that slides in from the right with a dark overlay_
+Result: User wanted it to slide from the left with no overlay - now you must redo everything
+
+**Good approach (saves time):**
+User: "Add a hamburger menu"
+Agent: "Before I implement the hamburger menu, I need to clarify a few details:
+
+- Should it slide in from the left, right, or top?
+- Do you want an overlay/backdrop when it's open?
+- Should it push content or overlay on top?
+- What should trigger it to close (click outside, close button, both)?
+- Any specific styling requirements (colors, animations, dimensions)?"
+
+**The lesson:** Even common UI patterns have many implementation variations. Making assumptions and building the wrong thing wastes significantly more time than asking 3-5 clarifying questions upfront. If you're not 95% certain about the specifics, ask first.
 
 ### Common best practices
 
@@ -193,451 +235,3 @@ git commit -m "feat: add jwt authentication system
 Implement JWT-based authentication with login,
 registration, and token refresh endpoints."
 ```
-
-## Brand guidelines
-
-Before making any UI changes, design decisions, or visual modifications, read:
-
-```
-docs/rules/BRAND_GUIDELINES.md
-```
-
-Follow all established standards:
-
-- Color palette and theme colors
-- Typography hierarchy and font usage
-- Logo usage rules and variations
-- Spacing and layout conventions
-- Accessibility standards (WCAG compliance)
-- Component design patterns
-- Animation and interaction guidelines
-
-Do not deviate from brand guidelines without explicit user approval.
-
-# Created by https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,phpstorm+all,composer,python
-
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,visualstudiocode,phpstorm+all,composer,python
-
-### Composer
-
-composer.phar
-/vendor/
-
-# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
-
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-
-# composer.lock
-
-### macOS
-
-# General
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-
-Icon
-
-# Thumbnails
-
-.\_\*
-
-# Files that might appear in the root of a volume
-
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-### macOS Patch
-
-# iCloud generated files
-
-\*.icloud
-
-### PhpStorm+all
-
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
-
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
-
-# User-specific stuff
-
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/\*\*/shelf
-
-# AWS User-specific
-
-.idea/\*\*/aws.xml
-
-# Generated files
-
-.idea/\*\*/contentModel.xml
-
-# Sensitive or high-churn files
-
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
-.idea/\*\*/dbnavigator.xml
-
-# Gradle
-
-.idea/**/gradle.xml
-.idea/**/libraries
-
-# Gradle and Maven with auto-import
-
-# When using Gradle or Maven with auto-import, you should exclude module files,
-
-# since they will be recreated, and may cause churn. Uncomment if using
-
-# auto-import.
-
-# .idea/artifacts
-
-# .idea/compiler.xml
-
-# .idea/jarRepositories.xml
-
-# .idea/modules.xml
-
-# .idea/\*.iml
-
-# .idea/modules
-
-# \*.iml
-
-# \*.ipr
-
-# CMake
-
-cmake-build-\*/
-
-# Mongo Explorer plugin
-
-.idea/\*\*/mongoSettings.xml
-
-# File-based project format
-
-\*.iws
-
-# IntelliJ
-
-out/
-
-# mpeltonen/sbt-idea plugin
-
-.idea_modules/
-
-# JIRA plugin
-
-atlassian-ide-plugin.xml
-
-# Cursive Clojure plugin
-
-.idea/replstate.xml
-
-# SonarLint plugin
-
-.idea/sonarlint/
-
-# Crashlytics plugin (for Android Studio and IntelliJ)
-
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-
-# Editor-based Rest Client
-
-.idea/httpRequests
-
-# Android studio 3.1+ serialized cache file
-
-.idea/caches/build_file_checksums.ser
-
-### PhpStorm+all Patch
-
-# Ignore everything but code style settings and run configurations
-
-# that are supposed to be shared within teams.
-
-.idea/\*
-
-!.idea/codeStyles
-!.idea/runConfigurations
-
-### Python
-
-# Byte-compiled / optimized / DLL files
-
-**pycache**/
-_.py[cod]
-_$py.class
-
-# C extensions
-
-\*.so
-
-# Distribution / packaging
-
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-_.egg-info/
-.installed.cfg
-_.egg
-MANIFEST
-
-# PyInstaller
-
-# Usually these files are written by a python script from a template
-
-# before PyInstaller builds the exe, so as to inject date/other infos into it.
-
-_.manifest
-_.spec
-
-# Installer logs
-
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage._
-.cache
-nosetests.xml
-coverage.xml
-_.cover
-\*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
-
-# Translations
-
-_.mo
-_.pot
-
-# Django stuff:
-
-\*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-
-.scrapy
-
-# Sphinx documentation
-
-docs/\_build/
-
-# PyBuilder
-
-.pybuilder/
-target/
-
-# Jupyter Notebook
-
-.ipynb_checkpoints
-
-# IPython
-
-profile_default/
-ipython_config.py
-
-# pyenv
-
-# For a library or package, you might want to ignore these files since the code is
-
-# intended to run in multiple environments; otherwise, check them in:
-
-# .python-version
-
-# pipenv
-
-# According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-
-# However, in case of collaboration, if having platform-specific dependencies or dependencies
-
-# having no cross-platform support, pipenv may install dependencies that don't work, or not
-
-# install all needed dependencies.
-
-#Pipfile.lock
-
-# poetry
-
-# Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-
-# This is especially recommended for binary packages to ensure reproducibility, and is more
-
-# commonly ignored for libraries.
-
-# https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-
-#poetry.lock
-
-# pdm
-
-# Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-
-#pdm.lock
-
-# pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
-
-# in version control.
-
-# https://pdm.fming.dev/#use-with-ide
-
-.pdm.toml
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-
-**pypackages**/
-
-# Celery stuff
-
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-
-\*.sage.py
-
-# Environments
-
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-
-.spyderproject
-.spyproject
-
-# Rope project settings
-
-.ropeproject
-
-# mkdocs documentation
-
-/site
-
-# mypy
-
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-
-.pyre/
-
-# pytype static type analyzer
-
-.pytype/
-
-# Cython debug symbols
-
-cython_debug/
-
-# PyCharm
-
-# JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-
-# be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-
-# and can be added to the global gitignore or merged into this file. For a more nuclear
-
-# option (not recommended) you can uncomment the following to ignore the entire idea folder.
-
-#.idea/
-
-### Python Patch
-
-# Poetry local configuration file - https://python-poetry.org/docs/configuration/#local-configuration
-
-poetry.toml
-
-# ruff
-
-.ruff_cache/
-
-# LSP config files
-
-pyrightconfig.json
-
-### VisualStudioCode
-
-.vscode/_
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/_.code-snippets
-
-# Local History for Visual Studio Code
-
-.history/
-
-# Built Visual Studio Code Extensions
-
-\*.vsix
-
-### VisualStudioCode Patch
-
-# Ignore all local history of files
-
-.history
-.ionide
-
-# End of https://www.toptal.com/developers/gitignore/api/macos,visualstudiocode,phpstorm+all,composer,python
