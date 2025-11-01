@@ -6,16 +6,18 @@ Renders a posts list with a title.
 */}}
 {{- $title := .title }}
 {{- $pages := .pages }}
-{{- if $title }}
-<h2>{{ $title }}</h2>
-{{- end }}
-<ul class="posts-list">
-  {{- range $pages }}
-  <li>
-    <a href="{{ .RelPermalink }}">
-      <h3 class="post-title">{{ .LinkTitle }}</h3>
-    </a>
-  </li>
+<section class="posts-list-section">
+  {{- if $title }}
+  <h2 class="posts-list-title">{{ $title }}</h2>
   {{- end }}
-</ul>
+  <ul class="posts-list">
+    {{- range $pages }}
+    <li>
+      <h3 class="post-title">
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+      </h3>
+    </li>
+    {{- end }}
+  </ul>
+</section>
 

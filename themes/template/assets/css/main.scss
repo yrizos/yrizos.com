@@ -1,6 +1,7 @@
 @import 'config';
 @import 'header';
 @import 'footer';
+@import 'posts-list';
 
 html {
   background-color: $color-background-primary;
@@ -94,47 +95,6 @@ article ul,
 article ol {
   margin-left: 0;
   padding-left: $spacing-xl;
-}
-
-.posts-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.section-posts .posts-list {
-  margin-bottom: $spacing-3xl;
-}
-
-.posts-list li {
-  margin: 0;
-  border-bottom: 1px solid $color-border-primary;
-  padding-top: $spacing-md;
-  padding-bottom: $spacing-md;
-}
-
-.posts-list li:first-child {
-  border-top: 1px solid $color-border-primary;
-}
-
-.posts-list a {
-  display: block;
-  text-decoration: none;
-  color: $color-text-primary;
-}
-
-.posts-list a:hover {
-  text-decoration: underline;
-}
-
-.posts-list .post-title {
-  margin: 0;
-  font-weight: $font-weight-normal;
-  color: $color-text-primary;
-}
-
-.section-posts h2 {
-  color: $color-text-accent;
 }
 
 .all-posts-link {

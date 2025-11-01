@@ -1,0 +1,48 @@
+// ============================================
+// POSTS LIST COMPONENT
+// ============================================
+
+.posts-list-section {
+  margin-top: $spacing-3xl;
+}
+
+.posts-list-section:first-child {
+  margin-top: 0;
+}
+
+.posts-list-title {
+  color: $color-text-accent;
+  margin-bottom: $spacing-md;
+}
+
+.posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.posts-list li {
+  margin: 0;
+  border-bottom: 1px solid $color-border-primary;
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
+}
+
+.posts-list li:first-child {
+  border-top: 1px solid $color-border-primary;
+}
+
+.post-title {
+  margin: 0;
+  font-weight: $font-weight-normal;
+  color: $color-text-primary;
+}
+
+.post-title a {
+  color: $color-text-primary;
+  text-decoration: none;
+}
+
+.post-title a:hover {
+  text-decoration: underline;
+}
