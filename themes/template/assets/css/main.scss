@@ -6,7 +6,7 @@ $color-light: #D3DAD9;
 $base-font-size: 1rem;
 $font-family: 'Source Sans 3', sans-serif;
 $heading-font-family: 'Inter', sans-serif;
-$footer-padding: 1.25rem;
+$container-padding: 1.25rem;
 $social-icons-gap: 1rem;
 
 html {
@@ -31,13 +31,39 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $heading-font-family;
 }
 
-main {
-  flex: 1;
-  padding: $footer-padding;
+.container {
+  padding: $container-padding;
 }
 
-footer {
-  padding: $footer-padding;
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-icon,
+.hamburger-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.home-icon svg,
+.hamburger-menu svg {
+  fill: $color-accent;
+}
+
+.home-icon:hover svg,
+.hamburger-menu:hover svg {
+  fill: $color-light;
+}
+
+main {
+  flex: 1;
 }
 
 .social-icons {
