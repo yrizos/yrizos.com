@@ -1,4 +1,5 @@
 @import 'config';
+@import 'header';
 
 html {
   background-color: $color-background-primary;
@@ -61,109 +62,7 @@ h6 {
   padding: $spacing-lg;
 }
 
-header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.home-icon,
-.hamburger-menu {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  list-style: none;
-  text-decoration: none;
-}
-
-.home-icon::before,
-.home-icon::after,
-.hamburger-menu::before,
-.hamburger-menu::after {
-  display: none;
-  content: none;
-}
-
 i {
-  text-decoration: none;
-}
-
-.home-icon i,
-.hamburger-menu i {
-  color: $color-text-accent;
-  font-size: $icon-size-primary;
-}
-
-.home-icon i::after,
-.hamburger-menu i::after {
-  display: none;
-  content: none;
-}
-
-.home-icon:hover i,
-.hamburger-menu:hover i {
-  color: $color-text-primary;
-}
-
-.hamburger-menu i {
-  color: $color-text-accent;
-}
-
-.hamburger-menu i.fa-bars {
-  color: $color-text-accent;
-}
-
-header {
-  position: relative;
-  z-index: $z-index-header;
-}
-
-.hamburger-nav {
-  position: fixed;
-  top: calc(($spacing-lg * 2) + $icon-size-primary);
-  left: 0;
-  right: 0;
-  width: 100%;
-  background-color: $color-background-primary;
-  z-index: $z-index-nav;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height $transition-duration-normal $transition-easing-normal;
-  padding: 0px;
-  box-shadow: $shadow-dropdown;
-}
-
-.hamburger-nav.open {
-  max-height: 500px;
-}
-
-
-.hamburger-menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-
-.hamburger-menu-list li {
-  padding: $spacing-lg;
-  border-top: 1px solid $color-border-secondary;
-}
-
-.hamburger-menu-list li:hover {
-  background-color: $color-background-hover;
-}
-
-.hamburger-menu-list a {
-  font-family: $font-family-primary;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-normal;
-  color: $color-text-primary;
   text-decoration: none;
 }
 
