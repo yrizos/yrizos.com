@@ -1,0 +1,74 @@
+// ============================================
+// COLORS
+// ============================================
+
+// Background colors
+$color-background-primary: #37353E;
+$color-background-hover: #715A5A;
+
+// Text colors
+$color-text-primary: #D3DAD9;
+$color-text-muted: #44444E;
+$color-text-accent: #715A5A;
+
+// Border colors
+$color-border-primary: #715A5A;
+$color-border-secondary: #3A3841;
+
+// ============================================
+// SPACING
+// ============================================
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.25rem;
+$spacing-xl: 1.5rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+
+// ============================================
+// TYPOGRAPHY
+// ============================================
+
+// Font families
+$font-family-primary: 'Inclusive Sans', sans-serif;
+
+// Font sizes
+$font-size-xs: 0.875rem;
+$font-size-sm: 1rem;
+$font-size-md: 1.125rem;
+$font-size-lg: 1.25rem;
+$font-size-xl: 1.4rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 2.25rem;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-normal: normal;
+
+// ============================================
+// LAYOUT
+// ============================================
+
+// Icon sizes
+$icon-size-primary: 1.4rem;
+$icon-size-small: 0.8rem;
+
+// Avatar
+$avatar-size: 128px;
+
+// Shadows
+$shadow-dropdown: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+// Border radius
+$border-radius-sm: 3px;
+$border-radius-round: 50%;
+
+// Z-index
+$z-index-header: 1000;
+$z-index-nav: 999;
+
+// Transitions
+$transition-duration-normal: 0.5s;
+$transition-easing-normal: ease-in-out;
