@@ -1,0 +1,43 @@
+$color-dark: #37353E;
+$color-medium-dark: #44444E;
+$color-accent: #715A5A;
+$color-light: #D3DAD9;
+
+$base-font-size: 1rem;
+$footer-padding: 1.25rem;
+$social-icons-gap: 1rem;
+
+html,
+body {
+  background-color: $color-dark;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  padding: $footer-padding;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: $social-icons-gap;
+  align-items: center;
+}
+
+.social-icons svg {
+  fill: $color-accent;
+}
+
+.social-icons a:hover svg {
+  fill: $color-light;
+}
+

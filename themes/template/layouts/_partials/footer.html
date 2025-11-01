@@ -1,0 +1,34 @@
+<nav class="social-icons">
+  {{ if site.Params.social.linkedin }}
+  {{ $linkedin := resources.GetRemote "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" }}
+  {{ if $linkedin }}
+  <a href="{{ site.Params.social.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+    {{ ($linkedin.Content | replaceRE `<svg` `<svg width="20" height="20"` | replaceRE `fill="[^"]*"` `fill="currentColor"`) | safeHTML }}
+  </a>
+  {{ end }}
+  {{ end }}
+  {{ if site.Params.social.github }}
+  {{ $github := resources.GetRemote "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg" }}
+  {{ if $github }}
+  <a href="{{ site.Params.social.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+    {{ ($github.Content | replaceRE `<svg` `<svg width="20" height="20"` | replaceRE `fill="[^"]*"` `fill="currentColor"`) | safeHTML }}
+  </a>
+  {{ end }}
+  {{ end }}
+  {{ if site.Params.social.medium }}
+  {{ $medium := resources.GetRemote "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/medium.svg" }}
+  {{ if $medium }}
+  <a href="{{ site.Params.social.medium }}" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+    {{ ($medium.Content | replaceRE `<svg` `<svg width="20" height="20"` | replaceRE `fill="[^"]*"` `fill="currentColor"`) | safeHTML }}
+  </a>
+  {{ end }}
+  {{ end }}
+  {{ if site.Params.social.goodreads }}
+  {{ $goodreads := resources.GetRemote "https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/goodreads.svg" }}
+  {{ if $goodreads }}
+  <a href="{{ site.Params.social.goodreads }}" target="_blank" rel="noopener noreferrer" aria-label="Goodreads">
+    {{ ($goodreads.Content | replaceRE `<svg` `<svg width="20" height="20"` | replaceRE `fill="[^"]*"` `fill="currentColor"`) | safeHTML }}
+  </a>
+  {{ end }}
+  {{ end }}
+</nav>
