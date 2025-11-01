@@ -3,17 +3,9 @@
   <section class="hero">
     {{ partial "hero.html" . }}
   </section>
-  <h2>Recent posts</h2>
-  <ul class="posts-list">
-    {{ $limit := site.Params.recentPostsLimit | default 6 }}
-    {{ range (first $limit (sort site.RegularPages "Date" "desc")) }}
-      <li>
-        <a href="{{ .RelPermalink }}">
-          <h3 class="post-title">{{ .LinkTitle }}</h3>
-        </a>
-      </li>
-    {{ end }}
-  </ul>
+  {{ $limit := site.Params.recentPostsLimit | default 6 }}
+  {{ $recentPosts := first $limit (sort site.RegularPages "Date" "desc") }}
+  {{ partial "posts-list.html" (dict "title" "Recent posts" "pages" $recentPosts) }}
   <div class="all-posts-link">
     <a href="/posts/">All posts <i class="fa-solid fa-angles-right"></i></a>
   </div>

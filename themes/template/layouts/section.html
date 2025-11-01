@@ -1,9 +1,8 @@
 {{ define "main" }}
-  {{ .Content }}
-  {{ range .Pages }}
-    <section>
-      <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
-      {{ .Summary }}
-    </section>
-  {{ end }}
+  <div class="section-posts">
+    {{ $pages := sort .Pages "Date" "desc" }}
+    {{ range $pages.GroupByDate "2006" }}
+      {{ partial "posts-list.html" (dict "title" .Key "pages" (sort .Pages "Date" "desc")) }}
+    {{ end }}
+  </div>
 {{ end }}

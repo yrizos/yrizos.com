@@ -1,0 +1,21 @@
+{{- /*
+Renders a posts list with a title.
+
+@context {string} title The title to display above the list.
+@context {slice} pages The pages to display in the list.
+*/}}
+{{- $title := .title }}
+{{- $pages := .pages }}
+{{- if $title }}
+<h2>{{ $title }}</h2>
+{{- end }}
+<ul class="posts-list">
+  {{- range $pages }}
+  <li>
+    <a href="{{ .RelPermalink }}">
+      <h3 class="post-title">{{ .LinkTitle }}</h3>
+    </a>
+  </li>
+  {{- end }}
+</ul>
+
