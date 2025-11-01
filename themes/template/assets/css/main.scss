@@ -141,8 +141,24 @@ header {
 }
 
 .hamburger-nav {
+  position: fixed;
+  top: $header-height;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: $color-dark;
+  z-index: 999;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+  padding: 0px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
+
+.hamburger-nav.open {
+  max-height: 500px;
+}
+
 
 .hamburger-menu-list {
   list-style: none;
