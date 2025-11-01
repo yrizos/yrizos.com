@@ -1,16 +1,20 @@
 {{ define "main" }}
-  {{ if .Params.image }}
-  <div class="post-cover">
-    <img src="{{ .Params.image }}" alt="{{ .Params.imageAlt | default .Title }}">
-  </div>
-  {{ end }}
+  <article>
+    {{ if .Params.image }}
+    <div class="post-cover">
+      <img src="{{ .Params.image }}" alt="{{ .Params.imageAlt | default .Title }}">
+    </div>
+    {{ end }}
 
-  <h1>{{ .Title }}</h1>
+    <header>
+      <h1>{{ .Title }}</h1>
 
-  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-  {{ $dateHuman := .Date | time.Format ":date_long" }}
-  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+    </header>
 
-  {{ .Content }}
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+    {{ .Content }}
+    {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  </article>
 {{ end }}

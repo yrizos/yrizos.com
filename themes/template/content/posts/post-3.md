@@ -26,6 +26,21 @@ Every technological advancement is fundamentally a tool—an extension of human 
 
 Understanding technology as a tool helps us maintain perspective. We remain in control of how we engage with new capabilities, and we can choose which developments align with our values and goals.
 
+Important considerations when evaluating technology:
+
+- Does it solve a real problem?
+- Does it enhance human capabilities?
+- What are the potential unintended consequences?
+- How does it align with our values?
+
+Evaluation checklist:
+
+1. Understand the technology's core purpose
+2. Assess its impact on human wellbeing
+3. Consider long-term implications
+4. Test it in your own context
+5. Make an informed decision
+
 ## Human-Centered Innovation
 
 The most impactful technological innovations put human needs at the center. They solve real problems for real people, enhancing our ability to connect, create, and contribute. When technology serves humanity rather than the other way around, remarkable things become possible.

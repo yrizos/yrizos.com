@@ -38,3 +38,18 @@ Relationships require ongoing attention and care. They're not static—they eith
 
 When we prioritize nurturing our connections, we build networks of support that enrich our lives and create opportunities for mutual growth and contribution.
 
+Elements of strong relationships:
+
+- Mutual respect and understanding
+- Consistent communication and presence
+- Genuine interest in each other's wellbeing
+- Willingness to work through challenges together
+
+Daily practices to strengthen relationships:
+
+1. Send a message just to check in
+2. Listen actively when others speak
+3. Show appreciation for small things
+4. Be present during shared time
+5. Offer support when someone needs it
+

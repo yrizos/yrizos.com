@@ -38,3 +38,18 @@ We don't just prepare for the future—we actively create it through our daily c
 
 When we align our actions with our vision for the future, we become co-creators of a world that reflects our values and aspirations, contributing to progress in meaningful ways.
 
+Principles for future-building:
+
+- Think long-term, act short-term
+- Build systems that outlast individual efforts
+- Invest in learning and adaptability
+- Focus on creating value for others
+
+Actions that shape tomorrow:
+
+1. Make choices aligned with your values
+2. Invest in relationships and community
+3. Learn skills that matter for the future
+4. Take small steps toward your vision daily
+5. Stay open to adapting as things change
+

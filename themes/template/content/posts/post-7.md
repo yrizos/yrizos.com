@@ -38,3 +38,18 @@ Creating something new requires courage—the willingness to be vulnerable, to t
 
 The more we practice creating, the more comfortable we become with the uncertainty and vulnerability that are inherent to the creative process. This comfort allows us to take bigger risks and explore more deeply.
 
+What creative courage looks like:
+
+- Starting projects even when unsure of the outcome
+- Sharing work before it feels "perfect"
+- Learning from failures and mistakes
+- Experimenting with new approaches
+
+Cultivating creative courage:
+
+1. Start with small creative acts
+2. Accept imperfection as part of the process
+3. Share your work regularly
+4. Learn from feedback without taking it personally
+5. Keep creating consistently
+

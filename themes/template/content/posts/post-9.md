@@ -38,3 +38,18 @@ Maintaining good habits requires ongoing attention, but it becomes easier over t
 
 When we view habit maintenance as a practice rather than a test, we create space for occasional slip-ups while maintaining long-term consistency and progress.
 
+Keys to sustaining habits:
+
+- Track your progress regularly
+- Review and adjust when needed
+- Be kind to yourself after slip-ups
+- Connect habits to your identity
+
+Habit maintenance strategy:
+
+1. Set up systems that make the habit automatic
+2. Identify and remove obstacles in advance
+3. Have a plan for when motivation is low
+4. Celebrate small wins along the way
+5. Return to the habit immediately after slip-ups
+
