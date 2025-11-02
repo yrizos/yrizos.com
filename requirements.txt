@@ -2,3 +2,4 @@ feedparser
 markdownify
 requests
 beautifulsoup4
+rich
