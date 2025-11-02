@@ -1,6 +1,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+<link rel="icon" type="image/png" sizes="180x180" href="{{ "images/avatar/avatar-180x180-rounded.png" | relURL }}">
+<link rel="icon" type="image/x-icon" href="{{ "images/avatar/avatar-180x180-rounded.ico" | relURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "images/avatar/avatar-180x180-rounded.png" | relURL }}">
 {{- if .IsPage }}
   {{- $rawDescription := .Params.description | default .Params.summary | default .Summary | default .Content -}}
   {{- $description := strings.TrimSpace (truncate 200 (plainify $rawDescription)) -}}
