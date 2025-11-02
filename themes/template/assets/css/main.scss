@@ -4,79 +4,119 @@
 @import 'hero';
 @import 'posts-list';
 @import 'post';
+@import 'post-meta';
 
 html {
   background-color: $color-background-primary;
   height: 100%;
+  scrollbar-gutter: stable;
 }
 
 body {
   background-color: $color-background-primary;
   color: $color-text-primary;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
   font-family: $font-family-primary;
   font-size: $font-size-sm;
   font-weight: $font-weight-light;
+  margin: 0;
 }
 
 a {
   color: $color-text-primary;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: $color-text-accent;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: $font-family-primary;
+  font-family: $font-family-heading;
   color: $color-text-primary;
+  font-weight: $font-weight-normal;
 }
 
 h1 {
   font-size: $font-size-3xl;
-  font-weight: $font-weight-normal;
+  margin-top: 0;
+  margin-bottom: $space-normal;
 }
 
 h2 {
   font-size: $font-size-2xl;
-  margin-top: $spacing-xl;
-  margin-bottom: $spacing-md;
+  margin-top: $space-extra-large;
+  margin-bottom: $space-normal;
 }
 
 h3 {
   font-size: $font-size-lg;
-  margin-top: $spacing-xl;
-  margin-bottom: $spacing-md;
+  margin-top: $space-extra-large;
+  margin-bottom: $space-normal;
 }
 
 h4 {
   font-size: $font-size-md;
-  margin-top: $spacing-xl;
-  margin-bottom: $spacing-md;
+  margin-top: $space-extra-large;
+  margin-bottom: $space-normal;
 }
 
 h5 {
   font-size: $font-size-sm;
-  margin-top: $spacing-xl;
-  margin-bottom: $spacing-md;
+  margin-top: $space-extra-large;
+  margin-bottom: $space-normal;
 }
 
 h6 {
-  font-size: $font-size-xs;
+  font-size: $font-size-sm;
+  margin-top: $space-extra-large;
+  margin-bottom: $space-normal;
 }
 
-.container {
+.site-container {
   max-width: 768px;
   margin: 0 auto;
-  padding: $spacing-lg;
+  padding: $space-large $space-large;
 }
 
-i {
-  text-decoration: none;
+p {
+  margin-top: 0;
+  margin-bottom: $space-normal;
+  line-height: 1.5;
 }
 
-main {
-  flex: 1;
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: $space-small;
 }
 
-main .container {
-  padding-bottom: 0;
+li {
+  margin-top: 0;
+  margin-bottom: $space-small;
+  line-height: 1.5;
+}
+
+.site-main {
+  margin: $space-large 0;
+  border-top: 1px solid $color-border-primary;
+  border-bottom: 1px solid $color-border-primary;
+  padding-top: $space-large;
+  padding-bottom: $space-large;
+}
+
+blockquote {
+  margin: $space-normal 0;
+  padding: $space-quote-padding;
+  border-left: 6px solid $color-border-accent;
+  background-color: $color-quote-background;
+  font-style: italic;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.site-footer {
+  margin-top: 0;
+  padding-top: 0;
 }

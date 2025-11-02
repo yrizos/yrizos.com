@@ -2,14 +2,10 @@
 // SINGLE POST VIEW
 // ============================================
 
-.post {
-  position: relative;
-}
-
 // Post Cover Image
 .post-cover {
   margin: 0;
-  margin-bottom: $spacing-xl;
+  margin-bottom: $space-large;
   padding: 0;
   width: 100vw;
   position: relative;
@@ -20,7 +16,7 @@
 
 .post-cover img {
   width: 100%;
-  max-width: 960px;
+  max-width: 1024px;
   height: auto;
   display: block;
   margin: 0 auto;
@@ -28,145 +24,63 @@
 
 // Post Header
 .post-header {
-  margin-bottom: $spacing-xl;
+  margin-bottom: $space-large;
+  display: flex;
+  flex-direction: column;
+  gap: $space-normal;
 }
 
-.post .post-title {
-  margin: 0 0 $spacing-md 0;
-  font-size: $font-size-3xl;
-  color: $color-text-primary;
+.post-header .post-title {
+  margin: 0;
 }
+
 
 .post-meta {
-  display: flex;
-  gap: $spacing-sm;
+  display: inline-flex;
   align-items: center;
-  font-size: $font-size-xs;
-  color: $color-text-muted;
+  gap: $space-separator;
+  line-height: 1;
 }
 
-.post-meta time,
-.post-meta .reading-time {
-  color: $color-text-muted;
-}
-
-.post-meta-separator {
-  color: $color-border-secondary;
+.post-meta__separator {
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  background-color: $color-border-primary;
+  display: inline-block;
 }
 
 // Post Content
 .post-content {
-  margin-top: $spacing-xl;
-}
-
-.post .post-content h2,
-.post .post-content h3,
-.post .post-content h4,
-.post .post-content h5,
-.post .post-content h6 {
-  margin-top: $spacing-xl;
-  margin-bottom: $spacing-sm;
-}
-
-.post .post-content h2 {
-  font-size: $font-size-2xl;
-}
-
-.post .post-content h3 {
-  font-size: $font-size-lg;
-}
-
-.post .post-content h4 {
-  font-size: $font-size-md;
-}
-
-.post .post-content h5 {
-  font-size: $font-size-sm;
-}
-
-.post .post-content h6 {
-  font-size: $font-size-xs;
-}
-
-.post .post-content p,
-.post .post-content ul,
-.post .post-content ol {
-  margin-top: 0;
-  margin-bottom: $spacing-xl;
-}
-
-.post .post-content p:last-child,
-.post .post-content ul:last-child,
-.post .post-content ol:last-child {
-  margin-bottom: 0;
-}
-
-.post .post-content ul,
-.post .post-content ol {
-  margin-left: 0;
-  padding-left: $spacing-xl;
-}
-
-.post .post-content li {
-  margin-bottom: $spacing-sm;
-  line-height: 1.5;
-}
-
-.post .post-content p {
-  line-height: 1.5;
-}
-
-.post .post-content a {
-  color: $color-text-primary;
-  text-decoration: underline;
-}
-
-.post .post-content a:hover {
-  color: $color-text-accent;
+  margin-top: $space-normal;
 }
 
 // Post Footer
 .post-footer {
-  margin-top: $spacing-xl;
-  padding-top: $spacing-xl;
-  padding-bottom: $spacing-xl;
-  border-top: 1px solid $color-border-secondary;
-  border-bottom: 1px solid $color-border-secondary;
-  font-size: $font-size-xs;
+  margin-top: $space-normal;
+  padding-top: $space-normal;
+  padding-bottom: $space-normal;
 }
 
 // Original URL Notice
 .post-original-notice {
-  margin-bottom: $spacing-xl;
-  text-align: center;
+  margin-bottom: $space-large;
+  text-align: left;
   font-style: italic;
-  color: $color-text-muted;
-}
-
-.post-original-notice a {
-  color: $color-text-muted;
-  text-decoration: underline;
-}
-
-.post-original-notice a:hover {
-  color: $color-text-primary;
 }
 
 // License
 .post-license {
-  text-align: center;
-  color: $color-text-muted;
+  text-align: left;
 }
 
 .post-license a {
-  color: $color-text-muted;
-  text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: $spacing-xs;
+  gap: $space-small;
+  text-decoration: none;
 }
 
-.post-license a:hover {
-  color: $color-text-primary;
+.post-license a:hover span {
   text-decoration: underline;
 }

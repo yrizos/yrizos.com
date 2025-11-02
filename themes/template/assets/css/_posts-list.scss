@@ -2,15 +2,9 @@
 // POSTS LIST COMPONENT
 // ============================================
 
-
-.section-posts-title {
-  margin: 0 0 $spacing-xl 0;
-  font-size: $font-size-3xl;
-}
-
 .posts-list-section {
-  margin-top: $spacing-2xl;
-  margin-bottom: $spacing-3xl;
+  margin-top: $space-extra-large;
+  margin-bottom: $space-extra-large;
 }
 
 .posts-list-section:last-child {
@@ -18,89 +12,36 @@
 }
 
 .posts-list-title {
-  color: $color-text-accent;
-  margin-top: 0;
-  margin-bottom: $spacing-md;
+  margin-top: $space-extra-large;
+  margin-bottom: $space-normal;
 }
 
 .posts-list {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-normal;
 }
 
 .posts-list li {
   margin: 0;
-  border-bottom: 1px solid $color-border-primary;
-  padding-top: $spacing-md;
-  padding-bottom: $spacing-md;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $spacing-xs;
-}
-
-.posts-list li:first-child {
-  border-top: 1px solid $color-border-primary;
+  gap: $space-small;
 }
 
 .post-title {
-  margin: 0;
-  font-weight: $font-weight-normal;
-  color: $color-text-primary;
-}
-
-.post-title a {
-  color: $color-text-primary;
-  text-decoration: none;
-}
-
-.post-title a:hover {
-  text-decoration: underline;
-}
-
-.post-date {
-  display: none;
-  color: $color-text-muted;
-  font-size: $font-size-sm;
-  margin-left: auto;
-  white-space: nowrap;
-}
-
-@media (min-width: 768px) {
-  .posts-list li {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .post-date {
-    display: block;
-  }
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .all-posts-link {
-  text-align: right;
-  margin-top: -$spacing-2xl;
+  text-align: left;
 }
 
 .all-posts-link a {
-  display: inline-flex;
-  align-items: center;
-  gap: $spacing-sm;
-  font-size: $font-size-lg;
-  color: $color-text-accent;
-  text-decoration: none;
-  line-height: 1;
-}
-
-.all-posts-link a i {
-  color: currentColor;
-  text-decoration: none;
-  font-size: $icon-size-small;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1;
-}
-
-.all-posts-link a:hover {
   text-decoration: underline;
 }

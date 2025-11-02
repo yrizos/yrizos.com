@@ -1,0 +1,9 @@
+{{- $page := .page -}}
+{{- $class := .class | default "post-meta" -}}
+<div class="{{ $class }}">
+  {{- $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" -}}
+  {{- $dateHuman := $page.Date | time.Format ":date_long" -}}
+  <time class="post-meta__date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  <span class="post-meta__separator" aria-hidden="true"></span>
+  <span class="post-meta__reading">{{ $page.ReadingTime }} min read</span>
+</div>

@@ -3,28 +3,13 @@
 // ============================================
 
 .hero {
-  margin-top: 0rem;
-  margin-bottom: $spacing-3xl;
-  text-align: center;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 0 $space-hero 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-normal;
 }
 
 .hero p {
-  margin: $spacing-md 0;
-  line-height: 1.25;
-}
-
-.hero h2 {
-  color: $color-text-accent;
-}
-
-.hero .avatar {
-  width: $avatar-size;
-  height: $avatar-size;
-  border-radius: $border-radius-round;
-  object-fit: cover;
-  display: block;
-  margin: 0 auto $spacing-md;
+  margin: 0;
+  line-height: 1.5;
 }

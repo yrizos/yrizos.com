@@ -16,9 +16,7 @@ Renders a posts list with a title.
       <h3 class="post-title">
         <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       </h3>
-      {{- $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-      {{- $dateHuman := .Date | time.Format ":date_long" }}
-      <time class="post-date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+      {{ partial "post-meta.html" (dict "page" . "class" "post-meta post-meta--list") }}
     </li>
     {{- end }}
   </ul>

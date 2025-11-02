@@ -8,16 +8,23 @@
 
 .social-icons {
   display: flex;
-  justify-content: center;
-  gap: $spacing-md;
+  justify-content: flex-start;
+  gap: $space-separator;
+  align-items: center;
+}
+
+.social-icons a {
+  color: $color-text-primary;
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
 }
 
 .social-icons i {
-  color: $color-text-accent;
+  color: currentColor;
   font-size: $icon-size-primary;
 }
 
-.social-icons a:hover i {
-  color: $color-text-primary;
+.social-icons a:hover {
+  color: $color-text-accent;
 }

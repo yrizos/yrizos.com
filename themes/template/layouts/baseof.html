@@ -4,16 +4,16 @@
   {{ partial "head.html" . }}
 </head>
 <body>
-  <header>
-    {{ partial "header.html" . }}
-  </header>
-  <main>
-    <div class="container">
+  <div class="site-container">
+    <header class="site-header">
+      {{ partial "header.html" . }}
+    </header>
+    <main class="site-main">
       {{ block "main" . }}{{ end }}
-    </div>
-  </main>
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
+    </main>
+    <footer class="site-footer">
+      {{ partial "footer.html" . }}
+    </footer>
+  </div>
 </body>
 </html>

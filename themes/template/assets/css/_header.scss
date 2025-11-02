@@ -2,197 +2,53 @@
 // HEADER
 // ============================================
 
-body > header {
-  position: relative;
-  z-index: $z-index-header;
-  background-color: darken($color-background-primary, 2%);
-}
-
-body > header nav {
-  position: relative;
-}
-
-body > header .container {
+.site-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
+  flex-direction: column;
+  gap: $space-small;
+  align-items: flex-start;
 }
 
-// ============================================
-// NAVIGATION ICONS
-// ============================================
+.site-title {
+  margin: 0;
+}
 
-.home-icon,
-.hamburger-menu {
+.site-title a {
+  font-size: $font-size-brand;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  font-family: $font-family-heading;
+  text-decoration: none;
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: $space-separator;
+  margin-bottom: 0;
+}
+
+.site-nav li {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+
+.site-nav__separator {
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  background-color: $color-border-primary;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+.site-nav a {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  list-style: none;
-  text-decoration: none;
-}
-
-.home-icon::before,
-.home-icon::after,
-.hamburger-menu::before,
-.hamburger-menu::after {
-  display: none;
-  content: none;
-}
-
-.home-icon i,
-.hamburger-menu i {
-  color: $color-text-accent;
-  font-size: $icon-size-primary;
-}
-
-.home-icon i::after,
-.hamburger-menu i::after {
-  display: none;
-  content: none;
-}
-
-.home-icon:hover i,
-.hamburger-menu:hover i {
-  color: $color-text-primary;
-}
-
-.hamburger-menu i {
-  color: $color-text-accent;
-}
-
-.hamburger-menu i.fa-bars {
-  color: $color-text-accent;
-}
-
-// ============================================
-// HAMBURGER NAVIGATION
-// ============================================
-
-.hamburger-nav {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background-color: darken($color-background-primary, 2%);
-  z-index: $z-index-nav;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height $transition-duration-normal $transition-easing-normal;
-  padding: 0px;
-  box-shadow: $shadow-dropdown;
-}
-
-.hamburger-nav.open {
-  max-height: 500px;
-}
-
-.hamburger-menu-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-
-.hamburger-menu-list li {
-  border-top: 1px solid $color-separator;
-}
-
-.hamburger-menu-list li:hover {
-  background-color: $color-background-hover;
-}
-
-.hamburger-menu-list a {
-  display: block;
-  padding: $spacing-lg;
-  font-family: $font-family-primary;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-normal;
-  color: $color-text-primary;
-  text-decoration: none;
-}
-
-// ============================================
-// DESKTOP NAVIGATION (768px and up)
-// ============================================
-
-@media (min-width: 768px) {
-  body > header {
-    position: sticky;
-    top: 0;
-  }
-
-  body > header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 768px;
-    margin: 0 auto;
-    padding: $spacing-lg;
-  }
-
-  body > header .container {
-    padding: 0;
-    max-width: none;
-    margin: 0;
-  }
-
-  .hamburger-menu {
-    display: none;
-  }
-
-  .home-icon {
-    z-index: 10;
-  }
-
-  .hamburger-nav {
-    position: static;
-    max-height: none;
-    overflow: visible;
-    box-shadow: none;
-    background-color: transparent;
-    width: auto;
-    padding: 0;
-  }
-
-  .hamburger-menu-list {
-    display: flex;
-    gap: $spacing-md;
-    align-items: center;
-    padding: 0;
-    margin: 0;
-  }
-
-  .hamburger-menu-list li {
-    border-top: none;
-    display: flex;
-    align-items: center;
-  }
-
-  .hamburger-menu-list li:hover {
-    background-color: transparent;
-  }
-
-  .hamburger-menu-list li:not(:last-child)::after {
-    content: '|';
-    color: $color-text-accent;
-    margin-left: $spacing-md;
-  }
-
-  .hamburger-menu-list a {
-    padding: 0;
-    font-size: $font-size-sm;
-    color: $color-text-primary;
-    text-decoration: none;
-    display: inline;
-  }
-
-  .hamburger-menu-list a:hover {
-    text-decoration: underline;
-  }
+  line-height: 1;
 }
