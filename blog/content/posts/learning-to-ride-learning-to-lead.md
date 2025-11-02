@@ -2,9 +2,10 @@
 title = "Learning to Ride, Learning to Lead"
 date = "2024-12-15T12:14:58+00:00"
 draft = false
-image = "/images/posts/learning-to-ride-learning-to-lead.jpg"
-imageAlt = "Abstract painted illustration of a blonde 4-year-old girl on a pink bicycle pedaling left, with an anthropomorphic bear running behind her with arms outstretched in a protective stance, set in a park with pine trees and trails, rendered in muted earth tones with heavy brushstrokes and paint texture."
 originalURL = "https://medium.com/@yrizos/learning-to-ride-learning-to-lead-eb6b102bf023"
+image = "/images/posts/learning-to-ride-learning-to-lead.png"
+imageAlt = "Abstract painted illustration of a blonde 4-year-old girl on a pink bicycle pedaling left, with an anthropomorphic bear running behind her with arms outstretched in a protective stance, set in a park with pine trees and trails, rendered in muted earth tones with heavy brushstrokes and paint texture."
+tags = ["parenting", "leadership", "personal-growth"]
 +++
 
 Watching my daughter learn to ride a bike was a mix of teetering starts and bursts of confidence, like the time she wobbled forward a few metres, only to tumble onto the soft grass, laughing despite the fall. It wasn’t just about teaching her to balance and pedal. It was about helping her see what she could do once she started trusting herself.
@@ -32,5 +33,3 @@ We never grabbed the bike, never steadied her when she could steady herself. She
 Until finally, she didn’t need either of us anymore. She pedaled away, steady and sure, the wobbles smoothing into rhythm. I stood there watching her disappear down the path and felt a swell of pride.
 
 I wondered if this is what it always looks like when someone crosses from uncertain to capable. Staying close enough that they feel supported, but far enough back that the success is theirs. I’m still not sure I always get the distance right.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=eb6b102bf023)

@@ -2,9 +2,10 @@
 title = "Into the Codebase, One Bug at a Time"
 date = "2025-08-23T23:49:43+00:00"
 draft = false
-image = "/images/posts/into-the-codebase-one-bug-at-a-time.jpg"
-imageAlt = "Abstract painted representation of a very small golden idol on a weathered stone pedestal in a desolate ancient temple chamber being reclaimed by forest vegetation, rendered in muted earth tones with heavy brushwork and paint texture, positioned centrally with crumbling temple architecture in the background."
 originalURL = "https://medium.com/@yrizos/into-the-codebase-one-bug-at-a-time-1bc991ce9a07"
+image = "/images/posts/into-the-codebase-one-bug-at-a-time.png"
+imageAlt = "Abstract painted representation of a very small golden idol on a weathered stone pedestal in a desolate ancient temple chamber being reclaimed by forest vegetation, rendered in muted earth tones with heavy brushwork and paint texture, positioned centrally with crumbling temple architecture in the background."
+tags = ["engineering-management", "software-engineering", "engineering-leadership", "technical-debt"]
 +++
 
 The temple was crumbling. I could see that much walking in. No clear maps. No reliable guides. Just a system that worked well enough that no one had bothered to document where the traps were hidden.
@@ -76,5 +77,3 @@ Every team carries history. Failed projects. Legacy systems. Technical decisions
 The bugs mattered. But what surfaced during debugging mattered more. The hidden architecture of both the technical system and the human system became visible. The dangerous passages in the temple were marked now. The loose stones were identified. The team knew which paths could bear weight.
 
 Repair isn’t the opposite of progress. It’s what makes progress sustainable. Feature work can wait one sprint. Understanding cannot.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=1bc991ce9a07)

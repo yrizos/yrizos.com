@@ -2,9 +2,10 @@
 title = "The Nostromo Incident"
 date = "2025-02-25T23:44:16+00:00"
 draft = false
-image = "/images/posts/the-nostromo-incident.jpg"
-imageAlt = "Abstract painted representation of the Nostromo spaceship, rendered in dark tones with heavy brushwork and paint texture, positioned centrally against the vast emptiness of deep space."
 originalURL = "https://medium.com/@yrizos/the-nostromo-incident-96386ea6e1fa"
+image = "/images/posts/the-nostromo-incident.png"
+imageAlt = "Abstract painted representation of the Nostromo spaceship, rendered in dark tones with heavy brushwork and paint texture, positioned centrally against the vast emptiness of deep space."
+tags = ["system-failure", "incident-response", "root-cause-analysis"]
 +++
 
 ## The Nostromo Incident: A Seven Whys Root Cause Analysis
@@ -108,5 +109,3 @@ Alien endures because it captures something true about institutional power. The 
 The film’s iconic tagline was *In space, no one can hear you scream*.
 
 The real horror, however, is that no one was listening in the first place.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=96386ea6e1fa)

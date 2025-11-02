@@ -2,9 +2,10 @@
 title = "Slow Productivity"
 date = "2025-03-11T19:39:44+00:00"
 draft = false
-image = "/images/posts/slow-productivity.jpg"
-imageAlt = "Abstract painting showing a clock or hourglass with reversed time flow. Thick, gestural brushstrokes in muted earth tones create a timepiece where hands move counterclockwise or sand flows upward, representing deliberate resistance to conventional productivity and the choice of slower, more intentional work."
 originalURL = "https://medium.com/@yrizos/slow-productivity-cb1692ea33eb"
+image = "/images/posts/slow-productivity.png"
+imageAlt = "Abstract painting showing a clock or hourglass with reversed time flow. Thick, gestural brushstrokes in muted earth tones create a timepiece where hands move counterclockwise or sand flows upward, representing deliberate resistance to conventional productivity and the choice of slower, more intentional work."
+tags = ["cal-newport", "book-review", "work-life-balance", "productivity", "burnout"]
 +++
 
 Cal Newport’s book *Slow Productivity: The Lost Art of Accomplishment Without Burnout* invites readers to rethink how they work. He challenges the relentless pursuit of efficiency and productivity by advocating for a slower, more deliberate approach. Newport encourages doing fewer tasks, working at a natural pace, and prioritising quality. While these ideas resonate, the execution of the book falls flat in several ways.
@@ -30,5 +31,3 @@ The advice is often contradictory. Newport suggests scaling down expenses while 
 I found *Slow Productivity* underwhelming. While the concept of rejecting pseudo-productivity is appealing, the book offers little practical advice and instead leans heavily on philosophical musings and anecdotes. It feels more like an abstract exploration than a useful guide.
 
 If you enjoy stories of historical and creative figures and want a broad, reflective take on productivity, this book may provide inspiration. However, if you’re looking for actionable strategies or clear guidance, you’ll likely be disappointed.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=cb1692ea33eb)

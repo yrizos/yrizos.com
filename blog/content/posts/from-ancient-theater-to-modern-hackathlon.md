@@ -2,9 +2,10 @@
 title = "From Ancient Theater to Modern Hackathlon"
 date = "2025-09-23T00:00:00+00:00"
 draft = false
-image = "/images/posts/from-ancient-theater-to-modern-hackathlon.jpg"
-imageAlt = "Abstract painted composition showing a bustling hackathon scene with teams working on laptops, surrounded by robotics displays. Heavy brushstrokes and textured paint create abstract forms suggesting collaborative work, technical discussion, and innovation in a convention center setting. Muted earth tones with expressive paint application."
 originalURL = "https://www.starttech.vc/blog/2025/from-ancient-theater-to-modern-hackathlon/"
+image = "/images/posts/from-ancient-theater-to-modern-hackathlon.png"
+imageAlt = "Abstract painted composition showing a bustling hackathon scene with teams working on laptops, surrounded by robotics displays. Heavy brushstrokes and textured paint create abstract forms suggesting collaborative work, technical discussion, and innovation in a convention center setting. Muted earth tones with expressive paint application."
+tags = ["accessibility", "mentoring", "hackathons"]
 +++
 
 Exhausted.
@@ -92,5 +93,3 @@ The tech community thrives because people choose to contribute. Choose to mentor
 The next time opportunity appears in a parking lot, at a conference, or in your inbox, I hope you say yes. The community needs more mentors, more volunteers, and more people willing to support builders. The future is built by people who show up and help others bridge the gap between idea and implementation.
 
 And sometimes, the most meaningful journeys begin with the most unexpected encounters under ancient stars.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=e4ea2199faeb)

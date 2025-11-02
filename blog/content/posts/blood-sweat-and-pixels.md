@@ -2,9 +2,10 @@
 title = "Blood, Sweat, and Pixels"
 date = "2024-11-28T21:53:21+00:00"
 draft = false
-image = "/images/posts/blood-sweat-and-pixels.jpg"
-imageAlt = "Abstract painting showing a game controller transforming into construction tools. Thick, gestural brushstrokes in muted earth tones create the metamorphosis from gaming interface to hammer and wrench, representing the creative construction of video games."
 originalURL = "https://medium.com/@yrizos/blood-sweat-and-pixels-250bcb7f9ff7"
+image = "/images/posts/blood-sweat-and-pixels.png"
+imageAlt = "Abstract painting showing a game controller transforming into construction tools. Thick, gestural brushstrokes in muted earth tones create the metamorphosis from gaming interface to hammer and wrench, representing the creative construction of video games."
+tags = ["book-review", "creative-process", "gaming", "jason-schreier", "game-development"]
 +++
 
 > ”Oh, Jason,” one developer said. “It’s a miracle that any game is made.”
@@ -34,5 +35,3 @@ The toll is not just professional but deeply personal. Developers often sacrific
 Schreier’s *Blood, Sweat, and Pixels* is essential reading for anyone curious about the reality behind their favourite games. While it avoids delving into the technical nitty-gritty of coding, it masterfully explores the broader dynamics of game production, a balancing act between creativity, technology, and business.
 
 If you’ve ever marvelled at the artistry of games like *The Witcher 3* or *Uncharted 4*, this book will deepen your appreciation for the immense effort behind them. But it will also leave you questioning the sustainability of an industry built on such relentless sacrifice. As Schreier reminds us, every game represents a monumental act of passion and survival.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=250bcb7f9ff7)

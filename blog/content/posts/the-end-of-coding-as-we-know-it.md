@@ -2,9 +2,10 @@
 title = "The End of Coding as We Know It"
 date = "2025-04-02T22:48:17+00:00"
 draft = false
-image = "/images/posts/the-end-of-coding-as-we-know-it.jpg"
-imageAlt = "Abstract painting showing a classical portrait transforming into cubist abstract art. Thick, gestural brushstrokes in muted earth tones create a metamorphosis from realistic representation to geometric abstraction, representing how photography pushed painting toward new creative directions."
 originalURL = "https://medium.com/@yrizos/the-end-of-coding-as-we-know-it-f5446f6c7806"
+image = "/images/posts/the-end-of-coding-as-we-know-it.png"
+imageAlt = "Abstract painting showing a classical portrait transforming into cubist abstract art. Thick, gestural brushstrokes in muted earth tones create a metamorphosis from realistic representation to geometric abstraction, representing how photography pushed painting toward new creative directions."
+tags = ["software-development", "future-of-work", "ai"]
 +++
 
 In 1839, Louis Daguerre’s invention, the daguerreotype, was unveiled to the world as a gift from France to humanity. Imagine how incredible this must have seemed back then. It captured people’s imaginations because it could produce a lifelike image in minutes. Painters had spent centuries perfecting realism, but suddenly, a machine could do it better and faster. If a machine could capture reality perfectly, then what was left for artists to do? People genuinely wondered if painting would become obsolete.
@@ -24,5 +25,3 @@ We already see this change taking place. Developers are using AI to prototype ap
 Photography made realism commonplace, pushing artists toward meaning and expression. Similarly, generative AI is making code production easy, pushing developers toward purpose-driven innovation. Some people naturally worry about losing traditional skills. That’s understandable. Yet just as artists didn’t disappear, we won’t either. We’ll adapt, like people always do, shifting from purely technical tasks to something more creative, more strategic. Asking the right questions, guiding AI effectively, and shaping outcomes meaningfully will matter far more than manual coding.
 
 We’re not witnessing the end of coding. We’re witnessing the end of coding as we’ve known it. And just as happened with art, that’s exactly when things start to get interesting.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=f5446f6c7806)

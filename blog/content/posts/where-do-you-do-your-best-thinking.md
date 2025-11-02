@@ -2,9 +2,10 @@
 title = "Where Do You Do Your Best Thinking?"
 date = "2024-11-21T12:09:28+00:00"
 draft = false
-image = "/images/posts/where-do-you-do-your-best-thinking.jpg"
-imageAlt = "Abstract painted view from inside Hymettus Forest looking out toward Athens cityscape, with pine and cypress trees framing the scene in the foreground, rendered in muted earth tones with heavy brushstrokes and paint texture, showing the contrast between natural forest environment and distant urban sprawl."
 originalURL = "https://medium.com/@yrizos/where-do-you-do-your-best-thinking-aa2d7a91f425"
+image = "/images/posts/where-do-you-do-your-best-thinking.png"
+imageAlt = "Abstract painted view from inside Hymettus Forest looking out toward Athens cityscape, with pine and cypress trees framing the scene in the foreground, rendered in muted earth tones with heavy brushstrokes and paint texture, showing the contrast between natural forest environment and distant urban sprawl."
+tags = ["personal-growth", "productivity", "mental-health", "work-life-balance"]
 +++
 
 I finished reading Gabrielle Zevin’s *Tomorrow, and Tomorrow, and Tomorrow* on a Saturday morning in October. I had been carrying the final chapter on my old Kindle for 2 weeks, finding reasons to delay. The story deserved better than a rushed ending.
@@ -52,5 +53,3 @@ She would be done soon, full of stories about whatever small discovery the morni
 The best decisions might require this same patience. The willingness to pull back when proximity distorts perspective. The discipline to stop analyzing and trust that answers will surface on their own schedule.
 
 I wonder how often I resist this at work, convinced that more hours or deeper analysis will break something open, when walking away might be exactly what the problem needs.
-
-![](https://medium.com/_/stat?event=post.clientViewed&referrerSource=full_rss&postId=aa2d7a91f425)
