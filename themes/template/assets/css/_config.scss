@@ -47,9 +47,23 @@ $font-weight-light: 300;
 $font-weight-normal: normal;
 $font-weight-bold: 700;
 
+// Line heights
+$line-height-body: 1.5;
+$line-height-tight: 1;
+
 // ============================================
 // LAYOUT
 // ============================================
 
 // Icon sizes
 $icon-size-primary: 1.4rem;
+
+// Layout widths
+$layout-content-max-width: 768px;
+$layout-cover-max-width: 1200px;
+
+// Border widths
+$border-width-accent: 6px;
+
+// Decorative sizing
+$size-divider-dot: 0.3rem;

@@ -73,7 +73,7 @@ h6 {
 }
 
 .site-container {
-  max-width: 768px;
+  max-width: $layout-content-max-width;
   margin: 0 auto;
   padding: $space-large $space-large;
 }
@@ -81,7 +81,7 @@ h6 {
 p {
   margin-top: 0;
   margin-bottom: $space-normal;
-  line-height: 1.5;
+  line-height: $line-height-body;
 }
 
 ul,
@@ -93,7 +93,7 @@ ol {
 li {
   margin-top: 0;
   margin-bottom: $space-small;
-  line-height: 1.5;
+  line-height: $line-height-body;
 }
 
 .site-main {
@@ -107,7 +107,7 @@ li {
 blockquote {
   margin: $space-normal 0;
   padding: $space-quote-padding;
-  border-left: 6px solid $color-border-accent;
+  border-left: $border-width-accent solid $color-border-accent;
   background-color: $color-quote-background;
   font-style: italic;
 }
@@ -119,8 +119,8 @@ blockquote p:last-child {
 hr {
   border: none;
   margin: $space-large auto;
-  height: 0.3rem;
-  width: 0.3rem;
+  height: $size-divider-dot;
+  width: $size-divider-dot;
   border-radius: 50%;
   background-color: $color-border-primary;
   position: relative;
@@ -129,8 +129,8 @@ hr {
   &::before,
   &::after {
     content: '';
-    width: 0.3rem;
-    height: 0.3rem;
+    width: $size-divider-dot;
+    height: $size-divider-dot;
     border-radius: 50%;
     background-color: $color-border-primary;
     position: absolute;
@@ -138,11 +138,11 @@ hr {
   }
 
   &::before {
-    left: calc(-0.3rem - #{$space-separator});
+    left: calc(-#{$size-divider-dot} - #{$space-separator});
   }
 
   &::after {
-    right: calc(-0.3rem - #{$space-separator});
+    right: calc(-#{$size-divider-dot} - #{$space-separator});
   }
 }
 
