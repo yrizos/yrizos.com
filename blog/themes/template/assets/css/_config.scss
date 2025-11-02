@@ -35,16 +35,16 @@ $font-family-primary: 'Inclusive Sans', sans-serif;
 $font-family-heading: 'Domine', serif;
 
 // Font size bases
-$font-size-base-desktop: 1.125rem;
+$font-size-base-desktop: 1.25rem;
 $font-size-base-mobile: 1rem;
 
 // Font scale factors (relative to base size)
 $font-scale-sm: 1;
-$font-scale-md: 1.1363636364;
-$font-scale-lg: 1.3636363636;
-$font-scale-2xl: 1.8181818182;
-$font-scale-3xl: 2.2727272727;
-$font-scale-brand: 2.7272727273;
+$font-scale-md: 1.1;
+$font-scale-lg: 1.2;
+$font-scale-2xl: 1.6;
+$font-scale-3xl: 1.8;
+$font-scale-brand: 2;
 
 // Font sizes
 $font-size-sm: $font-size-base-desktop * $font-scale-sm;
