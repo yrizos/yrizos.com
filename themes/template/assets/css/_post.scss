@@ -22,6 +22,12 @@
   margin: 0 auto;
 }
 
+@media (min-width: $layout-cover-max-width) {
+  .post-cover img {
+    border-radius: 1rem;
+  }
+}
+
 // Post Header
 .post-header {
   margin-bottom: $space-large;
