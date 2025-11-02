@@ -1,0 +1,195 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>The Mars Rover Challenge in Rust: Let's Get Moving! | Yannis Rizos</title><link rel=canonical href=https://dev.to/yrizos/the-mars-rover-challenge-in-rust-lets-get-moving-3a32><link rel=icon type=image/png sizes=180x180 href=/images/avatar/avatar-180x180-rounded.png><link rel=icon type=image/x-icon href=/images/avatar/avatar-180x180-rounded.ico><link rel=apple-touch-icon sizes=180x180 href=/images/avatar/avatar-180x180-rounded.png><meta property="og:type" content="article"><meta property="og:title" content="The Mars Rover Challenge in Rust: Let&amp;#39;s Get Moving!"><meta property="og:site_name" content="Yannis Rizos"><meta property="og:url" content="https://yrizos.com/posts/the-mars-rover-challenge-in-rust-lets-get-moving/"><meta property="og:description" content="Now that the challenge is clear, it&amp;amp;rsquo;s time to start coding.
+To kick things off, I got my project set up using Cargo – nothing fancy, just the basics:
+cargo new mars-rover-rust cd mars-rover-rust …"><meta name=twitter:card content="summary"><meta name=twitter:title content="The Mars Rover Challenge in Rust: Let&amp;#39;s Get Moving!"><meta name=twitter:description content="Now that the challenge is clear, it&amp;amp;rsquo;s time to start coding.
+To kick things off, I got my project set up using Cargo – nothing fancy, just the basics:
+cargo new mars-rover-rust cd mars-rover-rust …"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=/normalize_14985077408719764131.min.02d927c3d7aee93f4557abffff0169f2c90a749e49700a80350d5b3f2911e20a.css integrity="sha256-Atknw9eu6T9FV6v//wFp8skKdJ5JcAqANQ1bPykR4go=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.c2081ea6cd6b5031591dfab0c7455a079a4b46b889cafd790b2e5aaac84e595d.css integrity="sha256-wggeps1rUDFZHfqwx0VaB5pLRriJyv15Cy5aqshOWV0=" crossorigin=anonymous><script src=/js/main.f2979a93a325fecf9605263bd141398a311c8e23388ed7dcff74f92f7e632866.js integrity="sha256-8peak6Ml/s+WBSY70UE5ijEcjiM4jtfc/3T5L35jKGY=" crossorigin=anonymous></script></head><body><div class=site-container><header class=site-header><div class=site-title><a href=/>Yannis Rizos</a></div><nav class=site-nav aria-label="Primary navigation"><ul><li><a href=/>Home</a></li><li><span class=site-nav__separator aria-hidden=true></span></li><li><a href=/posts/>Posts</a></li><li><span class=site-nav__separator aria-hidden=true></span></li><li><a href=/about/>About</a></li></ul></nav></header><main class=site-main><article class=post><header class=post-header><h1 class=post-title>The Mars Rover Challenge in Rust: Let's Get Moving!</h1><div class=post-meta><time class=post-meta__date datetime=2024-11-18T11:52:37+00:00>November 18, 2024</time>
+<span class=post-meta__separator aria-hidden=true></span>
+<span class=post-meta__reading>4 min read</span></div></header><div class=post-content><p>Now that the challenge is clear, it&rsquo;s time to start coding.</p><p>To kick things off, I got my project set up using Cargo – nothing fancy, just the basics:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cargo new mars-rover-rust
+</span></span><span style=display:flex><span>cd mars-rover-rust
+</span></span></code></pre></div><h2 id=charting-the-course-defining-directions>Charting the Course: Defining Directions</h2><p>First up, I needed to figure out how our little rover would know which way it&rsquo;s facing. I went with the classics here – good old North, East, South, and West. Here&rsquo;s how I set that up in Rust:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/direction.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#[derive(Debug, PartialEq)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>enum</span> <span style=color:#a6e22e>Direction</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>NORTH</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>EAST</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>SOUTH</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>WEST</span>,
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Pretty straightforward, right? I added those <code>Debug</code> and <code>PartialEq</code> traits since I knew we&rsquo;d want to peek at these values during debugging and compare them in our tests.</p><h2 id=steering-the-rover-implementing-turns>Steering the Rover: Implementing Turns</h2><p>Now for the fun part – teaching our rover how to turn! I created a <code>Rover</code> struct and gave it some basic turning abilities:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/rover.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>use</span> <span style=color:#66d9ef>crate</span>::direction::Direction;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#[derive(Debug, PartialEq)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Rover</span> {
+</span></span><span style=display:flex><span>    x: <span style=color:#66d9ef>i32</span>,
+</span></span><span style=display:flex><span>    y: <span style=color:#66d9ef>i32</span>,
+</span></span><span style=display:flex><span>    direction: <span style=color:#a6e22e>Direction</span>,
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>impl</span> Rover {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>new</span>(x: <span style=color:#66d9ef>i32</span>, y: <span style=color:#66d9ef>i32</span>, direction: <span style=color:#a6e22e>Direction</span>) -&gt; <span style=color:#a6e22e>Self</span> {
+</span></span><span style=display:flex><span>        Rover { x, y, direction }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>turn_left</span>(<span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> self) {
+</span></span><span style=display:flex><span>        self.direction <span style=color:#f92672>=</span> <span style=color:#66d9ef>match</span> self.direction {
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>NORTH</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>WEST</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>WEST</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>SOUTH</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>SOUTH</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>EAST</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>EAST</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>NORTH</span>,
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>turn_right</span>(<span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> self) {
+</span></span><span style=display:flex><span>        self.direction <span style=color:#f92672>=</span> <span style=color:#66d9ef>match</span> self.direction {
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>NORTH</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>EAST</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>EAST</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>SOUTH</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>SOUTH</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>WEST</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>WEST</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>NORTH</span>,
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Of course, I had to make sure our rover could actually turn properly, so I wrote some tests to put it through its paces:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/rover.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#[cfg(test)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> tests {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>use</span> <span style=color:#66d9ef>super</span>::<span style=color:#f92672>*</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>use</span> <span style=color:#66d9ef>crate</span>::direction::Direction;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#[test]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>test_turn_left</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> rover <span style=color:#f92672>=</span> Rover::new(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, Direction::<span style=color:#66d9ef>NORTH</span>);
+</span></span><span style=display:flex><span>        rover.turn_left();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>WEST</span>);
+</span></span><span style=display:flex><span>        rover.turn_left();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>SOUTH</span>);
+</span></span><span style=display:flex><span>        rover.turn_left();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>EAST</span>);
+</span></span><span style=display:flex><span>        rover.turn_left();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>NORTH</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#[test]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>test_turn_right</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> rover <span style=color:#f92672>=</span> Rover::new(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, Direction::<span style=color:#66d9ef>NORTH</span>);
+</span></span><span style=display:flex><span>        rover.turn_right();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>EAST</span>);
+</span></span><span style=display:flex><span>        rover.turn_right();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>SOUTH</span>);
+</span></span><span style=display:flex><span>        rover.turn_right();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>WEST</span>);
+</span></span><span style=display:flex><span>        rover.turn_right();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>NORTH</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>A quick <code>cargo test</code> lets us know if everything&rsquo;s working as planned.</p><h2 id=mapping-the-terrain-setting-up-the-plateau>Mapping the Terrain: Setting Up the Plateau</h2><p>Here&rsquo;s where things got interesting – I realized our rover needed some boundaries to roam within. Can&rsquo;t have it wandering off into space! So I created a <code>Plateau</code> to keep it in check:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/plateau.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#[derive(Debug, PartialEq)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>struct</span> <span style=color:#a6e22e>Plateau</span> {
+</span></span><span style=display:flex><span>    width: <span style=color:#66d9ef>i32</span>,
+</span></span><span style=display:flex><span>    height: <span style=color:#66d9ef>i32</span>,
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>impl</span> Plateau {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>new</span>(width: <span style=color:#66d9ef>i32</span>, height: <span style=color:#66d9ef>i32</span>) -&gt; <span style=color:#a6e22e>Self</span> {
+</span></span><span style=display:flex><span>        Plateau { width, height }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>is_within_bounds</span>(<span style=color:#f92672>&amp;</span>self, x: <span style=color:#66d9ef>i32</span>, y: <span style=color:#66d9ef>i32</span>) -&gt; <span style=color:#66d9ef>bool</span> {
+</span></span><span style=display:flex><span>        x <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>&amp;&amp;</span> x <span style=color:#f92672>&lt;=</span> self.width <span style=color:#f92672>&amp;&amp;</span> y <span style=color:#f92672>&gt;=</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>&amp;&amp;</span> y <span style=color:#f92672>&lt;=</span> self.height
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=advancing-the-rover-moving-forward>Advancing the Rover: Moving Forward</h2><p>With our playground set up, it was time to teach our rover how to actually move around:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/rover.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>use</span> <span style=color:#66d9ef>crate</span>::plateau::Plateau;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>impl</span> Rover {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>move_forward</span>(<span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> self, plateau: <span style=color:#66d9ef>&amp;</span><span style=color:#a6e22e>Plateau</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> (new_x, new_y) <span style=color:#f92672>=</span> <span style=color:#66d9ef>match</span> self.direction {
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>NORTH</span> <span style=color:#f92672>=&gt;</span> (self.x, self.y <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>EAST</span> <span style=color:#f92672>=&gt;</span> (self.x <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>, self.y),
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>SOUTH</span> <span style=color:#f92672>=&gt;</span> (self.x, self.y <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>),
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>WEST</span> <span style=color:#f92672>=&gt;</span> (self.x <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>, self.y),
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> plateau.is_within_bounds(new_x, new_y) {
+</span></span><span style=display:flex><span>            self.x <span style=color:#f92672>=</span> new_x;
+</span></span><span style=display:flex><span>            self.y <span style=color:#f92672>=</span> new_y;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>And naturally, we needed to make sure it behaves:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/rover.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#[cfg(test)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> tests {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>use</span> <span style=color:#66d9ef>super</span>::<span style=color:#f92672>*</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>use</span> <span style=color:#66d9ef>crate</span>::plateau::Plateau;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#[test]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>test_move_forward_within_bounds</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> plateau <span style=color:#f92672>=</span> Plateau::new(<span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>5</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> rover <span style=color:#f92672>=</span> Rover::new(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, Direction::<span style=color:#66d9ef>NORTH</span>);
+</span></span><span style=display:flex><span>        rover.move_forward(<span style=color:#f92672>&amp;</span>plateau);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.x, <span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.y, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#[test]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>test_move_forward_out_of_bounds</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> plateau <span style=color:#f92672>=</span> Plateau::new(<span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>5</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> rover <span style=color:#f92672>=</span> Rover::new(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, Direction::<span style=color:#66d9ef>SOUTH</span>);
+</span></span><span style=display:flex><span>        rover.move_forward(<span style=color:#f92672>&amp;</span>plateau);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.x, <span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.y, <span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=commanding-the-rover-processing-instructions>Commanding the Rover: Processing Instructions</h2><p>Finally, the piece that brings it all together – teaching our rover to follow commands:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/rover.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>impl</span> Rover {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>execute_commands</span>(<span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> self, commands: <span style=color:#66d9ef>&amp;</span><span style=color:#66d9ef>str</span>, plateau: <span style=color:#66d9ef>&amp;</span><span style=color:#a6e22e>Plateau</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> command <span style=color:#66d9ef>in</span> commands.chars() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>match</span> command {
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;L&#39;</span> <span style=color:#f92672>=&gt;</span> self.turn_left(),
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;R&#39;</span> <span style=color:#f92672>=&gt;</span> self.turn_right(),
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#39;M&#39;</span> <span style=color:#f92672>=&gt;</span> self.move_forward(plateau),
+</span></span><span style=display:flex><span>                _ <span style=color:#f92672>=&gt;</span> {},
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>And here&rsquo;s the grand finale of our test suite:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/rover.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#[cfg(test)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> tests {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>use</span> <span style=color:#66d9ef>super</span>::<span style=color:#f92672>*</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>use</span> <span style=color:#66d9ef>crate</span>::direction::Direction;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>use</span> <span style=color:#66d9ef>crate</span>::plateau::Plateau;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>use</span> <span style=color:#66d9ef>crate</span>::instruction::Instruction;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// Existing tests...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#[test]</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>test_execute_instructions</span>() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> plateau <span style=color:#f92672>=</span> Plateau::new(<span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>5</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> rover <span style=color:#f92672>=</span> Rover::new(<span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>2</span>, Direction::<span style=color:#66d9ef>NORTH</span>, <span style=color:#f92672>&amp;</span>plateau);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> instructions <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>            Instruction::<span style=color:#66d9ef>LEFT</span>, Instruction::<span style=color:#66d9ef>MOVE</span>, Instruction::<span style=color:#66d9ef>LEFT</span>, Instruction::<span style=color:#66d9ef>MOVE</span>,
+</span></span><span style=display:flex><span>            Instruction::<span style=color:#66d9ef>LEFT</span>, Instruction::<span style=color:#66d9ef>MOVE</span>, Instruction::<span style=color:#66d9ef>LEFT</span>, Instruction::<span style=color:#66d9ef>MOVE</span>,
+</span></span><span style=display:flex><span>            Instruction::<span style=color:#66d9ef>MOVE</span>
+</span></span><span style=display:flex><span>        ];
+</span></span><span style=display:flex><span>        rover.execute_instructions(<span style=color:#f92672>&amp;</span>instructions);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.x, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.y, <span style=color:#ae81ff>3</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>NORTH</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> rover <span style=color:#f92672>=</span> Rover::new(<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>3</span>, Direction::<span style=color:#66d9ef>EAST</span>, <span style=color:#f92672>&amp;</span>plateau);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> instructions <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>            Instruction::<span style=color:#66d9ef>MOVE</span>, Instruction::<span style=color:#66d9ef>MOVE</span>, Instruction::<span style=color:#66d9ef>RIGHT</span>, Instruction::<span style=color:#66d9ef>MOVE</span>,
+</span></span><span style=display:flex><span>            Instruction::<span style=color:#66d9ef>MOVE</span>, Instruction::<span style=color:#66d9ef>RIGHT</span>, Instruction::<span style=color:#66d9ef>MOVE</span>, Instruction::<span style=color:#66d9ef>RIGHT</span>,
+</span></span><span style=display:flex><span>            Instruction::<span style=color:#66d9ef>RIGHT</span>, Instruction::<span style=color:#66d9ef>MOVE</span>
+</span></span><span style=display:flex><span>        ];
+</span></span><span style=display:flex><span>        rover.execute_instructions(<span style=color:#f92672>&amp;</span>instructions);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.x, <span style=color:#ae81ff>5</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.y, <span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>assert_eq!</span>(rover.direction, Direction::<span style=color:#66d9ef>EAST</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><p>And there you have it! Our Mars Rover is now ready to explore its virtual plateau. I&rsquo;ve got to say, as someone still getting their feet wet with Rust, seeing this all come together has been incredibly satisfying. The code might not be perfect by Rust standards, but hey, it works!</p><p>Next up on my list is handling user input and prettifying the output. But that&rsquo;s a story for another day!</p></div><footer class=post-footer><hr><div class=post-original-notice>Originally published at <a href=https://dev.to/yrizos/the-mars-rover-challenge-in-rust-lets-get-moving-3a32 target=_blank rel="noopener noreferrer"><span>dev.to/yrizos</span></a></div><div class=post-license><a href=https://creativecommons.org/licenses/by/4.0/ target=_blank rel="noopener noreferrer"><i class="fa-brands fa-creative-commons"></i>
+<i class="fa-brands fa-creative-commons-by"></i>
+<span>CC BY 4.0</span></a></div></footer></article></main><footer class=site-footer><div class=social-icons aria-label="Social media links"><a href=https://www.linkedin.com/in/yrizos/ target=_blank rel="noopener noreferrer" aria-label=LinkedIn><i class="fa-brands fa-linkedin"></i>
+</a><a href=https://github.com/yrizos target=_blank rel="noopener noreferrer" aria-label=GitHub><i class="fa-brands fa-github"></i>
+</a><a href=https://medium.com/@yrizos target=_blank rel="noopener noreferrer" aria-label=Medium><i class="fa-brands fa-medium"></i>
+</a><a href=https://www.goodreads.com/user/show/68793210-yannis-rizos target=_blank rel="noopener noreferrer" aria-label=Goodreads><i class="fa-brands fa-goodreads"></i>
+</a><a href=/index.xml target=_blank rel="noopener noreferrer" aria-label="RSS feed"><i class="fa-solid fa-rss"></i></a></div></footer></div></body></html>
