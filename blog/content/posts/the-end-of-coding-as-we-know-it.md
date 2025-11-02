@@ -2,7 +2,7 @@
 title = "The End of Coding as We Know It"
 date = "2025-04-02T22:48:17+00:00"
 draft = false
-originalURL = "https://medium.com/@yrizos/the-end-of-coding-as-we-know-it-f5446f6c7806"
+canonical_url = "https://medium.com/@yrizos/the-end-of-coding-as-we-know-it-f5446f6c7806"
 image = "/images/posts/the-end-of-coding-as-we-know-it.png"
 imageAlt = "Abstract painting showing a classical portrait transforming into cubist abstract art. Thick, gestural brushstrokes in muted earth tones create a metamorphosis from realistic representation to geometric abstraction, representing how photography pushed painting toward new creative directions."
 tags = ["software-development", "future-of-work", "ai"]

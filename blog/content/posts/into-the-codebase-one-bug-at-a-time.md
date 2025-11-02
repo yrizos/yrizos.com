@@ -2,7 +2,7 @@
 title = "Into the Codebase, One Bug at a Time"
 date = "2025-08-23T23:49:43+00:00"
 draft = false
-originalURL = "https://medium.com/@yrizos/into-the-codebase-one-bug-at-a-time-1bc991ce9a07"
+canonical_url = "https://medium.com/@yrizos/into-the-codebase-one-bug-at-a-time-1bc991ce9a07"
 image = "/images/posts/into-the-codebase-one-bug-at-a-time.png"
 imageAlt = "Abstract painted representation of a very small golden idol on a weathered stone pedestal in a desolate ancient temple chamber being reclaimed by forest vegetation, rendered in muted earth tones with heavy brushwork and paint texture, positioned centrally with crumbling temple architecture in the background."
 tags = ["engineering-management", "software-engineering", "engineering-leadership", "technical-debt"]

@@ -2,7 +2,7 @@
 title = "Setting Up Visual Studio Code for Rust on macOS"
 date = "2024-11-17T11:50:12+00:00"
 draft = false
-originalURL = "https://dev.to/yrizos/setting-up-visual-studio-code-for-rust-on-macos-95k"
+canonical_url = "https://dev.to/yrizos/setting-up-visual-studio-code-for-rust-on-macos-95k"
 tags = ["r", "u", "s", "t", ",", " ", "v", "s", "c", "o", "d", "e", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s"]
 +++
 

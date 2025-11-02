@@ -2,7 +2,7 @@
 title = "Slow Productivity"
 date = "2025-03-11T19:39:44+00:00"
 draft = false
-originalURL = "https://medium.com/@yrizos/slow-productivity-cb1692ea33eb"
+canonical_url = "https://medium.com/@yrizos/slow-productivity-cb1692ea33eb"
 image = "/images/posts/slow-productivity.png"
 imageAlt = "Abstract painting showing a clock or hourglass with reversed time flow. Thick, gestural brushstrokes in muted earth tones create a timepiece where hands move counterclockwise or sand flows upward, representing deliberate resistance to conventional productivity and the choice of slower, more intentional work."
 tags = ["cal-newport", "book-review", "work-life-balance", "productivity", "burnout"]

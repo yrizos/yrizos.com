@@ -133,7 +133,7 @@ def build_front_matter(post: BlogPost, image_web_path: Optional[pathlib.Path]) -
         "title": post.title,
         "date": post.date.isoformat(),
         "draft": False,
-        "originalURL": post.original_url,
+        "canonical_url": post.original_url,
     }
     if image_web_path:
         fields["image"] = "/" + image_web_path.as_posix()

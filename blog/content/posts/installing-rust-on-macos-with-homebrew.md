@@ -2,7 +2,7 @@
 title = "Installing Rust on macOS with Homebrew"
 date = "2024-11-17T09:28:59+00:00"
 draft = false
-originalURL = "https://dev.to/yrizos/installing-rust-on-macos-with-homebrew-51fk"
+canonical_url = "https://dev.to/yrizos/installing-rust-on-macos-with-homebrew-51fk"
 tags = ["r", "u", "s", "t", ",", " ", "h", "o", "m", "e", "b", "r", "e", "w", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s"]
 +++
 

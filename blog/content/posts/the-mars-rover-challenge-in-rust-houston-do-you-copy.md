@@ -2,7 +2,7 @@
 title = "The Mars Rover Challenge in Rust: Houston, Do You Copy?"
 date = "2024-11-18T11:59:45+00:00"
 draft = false
-originalURL = "https://dev.to/yrizos/the-mars-rover-challenge-in-rust-houston-do-you-copy-334o"
+canonical_url = "https://dev.to/yrizos/the-mars-rover-challenge-in-rust-houston-do-you-copy-334o"
 tags = ["r", "u", "s", "t", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s", ",", " ", "k", "a", "t", "a"]
 +++
 

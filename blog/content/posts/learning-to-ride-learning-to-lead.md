@@ -2,7 +2,7 @@
 title = "Learning to Ride, Learning to Lead"
 date = "2024-12-15T12:14:58+00:00"
 draft = false
-originalURL = "https://medium.com/@yrizos/learning-to-ride-learning-to-lead-eb6b102bf023"
+canonical_url = "https://medium.com/@yrizos/learning-to-ride-learning-to-lead-eb6b102bf023"
 image = "/images/posts/learning-to-ride-learning-to-lead.png"
 imageAlt = "Abstract painted illustration of a blonde 4-year-old girl on a pink bicycle pedaling left, with an anthropomorphic bear running behind her with arms outstretched in a protective stance, set in a park with pine trees and trails, rendered in muted earth tones with heavy brushstrokes and paint texture."
 tags = ["parenting", "leadership", "personal-growth"]

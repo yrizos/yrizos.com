@@ -2,7 +2,7 @@
 title = "From Ancient Theater to Modern Hackathlon"
 date = "2025-09-23T00:00:00+00:00"
 draft = false
-originalURL = "https://www.starttech.vc/blog/2025/from-ancient-theater-to-modern-hackathlon/"
+canonical_url = "https://www.starttech.vc/blog/2025/from-ancient-theater-to-modern-hackathlon/"
 image = "/images/posts/from-ancient-theater-to-modern-hackathlon.png"
 imageAlt = "Abstract painted composition showing a bustling hackathon scene with teams working on laptops, surrounded by robotics displays. Heavy brushstrokes and textured paint create abstract forms suggesting collaborative work, technical discussion, and innovation in a convention center setting. Muted earth tones with expressive paint application."
 tags = ["accessibility", "mentoring", "hackathons"]

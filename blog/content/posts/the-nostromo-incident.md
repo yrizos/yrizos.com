@@ -2,7 +2,7 @@
 title = "The Nostromo Incident"
 date = "2025-02-25T23:44:16+00:00"
 draft = false
-originalURL = "https://medium.com/@yrizos/the-nostromo-incident-96386ea6e1fa"
+canonical_url = "https://medium.com/@yrizos/the-nostromo-incident-96386ea6e1fa"
 image = "/images/posts/the-nostromo-incident.png"
 imageAlt = "Abstract painted representation of the Nostromo spaceship, rendered in dark tones with heavy brushwork and paint texture, positioned centrally against the vast emptiness of deep space."
 tags = ["system-failure", "incident-response", "root-cause-analysis"]

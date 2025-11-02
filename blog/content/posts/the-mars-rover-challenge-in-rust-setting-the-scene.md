@@ -2,7 +2,7 @@
 title = "The Mars Rover Challenge in Rust: Setting the Scene"
 date = "2024-11-18T11:52:03+00:00"
 draft = false
-originalURL = "https://dev.to/yrizos/the-mars-rover-challenge-in-rust-setting-the-scene-49l8"
+canonical_url = "https://dev.to/yrizos/the-mars-rover-challenge-in-rust-setting-the-scene-49l8"
 tags = ["r", "u", "s", "t", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s", ",", " ", "k", "a", "t", "a"]
 +++
 
