@@ -1,34 +1,8 @@
 {{ define "main" }}
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">{{ .Title }}</h1>
-      {{ partial "post-meta.html" (dict "page" .) }}
-    </header>
-
-    {{- if .Params.image }}
-    <figure class="post-cover">
-      <img src="{{ .Params.image }}" alt="{{ .Params.imageAlt | default .Title }}">
-    </figure>
-    {{- end }}
-
-    <div class="post-content">
+  <article class="page">
+    <h1 class="page-title">{{ .Title }}</h1>
+    <div class="page-content">
       {{ .Content }}
     </div>
-
-    <footer class="post-footer">
-      {{- if .Params.originalURL }}
-      <aside class="post-original-notice">
-        Originally published at <a href="{{ .Params.originalURL }}" target="_blank" rel="noopener noreferrer"><span>{{ .Params.originalURL }}</span></a>
-      </aside>
-      {{- end }}
-
-      <div class="post-license">
-        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
-          <i class="fa-brands fa-creative-commons"></i>
-          <i class="fa-brands fa-creative-commons-by"></i>
-          <span>CC BY 4.0</span>
-        </a>
-      </div>
-    </footer>
   </article>
 {{ end }}
