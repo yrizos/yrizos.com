@@ -20,8 +20,9 @@ from markdownify import markdownify as html_to_markdown
 
 DEFAULT_FEED_URL = "https://medium.com/feed/@yrizos"
 ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
-POSTS_DIR = ROOT_DIR / "content/posts"
-IMAGES_DIR = ROOT_DIR / "static/images/posts"
+BLOG_DIR = ROOT_DIR / "blog"
+POSTS_DIR = BLOG_DIR / "content/posts"
+IMAGES_DIR = BLOG_DIR / "static/images/posts"
 WEB_IMAGE_PREFIX = pathlib.Path("images/posts")
 ORIGINAL_LINE_PATTERN = re.compile(r"Originally published at", re.IGNORECASE)
 ORIGINAL_DATE_PATTERN = re.compile(
