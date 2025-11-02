@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="not-found-page">
+    <main class="not-found">
+      <img src="{{ "images/avatar/avatar-192x192.jpg" | relURL }}" alt="Avatar" class="not-found__avatar">
+      <h1 class="not-found__title">404 Not Found</h1>
+    </main>
+  </body>
+</html>
