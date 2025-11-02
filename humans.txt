@@ -1,13 +1,10 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
+/* TEAM */
+Author: Yannis Rizos
+GitHub: https://github.com/yrizos
+LinkedIn: https://www.linkedin.com/in/yrizos/
+Medium: https://medium.com/@yrizos
 
-# TEAM
-
-    Yannis Rizos -- @yrizos
-
-# TECHNOLOGY COLOPHON
-
-    CSS3, HTML5
-    Normalize.css
-    Github Pages
-    Lineicons
+/* SITE */
+Site: Yannis Rizos
+URL: https://yrizos.com/
+Generator: Hugo
