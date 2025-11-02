@@ -249,3 +249,16 @@ git commit -m "feat: add jwt authentication system
 Implement JWT-based authentication with login,
 registration, and token refresh endpoints."
 ```
+
+## Template structure rules
+
+- Let the base layout declare the HTML skeleton with semantic landmarks (`<header>`, `<main>`, `<footer>`) and wrap page content in a shared container utility for consistent width and padding.
+- Break views into focused Hugo partials, document their expected inputs, and pass data explicitly (e.g., with `dict`) instead of relying on globals.
+- Default to semantic markup plus accessibility helpers—label navigation, expose machine-readable metadata (like `<time datetime>`), provide alt text, and use safe link attributes for external targets.
+- Centralize tokens for color, spacing, typography, and motion in a dedicated Sass config file; import component-specific SCSS partials into the main bundle.
+- Preserve the SCSS file organization by keeping each partial scoped to a single UI area and using section banners to outline intent.
+- Feed CSS and JS through Hugo Pipes, compiling in dev, then minifying, fingerprinting, and caching asset partials for production builds.
+- Reuse layout helpers (container widths, spacing variables) instead of inventing ad-hoc measurements to keep rhythm and alignment uniform.
+- Render collections through shared list partials that accept data, perform any needed sorting beforehand, and emit both human- and machine-friendly metadata.
+- Keep interactive behavior in the primary JS bundle, guard for missing DOM nodes, and flip classes or icon names to reflect state changes instead of rewriting markup.
+- Trim extraneous whitespace in templates with `{{-` / `-}}` so the generated HTML stays tidy.
