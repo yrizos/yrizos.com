@@ -6,10 +6,18 @@
   margin-top: 0rem;
   margin-bottom: $spacing-3xl;
   text-align: center;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero p {
-  margin: 0;
+  margin: $spacing-md 0;
+  line-height: 1.25;
+}
+
+.hero h2 {
+  color: $color-text-accent;
 }
 
 .hero .avatar {
@@ -18,5 +26,5 @@
   border-radius: $border-radius-round;
   object-fit: cover;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto $spacing-md;
 }
