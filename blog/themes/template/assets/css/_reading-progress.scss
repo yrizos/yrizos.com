@@ -1,0 +1,19 @@
+// ============================================
+// READING PROGRESS BAR
+// ============================================
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  min-width: 0;
+  height: 3px;
+  background-color: $color-text-accent;
+  z-index: 9999;
+  transition: width 0.1s ease-out;
+  opacity: 1;
+  pointer-events: none;
+  display: block;
+}
+
