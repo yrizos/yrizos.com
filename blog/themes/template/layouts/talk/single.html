@@ -12,5 +12,29 @@
     {{ . }}
   </div>
   {{- end -}}
+
+  <footer class="talk-footer">
+    <hr>
+    {{- if .Params.canonical_url }}
+    {{ partial "canonical-url-notice.html" . }}
+    {{- end }}
+
+    {{- with .Params.slides_pdf -}}
+    <div class="talk-pdf-download">
+      <a href="{{ . }}" class="talk-pdf-download__link" download>
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>{{ $.Title }}</span>
+      </a>
+    </div>
+    {{- end -}}
+
+    <div class="post-license">
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-creative-commons"></i>
+        <i class="fa-brands fa-creative-commons-by"></i>
+        <span>CC BY 4.0</span>
+      </a>
+    </div>
+  </footer>
 </article>
 {{ end }}

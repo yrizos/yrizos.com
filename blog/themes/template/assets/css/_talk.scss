@@ -10,6 +10,32 @@
   }
 }
 
+.talk-pdf-download {
+  margin-bottom: $space-normal;
+  text-align: left;
+}
+
+.talk-pdf-download__link {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: $space-small;
+  text-decoration: none;
+  color: $color-text-primary;
+
+  i {
+    flex-shrink: 0;
+    margin-top: 0.1em;
+  }
+
+  span {
+    text-decoration: underline;
+  }
+
+  &:hover {
+    color: $color-text-accent;
+  }
+}
+
 .talk-description {
   margin-top: $space-extra-large;
   margin-bottom: $space-extra-large;

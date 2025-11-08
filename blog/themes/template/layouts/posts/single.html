@@ -25,8 +25,8 @@
     </div>
 
     <footer class="post-footer">
-      {{- if .Params.canonical_url }}
       <hr>
+      {{- if .Params.canonical_url }}
       {{ partial "canonical-url-notice.html" . }}
       {{- end }}
 

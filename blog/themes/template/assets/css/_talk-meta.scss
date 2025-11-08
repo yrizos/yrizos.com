@@ -1,6 +1,7 @@
 .talk-meta {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: $space-separator;
   line-height: $line-height-tight;
 

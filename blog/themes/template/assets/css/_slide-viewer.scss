@@ -10,7 +10,7 @@ $color-slide-bullet-bg: $color-slide-control-bg;
 $color-slide-bullet-bg-hover: $color-slide-control-bg-hover;
 
 // Slide viewer spacing
-$space-slide-viewer-bottom: $space-large;
+$space-slide-viewer-bottom: $space-tiny;
 $space-slide-controls-top: $space-normal;
 $space-slide-controls-padding: $space-normal;
 $space-slide-controls-gap: $space-tiny;
@@ -78,11 +78,11 @@ $space-slide-arrow-bullet-gap: $space-normal;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: $space-slide-controls-top;
   max-width: $layout-content-max-width;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 $space-slide-controls-padding;
+  padding: 0;
   gap: $space-slide-arrow-bullet-gap;
   width: 100%;
   position: relative;
