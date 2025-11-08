@@ -20,7 +20,7 @@ Hugo-powered personal blog for https://yrizos.com.
 │   └── themes/                # Theme packages pulled into the site
 ├── scripts/                   # Utility scripts that support the blog workflow
 │   ├── fetch_posts.py         # Medium/Dev.to import
-│   ├── fetch_books.py         # Goodreads read books import
+│   ├── fetch_books.py         # Goodreads favorites import
 │   └── fetch_reading.py       # Goodreads currently-reading import
 ├── Makefile                   # Docker-based development commands
 └── CNAME                      # Domain configuration used when deploying the site
@@ -93,9 +93,9 @@ make fetch-posts
 
 ### Goodreads Books
 
-#### Read Books
+#### Favorite Books
 
-Fetches 4 and 5 star rated books from Goodreads RSS feed and creates Hugo content files.
+Fetches favorite books from Goodreads RSS feed and creates Hugo content files.
 
 ```bash
 make fetch-books

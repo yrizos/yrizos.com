@@ -47,16 +47,16 @@
           {{- $sortedBooks := slice }}
           {{- range $readBooks }}
             {{- $dateStr := .Params.date_read }}
-            {{- $sortKey := $dateStr }}
-            {{- if eq (len $dateStr) 10 }}
-              {{- $sortKey = $dateStr }}
-            {{- else }}
-              {{- $sortKey = "0000-00-00" }}
+            {{- $sortTime := time "1970-01-01" }}
+            {{- if and $dateStr (eq (len $dateStr) 10) }}
+              {{- $parsedTime := time $dateStr }}
+              {{- if $parsedTime }}
+                {{- $sortTime = $parsedTime }}
+              {{- end }}
             {{- end }}
-            {{- $sortedBooks = $sortedBooks | append (dict "page" . "sortKey" $sortKey) }}
+            {{- $sortedBooks = $sortedBooks | append (dict "page" . "sortTime" $sortTime) }}
           {{- end }}
-          {{- $sortedBooks = sort $sortedBooks "sortKey" "desc" }}
-          {{- $sortedBooks = first 25 $sortedBooks }}
+          {{- $sortedBooks = sort $sortedBooks "sortTime" "desc" }}
           {{- range $sortedBooks }}
           <div class="book-item" itemscope itemtype="https://schema.org/Book">
             {{- if .page.Params.image }}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch 4 and 5 star read books from Goodreads RSS feed."""
+"""Fetch favorite books from Goodreads RSS feed."""
 
 import feedparser
 import requests
@@ -10,9 +10,9 @@ from dataclasses import dataclass
 from urllib.parse import urlparse
 from datetime import datetime
 
-GOODREADS_FEED = "https://www.goodreads.com/review/list_rss/68793210?key=Q5sTrEOdYsUhUSrXK0J7wg9adkkcAuTFlIKN8-TetPnEWK2-&shelf=read"
+GOODREADS_FEED = "https://www.goodreads.com/review/list_rss/68793210?key=Q5sTrEOdYsUhUSrXK0J7wg9adkkcAuTFlIKN8-TetPnEWK2-&shelf=favorites"
 
-SKIP_BOOK_IDS = {"29630264", "40186304", "32855235", "7930361160", "216017751", "41832736", "16146899", "46184813", "64238935", "5973243", "6416196", "17340660", "60233239", "36223859", "57987464", "8176978", "36844711", "56377548", "8442726", "6567483", "56791389", "126917757", "6488124", "52949193", "18938240", "20572455", "8123311", "6219313", "62193738"}
+SKIP_BOOK_IDS = {"29630264", "40186304", "32855235", "7930361160", "216017751", "41832736", "16146899", "46184813", "64238935", "5973243", "6416196", "17340660", "60233239", "36223859", "57987464", "8176978", "36844711", "56377548", "8442726", "6567483", "56791389", "126917757", "6488124", "52949193", "18938240", "20572455", "8123311", "6219313", "62193738", "40053399", "43812338", "34810395", "40396699"}
 
 ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 BLOG_DIR = ROOT_DIR / "blog"
@@ -138,9 +138,12 @@ def build_front_matter(book: Book, image_path: str) -> str:
         "book_id": book.book_id,
         "isbn": book.isbn,
         "rating": book.rating,
-        "date_read": book.date_read,
         "image": image_path,
     }
+    
+    # Only include date_read if it has a value
+    if book.date_read:
+        fields["date_read"] = book.date_read
 
     lines = ["+++"]
     for key, value in fields.items():
@@ -163,10 +166,7 @@ def fetch_goodreads_books() -> List[Book]:
         if book_id in SKIP_BOOK_IDS:
             continue
 
-        # Filter for 4 and 5 star ratings
         rating = entry.get("user_rating", "").strip()
-        if rating not in ["4", "5"]:
-            continue
 
         title = entry.get("title", "").strip()
         author = entry.get("author_name", "").strip()
@@ -183,7 +183,8 @@ def fetch_goodreads_books() -> List[Book]:
                     "&utm_medium=api&utm_source=rss", "")
 
         # Get date read and convert to ISO format (YYYY-MM-DD) for Hugo
-        date_read_raw = entry.get("user_read_at", "").strip() or entry.get("user_date_added", "").strip()
+        # Only use user_read_at, not user_date_added (which is when added to favorites)
+        date_read_raw = entry.get("user_read_at", "").strip()
         date_read = ""
         if date_read_raw:
             try:
@@ -321,9 +322,45 @@ def remove_skipped_books() -> None:
         print(f"Removed {removed_count} books from skip list.")
 
 
+def remove_books_not_in_feed(feed_book_ids: set[str]) -> None:
+    """Remove existing books that are not in the feed."""
+    if not BOOKS_DIR.exists():
+        return
+
+    removed_count = 0
+    for book_file in BOOKS_DIR.glob("*.md"):
+        try:
+            content = book_file.read_text(encoding="utf-8")
+            book_id_match = re.search(r'book_id\s*=\s*"([^"]+)"', content)
+            if book_id_match:
+                book_id = book_id_match.group(1)
+                # Skip if in skip list (handled separately)
+                if book_id in SKIP_BOOK_IDS:
+                    continue
+                # Remove if not in feed
+                if book_id not in feed_book_ids:
+                    # Delete the book file
+                    book_file.unlink()
+                    # Delete the image if it exists
+                    image_match = re.search(r'image\s*=\s*"([^"]+)"', content)
+                    if image_match:
+                        image_path = image_match.group(1)
+                        image_file = IMAGES_DIR / pathlib.Path(image_path).name
+                        if image_file.exists():
+                            image_file.unlink()
+                    removed_count += 1
+                    print(f"Removed book not in feed: {book_file.stem}")
+        except Exception as err:
+            print(f"Error checking {book_file.name}: {err}")
+            continue
+
+    if removed_count > 0:
+        print(f"Removed {removed_count} books not in feed.")
+
+
 def main() -> None:
     """Main entry point."""
-    print("Fetching 4 and 5 star read books from Goodreads...")
+    print("Fetching favorite books from Goodreads...")
 
     # Remove existing books that are in skip list
     remove_skipped_books()
@@ -331,10 +368,18 @@ def main() -> None:
     books = fetch_goodreads_books()
 
     if not books:
-        print("No books found matching criteria.")
+        print("No favorite books found in feed.")
+        # Still remove books not in feed (empty feed means remove all)
+        remove_books_not_in_feed(set())
         return
 
-    print(f"Found {len(books)} books matching criteria.")
+    print(f"Found {len(books)} favorite books in feed.")
+
+    # Get set of book IDs from feed
+    feed_book_ids = {book.book_id for book in books}
+    
+    # Remove books that are no longer in the feed
+    remove_books_not_in_feed(feed_book_ids)
 
     saved_count = 0
     skipped_count = 0
