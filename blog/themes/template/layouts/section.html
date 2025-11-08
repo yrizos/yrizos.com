@@ -1,7 +1,12 @@
 {{ define "main" }}
   <div class="section-posts">
     <h1 class="section-posts-title">All posts</h1>
-    {{ $pages := sort .Pages "Date" "desc" }}
+    {{- $pages := .Pages -}}
+    {{- if eq .Section "writing" -}}
+      {{- $speakingPages := where .Site.RegularPages "Section" "speaking" -}}
+      {{- $pages = union $pages $speakingPages -}}
+    {{- end -}}
+    {{- $pages = sort $pages "Date" "desc" -}}
     {{ range $pages.GroupByDate "2006" }}
       {{ partial "posts-list.html" (dict "title" .Key "pages" (sort .Pages "Date" "desc")) }}
     {{ end }}

@@ -1,0 +1,16 @@
+.talk {
+  // Inherits styles from article
+}
+
+.talk-header {
+  margin-bottom: $space-extra-large;
+
+  h1 {
+    margin-bottom: $space-normal;
+  }
+}
+
+.talk-description {
+  margin-top: $space-extra-large;
+  margin-bottom: $space-extra-large;
+}

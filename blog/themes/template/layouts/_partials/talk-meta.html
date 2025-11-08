@@ -1,0 +1,18 @@
+{{- $page := .page -}}
+{{- $class := .class | default "talk-meta" -}}
+{{- $isList := .isList | default false -}}
+<div class="{{ $class }}">
+  {{- $dateMachine := $page.Date | time.Format "2006-01-02T15:04:05-07:00" -}}
+  {{- $dateHuman := $page.Date | time.Format ":date_long" -}}
+  <time class="talk-meta__date" datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  {{- with $page.Params.slide_count -}}
+    <span class="talk-meta__separator" aria-hidden="true"></span>
+    <span class="talk-meta__slides">{{ . }} slides</span>
+  {{- end -}}
+  <span class="talk-meta__separator" aria-hidden="true"></span>
+  {{- if and $page.Params.event_url (not $isList) -}}
+    <a href="{{ $page.Params.event_url }}" class="talk-meta__event" target="_blank" rel="noopener">{{ $page.Params.event }}</a>
+  {{- else -}}
+    <span class="talk-meta__event">{{ $page.Params.event }}</span>
+  {{- end -}}
+</div>

@@ -3,7 +3,9 @@
     {{ partial "hero.html" . }}
   </section>
   {{ $limit := site.Params.recentPostsLimit | default 6 }}
-  {{ $recentPosts := where site.RegularPages "Section" "writing" }}
+  {{- $writingPages := where site.RegularPages "Section" "writing" -}}
+  {{- $speakingPages := where site.RegularPages "Section" "speaking" -}}
+  {{- $recentPosts := union $writingPages $speakingPages -}}
   {{ $recentPosts = first $limit (sort $recentPosts "Date" "desc") }}
   {{ partial "posts-list.html" (dict "title" "Recent posts" "pages" $recentPosts) }}
   <div class="all-posts-link">

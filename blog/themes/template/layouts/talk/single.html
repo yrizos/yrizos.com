@@ -1,0 +1,16 @@
+{{ define "main" }}
+<article class="talk">
+  <header class="talk-header">
+    <h1>{{ .Title }}</h1>
+    {{ partial "talk-meta.html" (dict "page" .) }}
+  </header>
+
+  {{ partial "slide-viewer.html" . }}
+
+  {{- with .Content -}}
+  <div class="talk-description">
+    {{ . }}
+  </div>
+  {{- end -}}
+</article>
+{{ end }}

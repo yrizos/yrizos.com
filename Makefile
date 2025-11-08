@@ -37,14 +37,16 @@ help:
 	@echo ""
 	@echo "Scripts:"
 	@echo "  fetch-posts       - Fetch posts from Medium/Dev.to"
-	@echo "  fetch-books        - Fetch favorite books from Goodreads RSS"
-	@echo "  fetch-reading - Fetch currently-reading books from Goodreads"
+	@echo "  fetch-books       - Fetch favorite books from Goodreads RSS"
+	@echo "  fetch-reading 	   - Fetch currently-reading books from Goodreads"
+	@echo "  pdf-to-images     - Convert PDF slides to images"
 	@echo "  venv-setup        - Set up Python virtual environment"
 	@echo ""
 	@echo "Parameters:"
 	@echo "  PORT=8080        - Change server port (default: 1313)"
 	@echo "  ENV=production   - Change environment (default: development)"
 	@echo "  DRAFTS=false     - Disable drafts in serve commands"
+	@echo "  PDF=path/to.pdf  - PDF file to convert (for pdf-to-images)"
 
 # Development servers
 .PHONY: serve
@@ -139,4 +141,14 @@ fetch-books: venv-setup
 fetch-reading: venv-setup
 	@echo "Fetching currently-reading books from Goodreads..."
 	$(PYTHON) scripts/fetch_reading.py
+
+.PHONY: pdf-to-images
+pdf-to-images: venv-setup
+	@if [ -z "$(PDF)" ]; then \
+		echo "Error: PDF parameter is required"; \
+		echo "Usage: make pdf-to-images PDF=path/to/presentation.pdf"; \
+		exit 1; \
+	fi
+	@echo "Converting PDF slides to JPG images..."
+	$(PYTHON) scripts/pdf_to_images.py $(PDF)
 

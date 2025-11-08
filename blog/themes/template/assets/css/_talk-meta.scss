@@ -1,0 +1,42 @@
+.talk-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-separator;
+  line-height: $line-height-tight;
+
+  &__date,
+  &__slides,
+  &__event,
+  &__pdf {
+    display: inline;
+  }
+
+  &__separator {
+    width: $size-divider-dot;
+    height: $size-divider-dot;
+    border-radius: 50%;
+    background-color: $color-border-primary;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__event {
+    &[href] {
+      color: $color-text-primary;
+      text-decoration: underline;
+
+      &:hover {
+        color: $color-text-accent;
+      }
+    }
+  }
+
+  &__pdf {
+    color: $color-text-primary;
+    text-decoration: underline;
+
+    &:hover {
+      color: $color-text-accent;
+    }
+  }
+}

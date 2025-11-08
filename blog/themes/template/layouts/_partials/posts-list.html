@@ -16,7 +16,11 @@ Renders a posts list with a title.
       <h3 class="post-title">
         <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
       </h3>
-      {{ partial "post-meta.html" (dict "page" . "class" "post-meta post-meta--list") }}
+      {{- if eq .Type "talk" -}}
+        {{ partial "talk-meta.html" (dict "page" . "class" "talk-meta talk-meta--list" "isList" true) }}
+      {{- else -}}
+        {{ partial "post-meta.html" (dict "page" . "class" "post-meta post-meta--list") }}
+      {{- end -}}
     </li>
     {{- end }}
   </ul>
