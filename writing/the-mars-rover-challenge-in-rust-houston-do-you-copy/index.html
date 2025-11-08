@@ -1,0 +1,250 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>The Mars Rover Challenge in Rust: Houston, Do You Copy? | Yannis Rizos</title><link rel=canonical href=https://dev.to/yrizos/the-mars-rover-challenge-in-rust-houston-do-you-copy-334o><link rel=icon type=image/png sizes=180x180 href=/images/avatar/avatar-180x180-rounded.png><link rel=icon type=image/x-icon href=/images/avatar/avatar-180x180-rounded.ico><link rel=apple-touch-icon sizes=180x180 href=/images/avatar/avatar-180x180-rounded.png><meta property="og:type" content="website"><meta property="og:title" content="The Mars Rover Challenge in Rust: Houston, Do You Copy?"><meta property="og:site_name" content="Yannis Rizos"><meta property="og:url" content="https://yrizos.com/writing/the-mars-rover-challenge-in-rust-houston-do-you-copy/"><meta property="og:description" content="Our rover navigation system is ready for its maiden voyage, but first, it needs to know where to go! The mission parameters have provided specific test scenarios to validate our implementation. My …"><meta name=twitter:card content="summary"><meta name=twitter:title content="The Mars Rover Challenge in Rust: Houston, Do You Copy?"><meta name=twitter:description content="Our rover navigation system is ready for its maiden voyage, but first, it needs to know where to go! The mission parameters have provided specific test scenarios to validate our implementation. My …"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin=anonymous referrerpolicy=no-referrer><link rel=stylesheet href=/normalize_14985077408719764131.min.02d927c3d7aee93f4557abffff0169f2c90a749e49700a80350d5b3f2911e20a.css integrity="sha256-Atknw9eu6T9FV6v//wFp8skKdJ5JcAqANQ1bPykR4go=" crossorigin=anonymous><link rel=stylesheet href=/css/main.min.0e61a653ef4c7b829e8411c1b950802edcc3a8c64319871c4159f1e7c511a7c9.css integrity="sha256-DmGmU+9Me4KehBHBuVCALtzDqMZDGYccQVnx58URp8k=" crossorigin=anonymous><script src=/js/main.1a2d86e63b9bcc94137f28e5b808a2cfd08137500f81bc904a906b0254ffae26.js integrity="sha256-Gi2G5jubzJQTfyjluAiiz9CBN1APgbyQSpBrAlT/riY=" crossorigin=anonymous></script></head><body><div class=reading-progress id=reading-progress aria-hidden=true></div><div class=site-container><header class=site-header><div class=site-title><a href=/>Yannis Rizos</a></div><nav class=site-nav aria-label="Primary navigation"><ul><li><a href=/>Home</a></li><li><span class=site-nav__separator aria-hidden=true></span></li><li><a href=/writing/>Writing</a></li><li><span class=site-nav__separator aria-hidden=true></span></li><li><a href=/reading/>Reading</a></li><li><span class=site-nav__separator aria-hidden=true></span></li><li><a href=/about/>About</a></li></ul></nav></header><main class=site-main><article class=page><h1 class=page-title>The Mars Rover Challenge in Rust: Houston, Do You Copy?</h1><div class=page-content><p>Our rover navigation system is ready for its maiden voyage, but first, it needs to know where to go! The mission parameters have provided specific test scenarios to validate our implementation. My rover needs to interpret these commands:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>5 5
+</span></span><span style=display:flex><span>1 2 N
+</span></span><span style=display:flex><span>LMLMLMLMM
+</span></span><span style=display:flex><span>3 3 E
+</span></span><span style=display:flex><span>MMRMMRMRRM
+</span></span></code></pre></div><p>And respond with precise positional data:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>1 3 N
+</span></span><span style=display:flex><span>5 1 E
+</span></span></code></pre></div><h2 id=establishing-communication-receiving-user-input>Establishing Communication: Receiving User Input</h2><p>My first challenge was creating a communication channel with Mission Control. I turned to Rust&rsquo;s powerful <code>std::io</code> module to establish this vital link:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/main.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>mod</span> direction;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> instruction;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> plateau;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> rover;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> std::io::{self, BufRead};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> stdin <span style=color:#f92672>=</span> io::stdin();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> lines <span style=color:#f92672>=</span> stdin.lock().lines();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> line <span style=color:#66d9ef>in</span> lines {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>match</span> line {
+</span></span><span style=display:flex><span>            Ok(content) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>&#34;</span>, content),
+</span></span><span style=display:flex><span>            Err(error) <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>eprintln!</span>(<span style=color:#e6db74>&#34;Error reading line: </span><span style=color:#e6db74>{}</span><span style=color:#e6db74>&#34;</span>, error),
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>This foundational setup acts as our mission control interface. Think of it as a radio receiver - it picks up incoming transmissions (user input) and echoes them back for confirmation. The <code>std::io</code> module serves as our communications array, carefully monitoring each incoming signal and reporting any transmission errors.</p><p>To verify our communication systems, I ran some basic diagnostic tests:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>cargo build
+</span></span></code></pre></div><p>Followed by:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>cargo run
+</span></span></code></pre></div><p>Perfect clarity - the system faithfully relays every message it receives, confirming our communication link is operational.</p><h2 id=mapping-the-terrain-parsing-plateau-dimensions>Mapping the Terrain: Parsing Plateau Dimensions</h2><p>A rover without terrain data is like a ship without a map. I needed to interpret the first transmission - the dimensions of our Martian plateau:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/main.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> stdin <span style=color:#f92672>=</span> io::stdin();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> lines <span style=color:#f92672>=</span> stdin.lock().lines();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Some(Ok(plateau_dimensions)) <span style=color:#f92672>=</span> lines.next() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> plateau_parts: Vec<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>i32</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> plateau_dimensions
+</span></span><span style=display:flex><span>            .split_whitespace()
+</span></span><span style=display:flex><span>            .map(<span style=color:#f92672>|</span>s<span style=color:#f92672>|</span> s.parse().unwrap())
+</span></span><span style=display:flex><span>            .collect();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;Plateau dimensions: </span><span style=color:#e6db74>{:?}</span><span style=color:#e6db74>&#34;</span>, plateau_parts);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The process here is like a surveyor reading coordinates. When Mission Control transmits the plateau dimensions, my code acts as a digital cartographer. It takes the raw input string, splits it at the spaces (like separating latitude and longitude), and converts each piece into a numerical value our rover can understand. The result? A precise digital map of our operational territory.</p><h2 id=setting-the-scene-parsing-rovers-initial-state>Setting the Scene: Parsing Rover&rsquo;s Initial State</h2><p>With our terrain mapped, it&rsquo;s time to establish our rover&rsquo;s starting position. Each rover deployment needs three crucial pieces of information - its x and y coordinates on our digital map, and which way it&rsquo;s facing when it touches down:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/main.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Some(Ok(rover_initial)) <span style=color:#f92672>=</span> lines.next() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> rover_parts: Vec<span style=color:#f92672>&lt;&amp;</span><span style=color:#66d9ef>str</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> rover_initial.split_whitespace().collect();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> x: <span style=color:#66d9ef>i32</span> <span style=color:#f92672>=</span> rover_parts[<span style=color:#ae81ff>0</span>].parse().unwrap();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> y: <span style=color:#66d9ef>i32</span> <span style=color:#f92672>=</span> rover_parts[<span style=color:#ae81ff>1</span>].parse().unwrap();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> direction <span style=color:#f92672>=</span> <span style=color:#66d9ef>match</span> rover_parts[<span style=color:#ae81ff>2</span>] {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;N&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>NORTH</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;E&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>EAST</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;S&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>SOUTH</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;W&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>WEST</span>,
+</span></span><span style=display:flex><span>            _ <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>panic!</span>(<span style=color:#e6db74>&#34;Invalid direction&#34;</span>),
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;Rover initial position: (</span><span style=color:#e6db74>{}</span><span style=color:#e6db74>, </span><span style=color:#e6db74>{}</span><span style=color:#e6db74>), Direction: </span><span style=color:#e6db74>{:?}</span><span style=color:#e6db74>&#34;</span>, x, y, direction);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>This setup phase is like a pre-launch checklist. The code carefully parses the deployment coordinates, treating them like a spacecraft&rsquo;s landing coordinates. The direction indicator - N, E, S, or W - gets translated into our rover&rsquo;s internal compass, ensuring it knows exactly which way it&rsquo;s facing when it begins its mission.</p><h2 id=commanding-the-rover-parsing-movement-instructions>Commanding the Rover: Parsing Movement Instructions</h2><p>Next came the most critical part of our mission control interface - interpreting the sequence of movement commands. Each instruction is like a carefully choreographed dance move, telling our rover to pirouette left (L), right (R), or march forward (M):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/main.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Some(Ok(instructions_line)) <span style=color:#f92672>=</span> lines.next() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> instructions: Vec<span style=color:#f92672>&lt;</span>Instruction<span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> instructions_line
+</span></span><span style=display:flex><span>            .chars()
+</span></span><span style=display:flex><span>            .filter_map(Instruction::from_char)
+</span></span><span style=display:flex><span>            .collect();
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;Rover instructions: </span><span style=color:#e6db74>{:?}</span><span style=color:#e6db74>&#34;</span>, instructions);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Think of this as our rover&rsquo;s mission sequence - each character in the instruction line represents a specific maneuver. The code transforms these simple letters into actionable commands our rover can understand, like translating Morse code into clear instructions.</p><h2 id=synchronizing-the-mission-integrating-components>Synchronizing the Mission: Integrating Components</h2><p>With all our systems ready, it was time to bring everything together into a coordinated mission control center. Like launching a space mission, every component needs to work in perfect harmony:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/main.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> direction;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> instruction;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> plateau;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>mod</span> rover;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> direction::Direction;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> instruction::Instruction;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> plateau::Plateau;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> rover::Rover;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> std::io::{self, BufRead};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> stdin <span style=color:#f92672>=</span> io::stdin();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> lines <span style=color:#f92672>=</span> stdin.lock().lines();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> plateau_dimensions <span style=color:#f92672>=</span> lines.next().unwrap().unwrap();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> plateau_parts: Vec<span style=color:#f92672>&lt;</span><span style=color:#66d9ef>i32</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> plateau_dimensions
+</span></span><span style=display:flex><span>        .split_whitespace()
+</span></span><span style=display:flex><span>        .map(<span style=color:#f92672>|</span>s<span style=color:#f92672>|</span> s.parse().unwrap())
+</span></span><span style=display:flex><span>        .collect();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> rover_initial <span style=color:#f92672>=</span> lines.next().unwrap().unwrap();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> rover_parts: Vec<span style=color:#f92672>&lt;&amp;</span><span style=color:#66d9ef>str</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> rover_initial.split_whitespace().collect();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> x: <span style=color:#66d9ef>i32</span> <span style=color:#f92672>=</span> rover_parts[<span style=color:#ae81ff>0</span>].parse().unwrap();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> y: <span style=color:#66d9ef>i32</span> <span style=color:#f92672>=</span> rover_parts[<span style=color:#ae81ff>1</span>].parse().unwrap();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> direction <span style=color:#f92672>=</span> <span style=color:#66d9ef>match</span> rover_parts[<span style=color:#ae81ff>2</span>] {
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;N&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>NORTH</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;E&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>EAST</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;S&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>SOUTH</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;W&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>WEST</span>,
+</span></span><span style=display:flex><span>        _ <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>panic!</span>(<span style=color:#e6db74>&#34;Invalid direction&#34;</span>),
+</span></span><span style=display:flex><span>    };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> instructions_line <span style=color:#f92672>=</span> lines.next().unwrap().unwrap();
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> instructions: Vec<span style=color:#f92672>&lt;</span>Instruction<span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> instructions_line
+</span></span><span style=display:flex><span>        .chars()
+</span></span><span style=display:flex><span>        .filter_map(Instruction::from_char)
+</span></span><span style=display:flex><span>        .collect();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> plateau <span style=color:#f92672>=</span> Plateau::new(plateau_parts[<span style=color:#ae81ff>0</span>], plateau_parts[<span style=color:#ae81ff>1</span>]);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> rover <span style=color:#f92672>=</span> Rover::new(x, y, direction, <span style=color:#f92672>&amp;</span>plateau);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    rover.execute_instructions(<span style=color:#f92672>&amp;</span>instructions);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Like a well-orchestrated space mission, each piece plays its crucial role. First, we establish our terrain parameters, then position our rover, and finally load its mission instructions. Every component - from the plateau dimensions to the rover&rsquo;s directional systems - comes together in a seamless integration.</p><h2 id=broadcasting-the-results-sharing-rover-outcomes>Broadcasting the Results: Sharing Rover Outcomes</h2><p>After each successful mission, Mission Control needs accurate position reports. I added some eyes to our rover:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/main.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{:?}</span><span style=color:#e6db74>&#34;</span>, rover.x(), rover.y(), rover.direction());
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>When I put this to the test with a sample mission:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>5 5
+</span></span><span style=display:flex><span>1 2 N
+</span></span><span style=display:flex><span>LMLMLMLMM
+</span></span></code></pre></div><p>The rover reported back:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>1 3 NORTH
+</span></span></code></pre></div><h2 id=tuning-the-details-refining-output-format>Tuning the Details: Refining Output Format</h2><p>Mission Control protocols are strict - they expect position reports in a specific format. <code>1 3 NORTH</code> wouldn&rsquo;t do - they need <code>1 3 N</code>. Time for some message formatting:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/direction.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#[derive(Debug, PartialEq)]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>enum</span> <span style=color:#a6e22e>Direction</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>NORTH</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>EAST</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>SOUTH</span>,
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>WEST</span>,
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>impl</span> Direction {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>pub</span> <span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>as_char</span>(<span style=color:#f92672>&amp;</span>self) -&gt; <span style=color:#66d9ef>char</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>match</span> self {
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>NORTH</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;N&#39;</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>EAST</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;E&#39;</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>SOUTH</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;S&#39;</span>,
+</span></span><span style=display:flex><span>            Direction::<span style=color:#66d9ef>WEST</span> <span style=color:#f92672>=&gt;</span> <span style=color:#e6db74>&#39;W&#39;</span>,
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>A quick update to our transmission format:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/main.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{}</span><span style=color:#e6db74>&#34;</span>, rover.x(), rover.y(), rover.direction().as_char());
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=final-touches-managing-multiple-rovers>Final Touches: Managing Multiple Rovers</h2><p>The real challenge emerged when Mission Control revealed their master plan - coordinating multiple rovers! Each rover would receive its own set of instructions:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>5 5
+</span></span><span style=display:flex><span>1 2 N
+</span></span><span style=display:flex><span>LMLMLMLMM
+</span></span><span style=display:flex><span>3 3 E
+</span></span><span style=display:flex><span>MMRMMRMRRM
+</span></span></code></pre></div><p>Like an air traffic controller managing multiple aircraft, I needed to coordinate multiple rover operations:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// src/main.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#75715e>// ...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>while</span> i <span style=color:#f92672>&lt;</span> lines.len() {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span> <span style=color:#f92672>&gt;=</span> lines.len() {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> rover_initial <span style=color:#f92672>=</span> <span style=color:#f92672>&amp;</span>lines[i];
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> rover_parts: Vec<span style=color:#f92672>&lt;&amp;</span><span style=color:#66d9ef>str</span><span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> rover_initial.split_whitespace().collect();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> x: <span style=color:#66d9ef>i32</span> <span style=color:#f92672>=</span> rover_parts[<span style=color:#ae81ff>0</span>].parse().unwrap();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> y: <span style=color:#66d9ef>i32</span> <span style=color:#f92672>=</span> rover_parts[<span style=color:#ae81ff>1</span>].parse().unwrap();
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> direction <span style=color:#f92672>=</span> <span style=color:#66d9ef>match</span> rover_parts[<span style=color:#ae81ff>2</span>] {
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;N&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>NORTH</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;E&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>EAST</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;S&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>SOUTH</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;W&#34;</span> <span style=color:#f92672>=&gt;</span> Direction::<span style=color:#66d9ef>WEST</span>,
+</span></span><span style=display:flex><span>            _ <span style=color:#f92672>=&gt;</span> <span style=color:#a6e22e>panic!</span>(<span style=color:#e6db74>&#34;Invalid direction&#34;</span>),
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> instructions_line <span style=color:#f92672>=</span> <span style=color:#f92672>&amp;</span>lines[i <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>];
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> instructions: Vec<span style=color:#f92672>&lt;</span>Instruction<span style=color:#f92672>&gt;</span> <span style=color:#f92672>=</span> instructions_line
+</span></span><span style=display:flex><span>            .chars()
+</span></span><span style=display:flex><span>            .filter_map(Instruction::from_char)
+</span></span><span style=display:flex><span>            .collect();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> rover <span style=color:#f92672>=</span> Rover::new(x, y, direction, <span style=color:#f92672>&amp;</span>plateau);
+</span></span><span style=display:flex><span>        rover.execute_instructions(<span style=color:#f92672>&amp;</span>instructions);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>println!</span>(<span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{}</span><span style=color:#e6db74>&#34;</span>, rover.x(), rover.y(), rover.direction().as_char());
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        i <span style=color:#f92672>+=</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>When put to the test with our multi-rover scenario:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>5 5
+</span></span><span style=display:flex><span>1 2 N
+</span></span><span style=display:flex><span>LMLMLMLMM
+</span></span><span style=display:flex><span>3 3 E
+</span></span><span style=display:flex><span>MMRMMRMRRM
+</span></span></code></pre></div><p>Mission accomplished! Each rover reported its position perfectly:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-plaintext data-lang=plaintext><span style=display:flex><span>1 3 N
+</span></span><span style=display:flex><span>5 1 E
+</span></span></code></pre></div><h2 id=verifying-the-expedition-writing-integration-tests>Verifying the Expedition: Writing Integration Tests</h2><p>Success is great, but in space exploration, we verify everything twice. I needed comprehensive tests to ensure our multi-rover coordination system worked flawlessly under all conditions:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#75715e>// tests/integration_test.rs
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#66d9ef>use</span> std::process::{Command, Stdio};
+</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> std::io::Write;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#[test]</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>test_multiple_rovers</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> child <span style=color:#f92672>=</span> Command::new(<span style=color:#e6db74>&#34;cargo&#34;</span>)
+</span></span><span style=display:flex><span>        .arg(<span style=color:#e6db74>&#34;run&#34;</span>)
+</span></span><span style=display:flex><span>        .stdin(Stdio::piped())
+</span></span><span style=display:flex><span>        .stdout(Stdio::piped())
+</span></span><span style=display:flex><span>        .spawn()
+</span></span><span style=display:flex><span>        .expect(<span style=color:#e6db74>&#34;Failed to start cargo run&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> stdin <span style=color:#f92672>=</span> child.stdin.as_mut().expect(<span style=color:#e6db74>&#34;Failed to open stdin&#34;</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> input <span style=color:#f92672>=</span> <span style=color:#e6db74>b</span><span style=color:#e6db74>&#34;5 5</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>1 2 N</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>LMLMLMLMM</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>3 3 E</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>MMRMMRMRRM</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+</span></span><span style=display:flex><span>        stdin.write_all(input).expect(<span style=color:#e6db74>&#34;Failed to write to stdin&#34;</span>);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> output <span style=color:#f92672>=</span> child.wait_with_output().expect(<span style=color:#e6db74>&#34;Failed to read stdout&#34;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> expected_output <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;1 3 N</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>5 1 E</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> actual_output <span style=color:#f92672>=</span> String::from_utf8_lossy(<span style=color:#f92672>&amp;</span>output.stdout);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>assert_eq!</span>(actual_output, expected_output);
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>This test suite acts like a mission simulator. It sends commands just like Mission Control would and verifies that our rovers respond exactly as expected. Think of it as a dress rehearsal for the real Mars mission - every command must execute perfectly, every position report must be precise.</p><p>I run the full battery of tests with:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span>cargo test
+</span></span></code></pre></div><p>When every test passes, I know our rovers are ready for their Martian adventure. The integration tests confirm that our entire command and control system - from receiving instructions to coordinating multiple rovers to reporting positions - works in perfect harmony. This comprehensive testing approach ensures that when our rovers touch down on Mars, they&rsquo;ll execute their missions flawlessly, navigating the red planet&rsquo;s terrain with precision and reliability.</p><hr><p>The journey through this challenge has finally reached its conclusion, and what a gratifying experience it turned out to be. While Rust Analyzer flags a couple of minor issues, the robust test suite provides confidence that these will be straightforward fixes.</p><p>The code is available for <a href=https://github.com/yrizos/mars-rover-rs>perusal on Github</a>, marking the end of this rewarding coding adventure.</p></div></article></main><footer class=site-footer><div class=social-icons aria-label="Social media links"><a href=https://www.linkedin.com/in/yrizos/ target=_blank rel="noopener noreferrer" aria-label=LinkedIn><i class="fa-brands fa-linkedin"></i>
+</a><a href=https://github.com/yrizos target=_blank rel="noopener noreferrer" aria-label=GitHub><i class="fa-brands fa-github"></i>
+</a><a href=https://medium.com/@yrizos target=_blank rel="noopener noreferrer" aria-label=Medium><i class="fa-brands fa-medium"></i>
+</a><a href=https://www.goodreads.com/user/show/68793210-yannis-rizos target=_blank rel="noopener noreferrer" aria-label=Goodreads><i class="fa-brands fa-goodreads"></i>
+</a><a href=/index.xml target=_blank rel="noopener noreferrer" aria-label="RSS feed"><i class="fa-solid fa-rss"></i></a></div></footer></div></body></html>
