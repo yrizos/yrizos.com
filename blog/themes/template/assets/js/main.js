@@ -109,10 +109,6 @@
     const glideElement = slideViewer.querySelector('.glide');
     if (!glideElement) return;
 
-    const slideCount = parseInt(slideViewer.dataset.slideCount, 10) || 0;
-    const currentSlideEl = slideViewer.querySelector('.slide-counter__current');
-    const totalSlideEl = slideViewer.querySelector('.slide-counter__total');
-
     // Initialize Glide
     const glide = new Glide(glideElement, {
       type: 'carousel',
@@ -126,23 +122,8 @@
       dragThreshold: 120,
     });
 
-    // Update slide counter
-    function updateCounter() {
-      if (currentSlideEl) {
-        currentSlideEl.textContent = glide.index + 1;
-      }
-    }
-
-    // Listen to slide changes
-    glide.on(['mount.after', 'run'], function() {
-      updateCounter();
-    });
-
     // Mount Glide
     glide.mount();
-
-    // Update counter on initial mount
-    updateCounter();
   }
 
   // Initialize on DOM ready, wait for Glide to be available

@@ -6,34 +6,22 @@
 {{- $slideCount := len $slides -}}
 {{- if gt $slideCount 0 -}}
 <div class="slide-viewer" data-slides-dir="{{ $slidesDir }}" data-slide-count="{{ $slideCount }}">
-  <div class="glide">
-    <div class="glide__track" data-glide-el="track">
-      <ul class="glide__slides">
-        {{- range $index, $slide := $slides -}}
-        <li class="glide__slide">
-          <img 
-            src="{{ $slide.RelPermalink }}" 
-            alt="Slide {{ add $index 1 }}"
-            loading="lazy"
-            class="slide-image">
-        </li>
-        {{- end -}}
-      </ul>
+  <div class="slide-viewer-picture">
+    <div class="glide">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          {{- range $index, $slide := $slides -}}
+          <li class="glide__slide">
+            <img 
+              src="{{ $slide.RelPermalink }}" 
+              alt="Slide {{ add $index 1 }}"
+              loading="lazy"
+              class="slide-image">
+          </li>
+          {{- end -}}
+        </ul>
+      </div>
     </div>
-    <div class="glide__arrows" data-glide-el="controls">
-      <button class="glide__arrow glide__arrow--left" data-glide-dir="<" aria-label="Previous slide">←</button>
-      <button class="glide__arrow glide__arrow--right" data-glide-dir=">" aria-label="Next slide">→</button>
-    </div>
-    <div class="glide__bullets" data-glide-el="controls[nav]">
-      {{- range $index := (seq 0 (sub $slideCount 1)) -}}
-      <button class="glide__bullet" data-glide-dir="={{ $index }}" aria-label="Go to slide {{ add $index 1 }}"></button>
-      {{- end -}}
-    </div>
-  </div>
-  <div class="slide-counter">
-    <span class="slide-counter__current">1</span>
-    <span class="slide-counter__separator"> / </span>
-    <span class="slide-counter__total">{{ $slideCount }}</span>
   </div>
 </div>
 {{- end -}}
