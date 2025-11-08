@@ -19,49 +19,92 @@ Hugo-powered personal blog for https://yrizos.com.
 │   ├── static/                # Static assets (images, JS, CSS) served as-is
 │   └── themes/                # Theme packages pulled into the site
 ├── scripts/                   # Utility scripts that support the blog workflow
-│   └── fetch_posts.py         # Medium/Dev.to import
+│   ├── fetch_posts.py         # Medium/Dev.to import
+│   ├── fetch_books.py         # Goodreads read books import
+│   └── fetch_reading.py       # Goodreads currently-reading import
+├── Makefile                   # Docker-based development commands
 └── CNAME                      # Domain configuration used when deploying the site
 ```
 
 ## Local Development
 
-### Serve
+The project includes a Makefile with Docker-based commands that don't require local Hugo installation.
 
-Install [Hugo](https://gohugo.io/getting-started/installing/), then run from the repository root:
+### Development Server
+
+Start the development server with drafts enabled:
 
 ```bash
-hugo server --source blog
+make serve
 ```
 
 Visit `http://localhost:1313/` to browse the site with live reload.
 
-### Build
+Other serve options:
+
+- `make serve-future` - Include future-dated posts
+- `make serve-prod` - Production-like server (no drafts)
+- `make serve-clean` - Server without drafts
+- `PORT=8080 make serve` - Use custom port
+
+### Building
+
+Build the site for development:
 
 ```bash
-hugo --source blog
+make build
+```
+
+Build for production:
+
+```bash
+make build-prod
 ```
 
 Static site output goes to `blog/public/`.
 
-## Medium/Dev.to import
+### Other Commands
 
-Reads posts from:
+- `make clean` - Remove build artifacts
+- `make help` - Show all available commands
+
+## Content Import Scripts
+
+### Setup
+
+The Python virtual environment is automatically set up when running Makefile commands. To set it up explicitly:
+
+```bash
+make venv-setup
+```
+
+### Medium/Dev.to Posts
+
+Fetches posts from:
 
 - https://medium.com/feed/@yrizos
 - https://dev.to/feed/yrizos
 
 and converts them into Hugo-ready Markdown files.
 
-### Setup
-
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+make fetch-posts
 ```
 
-### Run
+### Goodreads Books
+
+#### Read Books
+
+Fetches 4 and 5 star rated books from Goodreads RSS feed and creates Hugo content files.
 
 ```bash
-python3 scripts/fetch_posts.py
+make fetch-books
+```
+
+#### Currently Reading
+
+Fetches currently-reading books from Goodreads RSS feed.
+
+```bash
+make fetch-reading
 ```
