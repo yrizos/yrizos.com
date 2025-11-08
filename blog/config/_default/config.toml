@@ -4,9 +4,13 @@ title = 'Yannis Rizos'
 theme = 'template'
 
 [outputs]
-  home = ['HTML', 'RSS', 'Robots', 'Humans']
+  home = ['HTML', 'Feed', 'Robots', 'Humans']
 
 [outputFormats]
+  [outputFormats.Feed]
+    mediaType = 'application/rss+xml'
+    baseName = 'feed'
+    rel = 'alternate'
   [outputFormats.Humans]
     mediaType = 'text/plain'
     baseName = 'humans'
