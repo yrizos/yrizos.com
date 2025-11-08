@@ -1,6 +1,24 @@
+// ============================================
+// 404 PAGE
+// ============================================
+
+// 404 page colors
+$color-404-background: $color-background-primary;
+$color-404-text: $color-text-primary;
+
+// 404 page spacing
+$space-404-padding: $space-large;
+
+// 404 page typography
+$font-404-title-scale: $font-scale-3xl;
+$font-404-title-family: $font-family-heading;
+
+// 404 page sizes
+$size-404-avatar: $size-avatar;
+
 .not-found-page {
-  background-color: $color-background-primary;
-  color: $color-text-primary;
+  background-color: $color-404-background;
+  color: $color-404-text;
   min-height: 100vh;
   margin: 0;
 }
@@ -13,19 +31,19 @@
   justify-content: center;
   gap: $space-normal;
   text-align: center;
-  padding: $space-large;
+  padding: $space-404-padding;
 }
 
 .not-found__avatar {
-  width: $size-avatar;
-  height: $size-avatar;
+  width: $size-404-avatar;
+  height: $size-404-avatar;
   border-radius: 50%;
   object-fit: cover;
   display: block;
 }
 
 .not-found__title {
-  font-family: $font-family-heading;
-  font-size: #{$font-scale-3xl}em;
+  font-family: $font-404-title-family;
+  font-size: #{$font-404-title-scale}em;
   margin: 0;
 }

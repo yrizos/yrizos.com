@@ -1,30 +1,52 @@
+// ============================================
+// TALK
+// ============================================
+
+// Talk spacing
+$space-talk-header-bottom: $space-extra-large;
+$space-talk-header-title-bottom: $space-normal;
+$space-talk-pdf-download-bottom: $space-normal;
+$space-talk-description-top: $space-extra-large;
+$space-talk-description-bottom: $space-extra-large;
+
+// Talk typography
+$font-talk-title-bottom: $space-normal;
+
+// Talk colors
+$color-talk-pdf-text: $color-text-primary;
+$color-talk-pdf-hover: $color-text-accent;
+
+// Talk sizes
+$size-talk-pdf-icon-margin-top: 0.1em;
+$space-talk-pdf-gap: $space-small;
+
 .talk {
   // Inherits styles from article
 }
 
 .talk-header {
-  margin-bottom: $space-extra-large;
+  margin-bottom: $space-talk-header-bottom;
 
   h1 {
-    margin-bottom: $space-normal;
+    margin-bottom: $font-talk-title-bottom;
   }
 }
 
 .talk-pdf-download {
-  margin-bottom: $space-normal;
+  margin-bottom: $space-talk-pdf-download-bottom;
   text-align: left;
 }
 
 .talk-pdf-download__link {
   display: inline-flex;
   align-items: flex-start;
-  gap: $space-small;
+  gap: $space-talk-pdf-gap;
   text-decoration: none;
-  color: $color-text-primary;
+  color: $color-talk-pdf-text;
 
   i {
     flex-shrink: 0;
-    margin-top: 0.1em;
+    margin-top: $size-talk-pdf-icon-margin-top;
   }
 
   span {
@@ -32,11 +54,11 @@
   }
 
   &:hover {
-    color: $color-text-accent;
+    color: $color-talk-pdf-hover;
   }
 }
 
 .talk-description {
-  margin-top: $space-extra-large;
-  margin-bottom: $space-extra-large;
+  margin-top: $space-talk-description-top;
+  margin-bottom: $space-talk-description-bottom;
 }

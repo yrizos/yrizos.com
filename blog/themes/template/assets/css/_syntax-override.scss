@@ -1,5 +1,24 @@
+// ============================================
+// SYNTAX OVERRIDE
+// ============================================
+
+// Syntax override spacing
+$space-syntax-override-pre-padding: $space-normal;
+$space-syntax-override-highlight-bottom: $space-normal;
+
+// Syntax override typography
+$font-syntax-override-code-family: 'Source Code Pro', monospace;
+$font-syntax-override-code-size-desktop: $font-size-base-desktop;
+$font-syntax-override-code-size-mobile: $font-size-base-mobile;
+
+// Syntax override border radius
+$border-syntax-override-pre-radius: $border-radius-normal;
+
+// Syntax override layout
+$layout-syntax-override-mobile-breakpoint: $layout-content-max-width;
+
 div.highlight {
-    margin-bottom: $space-normal;
+    margin-bottom: $space-syntax-override-highlight-bottom;
     overflow: hidden;
   }
   
@@ -12,18 +31,18 @@ div.highlight {
   }
   
   pre {
-    padding: $space-normal;
-    border-radius: $border-radius-normal;
+    padding: $space-syntax-override-pre-padding;
+    border-radius: $border-syntax-override-pre-radius;
   }
   
   code {
-    font-family: 'Source Code Pro', monospace;
-    font-size: $font-size-base-desktop;
+    font-family: $font-syntax-override-code-family;
+    font-size: $font-syntax-override-code-size-desktop;
   }
   
-  @media (max-width: $layout-content-max-width) {
+  @media (max-width: $layout-syntax-override-mobile-breakpoint) {
     code {
-      font-size: $font-size-base-mobile;
+      font-size: $font-syntax-override-code-size-mobile;
     }
   }
   

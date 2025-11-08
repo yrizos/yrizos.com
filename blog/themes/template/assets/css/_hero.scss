@@ -2,14 +2,21 @@
 // HERO COMPONENT
 // ============================================
 
+// Hero spacing
+$space-hero-margin-bottom: $space-hero;
+$space-hero-gap: $space-normal;
+
+// Hero typography
+$line-hero-height: $line-height-body;
+
 .hero {
-  margin: 0 0 $space-hero 0;
+  margin: 0 0 $space-hero-margin-bottom 0;
   display: flex;
   flex-direction: column;
-  gap: $space-normal;
+  gap: $space-hero-gap;
 }
 
 .hero p {
   margin: 0;
-  line-height: $line-height-body;
+  line-height: $line-hero-height;
 }

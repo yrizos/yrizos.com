@@ -2,10 +2,30 @@
 // SINGLE POST VIEW
 // ============================================
 
+// Post spacing
+$space-post-cover-bottom: $space-large;
+$space-post-header-bottom: $space-large;
+$space-post-header-gap: $space-normal;
+$space-post-content-top: $space-normal;
+$space-post-footer-top: $space-normal;
+$space-post-original-notice-bottom: $space-normal;
+
+// Post layout
+$layout-post-cover-max-width: $layout-cover-max-width;
+$border-post-cover-radius: $border-radius-normal;
+
+// Post cover opacity
+$opacity-post-cover-image-hidden: 0;
+$opacity-post-cover-image-visible: 1;
+
+// Post cover motion
+$motion-post-cover-duration: 0.3s;
+$motion-post-cover-easing: ease-in;
+
 // Post Cover Image
 .post-cover {
   margin: 0;
-  margin-bottom: $space-large;
+  margin-bottom: $space-post-cover-bottom;
   padding: 0;
   width: 100vw;
   position: relative;
@@ -17,7 +37,7 @@
 .post-cover-picture {
   display: block;
   width: 100%;
-  max-width: $layout-cover-max-width;
+  max-width: $layout-post-cover-max-width;
   margin: 0 auto;
   overflow: hidden;
   position: relative;
@@ -27,27 +47,27 @@
   width: 100%;
   height: auto;
   display: block;
-  opacity: 0;
-  transition: opacity 0.3s ease-in;
+    opacity: $opacity-post-cover-image-hidden;
+    transition: opacity $motion-post-cover-duration $motion-post-cover-easing;
   position: relative;
 }
 
 .post-cover img.loaded {
-  opacity: 1;
+    opacity: $opacity-post-cover-image-visible;
 }
 
-@media (min-width: $layout-cover-max-width) {
+@media (min-width: $layout-post-cover-max-width) {
   .post-cover-picture {
-    border-radius: $border-radius-normal;
+    border-radius: $border-post-cover-radius;
   }
 }
 
 // Post Header
 .post-header {
-  margin-bottom: $space-large;
+  margin-bottom: $space-post-header-bottom;
   display: flex;
   flex-direction: column;
-  gap: $space-normal;
+  gap: $space-post-header-gap;
 }
 
 .post-header .post-title {
@@ -73,17 +93,17 @@
 
 // Post Content
 .post-content {
-  margin-top: $space-normal;
+  margin-top: $space-post-content-top;
 }
 
 // Post Footer
 .post-footer {
-  margin-top: $space-normal;
+  margin-top: $space-post-footer-top;
 }
 
 // Original URL Notice
 .post-original-notice {
-  margin-bottom: $space-normal;
+  margin-bottom: $space-post-original-notice-bottom;
   text-align: left;
 }
 

@@ -2,9 +2,17 @@
 // POSTS LIST COMPONENT
 // ============================================
 
+// Posts list spacing
+$space-posts-list-section-top: $space-extra-large;
+$space-posts-list-section-bottom: $space-extra-large;
+$space-posts-list-title-top: $space-extra-large;
+$space-posts-list-title-bottom: $space-normal;
+$space-posts-list-gap: $space-normal;
+$space-posts-list-item-gap: $space-small;
+
 .posts-list-section {
-  margin-top: $space-extra-large;
-  margin-bottom: $space-extra-large;
+  margin-top: $space-posts-list-section-top;
+  margin-bottom: $space-posts-list-section-bottom;
 }
 
 .posts-list-section:last-child {
@@ -12,8 +20,8 @@
 }
 
 .posts-list-title {
-  margin-top: $space-extra-large;
-  margin-bottom: $space-normal;
+  margin-top: $space-posts-list-title-top;
+  margin-bottom: $space-posts-list-title-bottom;
 }
 
 .posts-list {
@@ -22,7 +30,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $space-normal;
+  gap: $space-posts-list-gap;
 }
 
 .posts-list li {
@@ -30,7 +38,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $space-small;
+  gap: $space-posts-list-item-gap;
 }
 
 .post-title {

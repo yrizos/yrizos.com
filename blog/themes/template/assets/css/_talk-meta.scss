@@ -1,9 +1,27 @@
+// ============================================
+// TALK META
+// ============================================
+
+// Talk meta spacing
+$space-talk-meta-gap: $space-separator;
+
+// Talk meta typography
+$line-talk-meta-height: $line-height-tight;
+
+// Talk meta colors
+$color-talk-meta-text: $color-text-primary;
+$color-talk-meta-hover: $color-text-accent;
+$color-talk-meta-separator: $color-border-primary;
+
+// Talk meta sizes
+$size-talk-meta-separator: $size-divider-dot;
+
 .talk-meta {
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: $space-separator;
-  line-height: $line-height-tight;
+  gap: $space-talk-meta-gap;
+  line-height: $line-talk-meta-height;
 
   &__date,
   &__slides,
@@ -13,31 +31,31 @@
   }
 
   &__separator {
-    width: $size-divider-dot;
-    height: $size-divider-dot;
-    border-radius: 50%;
-    background-color: $color-border-primary;
+  width: $size-talk-meta-separator;
+  height: $size-talk-meta-separator;
+  border-radius: 50%;
+  background-color: $color-talk-meta-separator;
     display: inline-block;
     vertical-align: middle;
   }
 
   &__event {
     &[href] {
-      color: $color-text-primary;
+      color: $color-talk-meta-text;
       text-decoration: underline;
 
       &:hover {
-        color: $color-text-accent;
+        color: $color-talk-meta-hover;
       }
     }
   }
 
   &__pdf {
-    color: $color-text-primary;
+    color: $color-talk-meta-text;
     text-decoration: underline;
 
     &:hover {
-      color: $color-text-accent;
+      color: $color-talk-meta-hover;
     }
   }
 }

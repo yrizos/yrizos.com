@@ -2,10 +2,46 @@
 // BOOKS LIST COMPONENT
 // ============================================
 
+// Books list spacing
+$space-books-list-margin-top: $space-normal;
+$space-books-list-margin-bottom: $space-normal;
+$space-books-list-margin-bottom-content: $space-large;
+$space-books-list-gap: $space-normal;
+$space-books-list-rating-top: $space-small;
+$space-books-list-rating-gap: $space-tiny;
+
+// Books list typography
+$font-books-list-heading-scale: $font-scale-3xl;
+$font-books-list-heading-bottom: $space-large;
+$font-books-list-rating-size: $font-size-rating;
+
+// Books list colors
+$color-books-list-rating-filled: $color-text-accent;
+$color-books-list-rating-empty: $color-border-primary;
+$color-books-list-shadow: $color-shadow-primary;
+
+// Books list sizes
+$size-books-list-grid-columns-desktop: 5;
+$size-books-list-grid-columns-tablet: 3;
+$size-books-list-grid-columns-mobile: 2;
+$size-books-list-grid-columns-small-mobile: 1;
+$border-books-list-cover-radius: $border-radius-small;
+
+// Books list transforms
+$transform-books-list-cover-hover: scale(1.05);
+
+// Books list opacity
+$opacity-books-list-cover-image-hidden: 0;
+$opacity-books-list-cover-image-visible: 1;
+
+// Books list motion
+$motion-books-list-cover-duration: 0.3s;
+$motion-books-list-cover-easing: ease-in;
+
 .page-content h2:has(+ section) {
-  font-size: #{$font-scale-3xl}em;
+  font-size: #{$font-books-list-heading-scale}em;
   margin-top: 0;
-  margin-bottom: $space-large;
+  margin-bottom: $font-books-list-heading-bottom;
 }
 
 .page-content > section:first-of-type h2 {
@@ -13,31 +49,31 @@
 }
 
 .page-content > section h2:has(+ .books-list) {
-  font-size: #{$font-scale-3xl}em;
+  font-size: #{$font-books-list-heading-scale}em;
 }
 
 .books-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: $space-normal;
-  margin-top: $space-normal;
-  margin-bottom: $space-normal;
+  grid-template-columns: repeat($size-books-list-grid-columns-desktop, 1fr);
+  gap: $space-books-list-gap;
+  margin-top: $space-books-list-margin-top;
+  margin-bottom: $space-books-list-margin-bottom;
 
   @media (max-width: $layout-content-max-width) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat($size-books-list-grid-columns-tablet, 1fr);
   }
 
   @media (max-width: $layout-mobile-max-width) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat($size-books-list-grid-columns-mobile, 1fr);
   }
 
   @media (max-width: $layout-small-mobile-max-width) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat($size-books-list-grid-columns-small-mobile, 1fr);
   }
 }
 
 .page-content .books-list {
-  margin-bottom: $space-large;
+  margin-bottom: $space-books-list-margin-bottom-content;
 }
 
 .book-item {
@@ -46,18 +82,18 @@
 }
 
 .book-rating {
-  margin-top: $space-small;
+  margin-top: $space-books-list-rating-top;
   display: flex;
-  gap: $space-tiny;
+  gap: $space-books-list-rating-gap;
   justify-content: center;
   
   i {
-    color: $color-text-accent;
-    font-size: $font-size-rating;
+    color: $color-books-list-rating-filled;
+    font-size: $font-books-list-rating-size;
   }
   
   .fa-regular {
-    color: $color-border-primary;
+    color: $color-books-list-rating-empty;
   }
 }
 
@@ -66,26 +102,26 @@
   text-decoration: none;
   transition: transform $motion-duration-normal $motion-easing-normal;
   overflow: hidden;
-  border-radius: $border-radius-small;
+  border-radius: $border-books-list-cover-radius;
   position: relative;
 
   &:hover {
-    transform: scale(1.05);
+    transform: $transform-books-list-cover-hover;
   }
 
   img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: $border-radius-small;
-    box-shadow: 0 2px 8px $color-shadow-primary;
-    opacity: 0;
-    transition: opacity 0.3s ease-in;
+    border-radius: $border-books-list-cover-radius;
+    box-shadow: 0 2px 8px $color-books-list-shadow;
+    opacity: $opacity-books-list-cover-image-hidden;
+    transition: opacity $motion-books-list-cover-duration $motion-books-list-cover-easing;
     position: relative;
   }
 
   img.loaded {
-    opacity: 1;
+    opacity: $opacity-books-list-cover-image-visible;
   }
 }
 

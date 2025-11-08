@@ -2,17 +2,30 @@
 // READING PROGRESS BAR
 // ============================================
 
+// Reading progress colors
+$color-reading-progress-bg: $color-text-accent;
+
+// Reading progress sizes
+$size-reading-progress-height: $size-progress-bar-height;
+
+// Reading progress motion
+$motion-reading-progress-duration: $motion-duration-fast;
+$motion-reading-progress-easing: $motion-easing-out;
+
+// Reading progress opacity
+$opacity-reading-progress: 1;
+
 .reading-progress {
   position: fixed;
   top: 0;
   left: 0;
   width: 0%;
   min-width: 0;
-  height: $size-progress-bar-height;
-  background-color: $color-text-accent;
+  height: $size-reading-progress-height;
+  background-color: $color-reading-progress-bg;
   z-index: 9999;
-  transition: width $motion-duration-fast $motion-easing-out;
-  opacity: 1;
+  transition: width $motion-reading-progress-duration $motion-reading-progress-easing;
+  opacity: $opacity-reading-progress;
   pointer-events: none;
   display: block;
 }

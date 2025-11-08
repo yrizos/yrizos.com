@@ -2,6 +2,9 @@
 // PAGES
 // ============================================
 
+// Page spacing
+$space-page-title-bottom: $space-normal * 2;
+
 .page-title {
-  margin-bottom: $space-normal * 2;
+  margin-bottom: $space-page-title-bottom;
 }

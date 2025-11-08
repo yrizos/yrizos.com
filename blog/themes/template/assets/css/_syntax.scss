@@ -67,12 +67,27 @@
 /* GenericStrong */ .chroma .gs { font-weight:bold }
 /* GenericSubheading */ .chroma .gu { color:#75715e }
 
+// ============================================
+// SYNTAX HIGHLIGHTING
+// ============================================
+
+// Syntax spacing
+$space-syntax-chroma-padding: $space-normal;
+$space-syntax-chroma-margin: $space-normal;
+
+// Syntax typography
+$font-syntax-code-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+$font-syntax-code-size: 0.9em;
+
+// Syntax border radius
+$border-syntax-chroma-radius: $border-radius-small;
+
 // Code block styling
 .chroma {
-  padding: $space-normal;
-  border-radius: $border-radius-small;
+  padding: $space-syntax-chroma-padding;
+  border-radius: $border-syntax-chroma-radius;
   overflow-x: auto;
-  margin: $space-normal 0;
+  margin: $space-syntax-chroma-margin 0;
 }
 
 pre {
@@ -81,6 +96,6 @@ pre {
 }
 
 code {
-  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
-  font-size: 0.9em;
+  font-family: $font-syntax-code-family;
+  font-size: $font-syntax-code-size;
 }

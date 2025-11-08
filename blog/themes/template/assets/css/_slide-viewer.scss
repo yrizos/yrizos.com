@@ -12,11 +12,14 @@ $color-slide-bullet-bg-hover: $color-slide-control-bg-hover;
 // Slide viewer spacing
 $space-slide-viewer-bottom: $space-tiny;
 $space-slide-controls-top: $space-normal;
-$space-slide-controls-padding: $space-normal;
 $space-slide-controls-gap: $space-tiny;
 $space-slide-arrow-padding: $space-small;
 $space-slide-bullets-gap: $space-small;
 $space-slide-arrow-bullet-gap: $space-normal;
+
+// Slide viewer sizes
+$size-slide-arrow-font: 1.5rem;
+$size-slide-bullet: 0.5rem;
 
 .slide-viewer {
   margin: 0;
@@ -93,7 +96,7 @@ $space-slide-arrow-bullet-gap: $space-normal;
   border: none;
   color: $color-slide-control-text;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: $size-slide-arrow-font;
   line-height: 1;
   padding: $space-slide-arrow-padding;
   border-radius: $border-radius-small;
@@ -127,8 +130,8 @@ $space-slide-arrow-bullet-gap: $space-normal;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  height: 0.5rem;
-  width: 0.5rem;
+  height: $size-slide-bullet;
+  width: $size-slide-bullet;
   padding: 0;
   transition: background-color $motion-duration-normal $motion-easing-normal;
   outline: none;

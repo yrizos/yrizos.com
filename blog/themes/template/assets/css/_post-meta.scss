@@ -2,19 +2,31 @@
 // POST META
 // ============================================
 
+// Post meta spacing
+$space-post-meta-gap: $space-separator;
+
+// Post meta typography
+$line-post-meta-height: $line-height-tight;
+
+// Post meta colors
+$color-post-meta-separator: $color-border-primary;
+
+// Post meta sizes
+$size-post-meta-separator: $size-divider-dot;
+
 .post-meta {
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: $space-separator;
-  line-height: $line-height-tight;
+  gap: $space-post-meta-gap;
+  line-height: $line-post-meta-height;
 }
 
 .post-meta__separator {
-  width: $size-divider-dot;
-  height: $size-divider-dot;
+  width: $size-post-meta-separator;
+  height: $size-post-meta-separator;
   border-radius: 50%;
-  background-color: $color-border-primary;
+  background-color: $color-post-meta-separator;
   display: inline-block;
   vertical-align: middle;
 }
