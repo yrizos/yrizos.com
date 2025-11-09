@@ -6,6 +6,7 @@ draft: false
 type: "talk"
 
 event: "Devoxx Greece 2023"
+event_url: "https://devoxx.gr/"
 venue: "Athens Megaron International Conference Center"
 co_presenter: "Vassilis Poursalidis"
 
