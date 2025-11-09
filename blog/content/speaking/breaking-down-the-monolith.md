@@ -15,6 +15,8 @@ slides_dir: "speaking/breaking-down-the-monolith-devoxx-greece-may2023"
 slide_count: 10
 
 image: "images/speaking/breaking-down-the-monolith-devoxx-greece-may2023/slide-01.png"
+tags:
+  ["talk", "software-engineering", "engineering-leadership", "technical-debt"]
 ---
 
 The Athens Megaron International Conference Center is an imposing place. Walking into it that morning felt like stepping into a different league. It was my first time presenting to a large audience, and we had no idea what to expect. Five minutes before the session started, the room was already packed. People were standing along the walls and at the back, trying to find a spot. It was equal parts exhilarating and nerve-racking.

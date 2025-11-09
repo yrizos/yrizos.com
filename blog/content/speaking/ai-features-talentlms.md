@@ -16,6 +16,7 @@ image: "images/speaking/ai-features-talentlms-jun2025/slide-01.png"
 
 description: |
   Practical lessons from building AI features at scale for TalentLMS, presented at the inaugural Mindstone Athens Practical AI Meetup. Why production AI is 95% engineering: architecture, team structure, prompts as code, and designing for failure from day one.
+tags: ["talk", "ai", "software-engineering", "engineering-leadership"]
 ---
 
 The first [Mindstone Athens Practical AI Meetup](https://www.meetup.com/mindstone-athens-practicalai-meetup/) at [Epignosis HQ](https://www.epignosishq.com/) drew a full house. It was the opening event of the Athens chapter of the Global Mindstone Practical AI community, and the energy in the room matched that sense of beginning.
