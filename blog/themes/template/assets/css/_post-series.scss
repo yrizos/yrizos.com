@@ -2,21 +2,36 @@
 // POST SERIES
 // ============================================
 
-// Series colors (same as slide viewer controls)
-$color-series-number-bg: lighten($color-text-primary, 45%);
-$color-series-number-text: $color-background-primary;
-$color-series-number-bg-hover: darken($color-series-number-bg, 10%);
+// Colors
+$series-number-bg: lighten($color-text-primary, 45%);
+$series-number-bg-active: darken($series-number-bg, 10%);
+$series-number-text: $color-background-primary;
+$series-link-text: $color-text-primary;
+$series-link-text-hover: $color-text-accent;
+$series-link-underline: $color-link-underline;
+$series-link-underline-hover: $color-text-accent;
+$series-current-link-text: $color-text-primary;
 
-// Series spacing
-$space-series-top: $space-normal;
-$space-series-item-gap: $space-tiny;
+// Spacing
+$series-container-top: $space-normal;
+$series-items-gap: $space-tiny;
+$series-number-title-gap: $space-normal;
 
-// Series sizes
-$size-series-number: 2rem;
-$size-series-number-font: 1rem;
+// Sizes
+$series-number-size: $space-large;
+$series-number-font-size: $font-size-base-mobile;
+$series-number-border-radius: 50%;
+$series-link-underline-offset: 0.2em;
+
+// Typography
+$series-font-weight: $font-weight-normal;
+
+// Motion
+$series-transition-duration: $motion-duration-normal;
+$series-transition-easing: $motion-easing-normal;
 
 .post-series {
-  margin-top: $space-series-top;
+  margin-top: $series-container-top;
 }
 
 .post-series-list {
@@ -25,59 +40,59 @@ $size-series-number-font: 1rem;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: $space-series-item-gap;
+  gap: $series-items-gap;
 }
 
 .post-series-item {
   display: flex;
   align-items: center;
-  gap: $space-small;
+  gap: $series-number-title-gap;
 }
 
 .post-series-number {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: $size-series-number;
-  height: $size-series-number;
-  border-radius: 50%;
-  background-color: $color-series-number-bg;
-  color: $color-series-number-text;
-  font-size: $size-series-number-font;
-  font-weight: 400;
+  width: $series-number-size;
+  height: $series-number-size;
+  border-radius: $series-number-border-radius;
+  background-color: $series-number-bg;
+  color: $series-number-text;
+  font-size: $series-number-font-size;
+  font-weight: $series-font-weight;
   flex-shrink: 0;
-  transition: background-color $motion-duration-normal $motion-easing-normal;
+  transition: background-color $series-transition-duration $series-transition-easing;
 }
 
 .post-series-item--current .post-series-number {
-  background-color: $color-series-number-bg-hover;
+  background-color: $series-number-bg-active;
 }
 
 .post-series-item:not(.post-series-item--current):hover .post-series-number {
-  background-color: $color-series-number-bg-hover;
+  background-color: $series-number-bg-active;
 }
 
 a.post-series-link {
   flex: 1;
-  color: $color-text-primary;
+  color: $series-link-text;
   text-decoration: underline;
-  text-decoration-color: $color-border-primary;
-  text-underline-offset: 0.2em;
-  transition: color $motion-duration-normal $motion-easing-normal,
-              text-decoration-color $motion-duration-normal $motion-easing-normal;
+  text-decoration-color: $series-link-underline;
+  text-underline-offset: $series-link-underline-offset;
+  transition: color $series-transition-duration $series-transition-easing,
+              text-decoration-color $series-transition-duration $series-transition-easing;
 
   &:hover,
   &:focus {
-    color: $color-text-accent;
-    text-decoration-color: $color-text-accent;
+    color: $series-link-text-hover;
+    text-decoration-color: $series-link-underline-hover;
   }
 }
 
 span.post-series-link {
   flex: 1;
-  color: $color-text-primary;
+  color: $series-current-link-text;
 
   .post-series-item--current & {
-    font-weight: 400;
+    font-weight: $series-font-weight;
   }
 }

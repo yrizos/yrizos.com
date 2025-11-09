@@ -35,10 +35,14 @@ body {
 a {
   color: $color-text-primary;
   text-decoration: underline;
+  text-decoration-color: $color-link-underline;
+  transition: color $motion-duration-normal $motion-easing-normal,
+              text-decoration-color $motion-duration-normal $motion-easing-normal;
 }
 
 a:hover {
   color: $color-text-accent;
+  text-decoration-color: $color-text-accent;
 }
 
 h1, h2, h3, h4, h5, h6 {

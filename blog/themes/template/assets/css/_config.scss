@@ -12,7 +12,10 @@ $color-border-accent: #34656D;
 $color-quote-background: lighten($color-background-primary, 10%);
 
 // Border colors
-$color-border-primary: darken($color-background-primary, 10%);
+$color-border-primary: darken($color-background-primary, 15%);
+
+// Link colors
+$color-link-underline: $color-border-primary;
 
 // Shadow colors
 $color-shadow-primary: rgba(0, 0, 0, 0.1);
