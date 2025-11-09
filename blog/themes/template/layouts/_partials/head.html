@@ -9,6 +9,7 @@
 {{- if .IsHome }}
   {{- $description := site.Params.description | default site.Title -}}
   <meta name="description" content="{{ $description | htmlEscape }}">
+  <meta name="author" content="{{ site.Title | htmlEscape }}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ site.Title | htmlEscape }}">
   <meta property="og:site_name" content="{{ site.Title | htmlEscape }}">
@@ -17,6 +18,10 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{{ site.Title | htmlEscape }}">
   <meta name="twitter:description" content="{{ $description | htmlEscape }}">
+  {{- with site.Params.social.twitter }}
+  <meta name="twitter:site" content="{{ . | htmlEscape }}">
+  <meta name="twitter:creator" content="{{ . | htmlEscape }}">
+  {{- end }}
 {{- else if .IsSection }}
   {{- $rawDescription := .Params.description | default .Summary | default .Content -}}
   {{- if not $rawDescription }}
@@ -30,6 +35,7 @@
   {{- if $description }}
     <meta name="description" content="{{ $description | htmlEscape }}">
   {{- end }}
+  <meta name="author" content="{{ site.Title | htmlEscape }}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ .Title | htmlEscape }}">
   <meta property="og:site_name" content="{{ site.Title | htmlEscape }}">
@@ -42,12 +48,17 @@
   {{- if $description }}
     <meta name="twitter:description" content="{{ $description | htmlEscape }}">
   {{- end }}
+  {{- with site.Params.social.twitter }}
+  <meta name="twitter:site" content="{{ . | htmlEscape }}">
+  <meta name="twitter:creator" content="{{ . | htmlEscape }}">
+  {{- end }}
 {{- else if .IsPage }}
   {{- $rawDescription := .Params.description | default .Params.summary | default .Summary | default .Content -}}
   {{- $description := strings.TrimSpace (truncate 200 (plainify $rawDescription)) -}}
   {{- if $description }}
     <meta name="description" content="{{ $description | htmlEscape }}">
   {{- end }}
+  <meta name="author" content="{{ site.Title | htmlEscape }}">
   {{- $isArticle := or (eq .Section "writing") (eq .Params.type "posts") (eq .Params.type "talk") -}}
   <meta property="og:type" content="{{ if $isArticle }}article{{ else }}website{{ end }}">
   <meta property="og:title" content="{{ .Title | htmlEscape }}">
@@ -71,18 +82,34 @@
     {{- end }}
   {{- end }}
   {{- with .Params.image }}
-    <meta property="og:image" content="{{ . | absURL }}">
-    {{- with $.Params.imageAlt | default $.Title }}
-      <meta property="og:image:alt" content="{{ . | plainify | htmlEscape }}">
+    {{- $imageResource := resources.Get . }}
+    {{- if $imageResource }}
+      <meta property="og:image" content="{{ $imageResource | absURL }}">
+      <meta property="og:image:width" content="{{ $imageResource.Width }}">
+      <meta property="og:image:height" content="{{ $imageResource.Height }}">
+      {{- with $.Params.imageAlt | default $.Title }}
+        <meta property="og:image:alt" content="{{ . | plainify | htmlEscape }}">
+      {{- end }}
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="{{ $imageResource | absURL }}">
+    {{- else }}
+      <meta property="og:image" content="{{ . | absURL }}">
+      {{- with $.Params.imageAlt | default $.Title }}
+        <meta property="og:image:alt" content="{{ . | plainify | htmlEscape }}">
+      {{- end }}
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:image" content="{{ . | absURL }}">
     {{- end }}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="{{ . | absURL }}">
   {{- else }}
     <meta name="twitter:card" content="summary">
   {{- end }}
   <meta name="twitter:title" content="{{ .Title | htmlEscape }}">
   {{- if $description }}
     <meta name="twitter:description" content="{{ $description | htmlEscape }}">
+  {{- end }}
+  {{- with site.Params.social.twitter }}
+  <meta name="twitter:site" content="{{ . | htmlEscape }}">
+  <meta name="twitter:creator" content="{{ . | htmlEscape }}">
   {{- end }}
 {{- end }}
 {{- with site.Home.OutputFormats.Get "Feed" }}
