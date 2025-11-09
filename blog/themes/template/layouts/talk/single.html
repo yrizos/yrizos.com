@@ -21,7 +21,7 @@
 
     {{- with .Params.slides_pdf -}}
     <div class="talk-pdf-download">
-      <a href="{{ . }}" class="talk-pdf-download__link" download>
+      <a href="{{ . }}" class="talk-pdf-download__link" target="_blank" rel="noopener noreferrer">
         <i class="fa-solid fa-file-pdf"></i>
         <span>{{ $.Title }}</span>
       </a>
