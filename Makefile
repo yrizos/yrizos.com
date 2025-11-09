@@ -114,14 +114,10 @@ check:
 # Python Docker image
 .PHONY: python-build
 python-build:
-	@if docker image inspect $(PYTHON_IMAGE) >/dev/null 2>&1; then \
-		:; \
-	else \
-		if ! docker image inspect python:3.9-slim >/dev/null 2>&1; then \
-			docker pull python:3.9-slim || (echo "Error: Failed to pull base image. Check your network connection."; exit 1); \
-		fi; \
-		docker build -f Dockerfile.python -t $(PYTHON_IMAGE) .; \
+	@if ! docker image inspect python:3.9-slim >/dev/null 2>&1; then \
+		docker pull python:3.9-slim || (echo "Error: Failed to pull base image. Check your network connection."; exit 1); \
 	fi
+	docker build -f Dockerfile.python -t $(PYTHON_IMAGE) .
 
 # Python scripts
 
