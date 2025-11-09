@@ -14,6 +14,19 @@ $space-post-original-notice-bottom: $space-normal;
 $layout-post-cover-max-width: $layout-cover-max-width;
 $border-post-cover-radius: $border-radius-normal;
 
+// Post meta spacing
+$space-post-meta-gap: $space-separator;
+$space-post-license-gap: $space-small;
+
+// Post meta typography
+$line-post-meta-height: $line-height-tight;
+
+// Post meta colors
+$color-post-meta-separator: $color-border-primary;
+
+// Post meta sizes
+$size-post-meta-separator: $size-divider-dot;
+
 // Post cover opacity
 $opacity-post-cover-image-hidden: 0;
 $opacity-post-cover-image-visible: 1;
@@ -79,15 +92,15 @@ $motion-post-cover-easing: ease-in;
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: $space-separator;
-  line-height: $line-height-tight;
+  gap: $space-post-meta-gap;
+  line-height: $line-post-meta-height;
 }
 
 .post-meta__separator {
-  width: $size-divider-dot;
-  height: $size-divider-dot;
+  width: $size-post-meta-separator;
+  height: $size-post-meta-separator;
   border-radius: 50%;
-  background-color: $color-border-primary;
+  background-color: $color-post-meta-separator;
   display: inline-block;
 }
 
@@ -115,7 +128,7 @@ $motion-post-cover-easing: ease-in;
 .post-license a {
   display: inline-flex;
   align-items: center;
-  gap: $space-small;
+  gap: $space-post-license-gap;
   text-decoration: none;
 }
 

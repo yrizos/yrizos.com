@@ -37,6 +37,8 @@ $opacity-books-list-cover-image-visible: 1;
 // Books list motion
 $motion-books-list-cover-duration: 0.3s;
 $motion-books-list-cover-easing: ease-in;
+$motion-books-list-cover-transform-duration: $motion-duration-normal;
+$motion-books-list-cover-transform-easing: $motion-easing-normal;
 
 .page-content h2:has(+ section) {
   font-size: #{$font-books-list-heading-scale}em;
@@ -108,7 +110,7 @@ $motion-books-list-cover-easing: ease-in;
 .book-cover {
   display: block;
   text-decoration: none;
-  transition: transform $motion-duration-normal $motion-easing-normal;
+  transition: transform $motion-books-list-cover-transform-duration $motion-books-list-cover-transform-easing;
   overflow: hidden;
   border-radius: $border-books-list-cover-radius;
   position: relative;

@@ -8,6 +8,7 @@ $color-404-text: $color-text-primary;
 
 // 404 page spacing
 $space-404-padding: $space-large;
+$space-404-gap: $space-normal;
 
 // 404 page typography
 $font-404-title-scale: $font-scale-3xl;
@@ -29,7 +30,7 @@ $size-404-avatar: $size-avatar;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: $space-normal;
+  gap: $space-404-gap;
   text-align: center;
   padding: $space-404-padding;
 }

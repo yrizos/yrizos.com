@@ -17,7 +17,7 @@ $color-talk-pdf-text: $color-text-primary;
 $color-talk-pdf-hover: $color-text-accent;
 
 // Talk sizes
-$size-talk-pdf-icon-margin-top: 0.1em;
+$space-talk-pdf-icon-margin-top: 0.1em;
 $space-talk-pdf-gap: $space-small;
 
 .talk {
@@ -46,12 +46,12 @@ $space-talk-pdf-gap: $space-small;
 
   i {
     flex-shrink: 0;
-    margin-top: $size-talk-pdf-icon-margin-top;
+    margin-top: $space-talk-pdf-icon-margin-top;
   }
   
   .icon {
     flex-shrink: 0;
-    margin-top: $size-talk-pdf-icon-margin-top;
+    margin-top: $space-talk-pdf-icon-margin-top;
   }
 
   span {

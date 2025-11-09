@@ -1,8 +1,8 @@
-# Agent rules
+# Agent Rules for LLM Assistants
 
-## Project context
+## Initial Context Gathering
 
-Before working on any task, read README.md to understand:
+**FIRST ACTION: Before any task, read README.md to understand:**
 
 - Project purpose and goals
 - Project structure and organization
@@ -10,167 +10,126 @@ Before working on any task, read README.md to understand:
 - Key dependencies and technologies
 - Build and deployment processes
 
-## Behavior guidelines
+## Core Operating Principles
 
-### Core principles
+### 1. Clarification Over Assumption (ABSOLUTE RULE)
 
-1. **Never make assumptions - These rules are ABSOLUTE**
+**Never proceed with <95% confidence.** If ANY detail is unclear, ask questions FIRST.
 
-   - If anything is unclear, ask for clarification
-   - Do not infer requirements beyond what is explicitly stated
-   - Do not assume user preferences or constraints
-   - Do not assume technical decisions without verification
-   - There is NO situation where violating these rules is acceptable
-   - "Probably what they want" = violation, STOP and ask
-   - "This seems obvious" = violation, STOP and ask
-   - "This will save time" = violation, STOP and ask
+**STOP and ASK if:**
 
-2. **95% confidence threshold before action**
+- Request has multiple interpretations
+- Scope is undefined (what to change, how much to change)
+- Technical approach is not specified
+- File locations are ambiguous
+- Implementation details are missing
+- User intent could mean different things
 
-   - You must be 95% confident you understand exactly what the user wants before making any changes
-   - If you have ANY doubt about the request, ask clarifying questions first
-   - Uncertainty about scope, approach, or requirements means STOP and ask
-   - Do not proceed with "I think you mean..." or "I assume you want..." - ask instead
-   - **It is always better to do NOTHING and ask than to do the wrong thing**
-   - Doing the wrong thing wastes the user's time and creates more work
-   - Taking no action is preferable to taking incorrect action
-   - **Before making ANY change, verify: Did the user explicitly specify this exact detail? If No, ASK.**
+**Question patterns to use:**
 
-3. **Do the minimum requested - Never "add value"**
-
-   - Complete ONLY what the user explicitly asks for
-   - Do NOT add extra features, files, or improvements beyond what was requested
-   - Do NOT refactor unrelated code
-   - Do NOT update dependencies unless asked
-   - Do NOT fill in blanks that weren't specified
-   - Do NOT anticipate next steps or make anything "complete" unless explicitly asked
-   - If the user asks you to create a file, create ONLY the file structure they specified
-   - If the user asks you to add a function, add ONLY that function with no extra features
-   - Excessive actions waste time and add complexity
-   - Better to do less than more
-   - **Adding unrequested features wastes the user's time when you're wrong**
-
-4. **Answer questions, do not take action**
-
-   - If the user asks a question, provide an answer
-   - Do not implement changes when user is asking for information
-   - Do not create files or modify code when user is seeking clarification
-   - User questions expect answers, not actions
-
-5. **Never commit without explicit request**
-
-   - Do not create commits automatically after making changes
-   - Do not commit unless the user explicitly asks you to commit
-   - Only run `git commit` when directly instructed by the user
-   - Making changes does not imply permission to commit them
-
-### When to ask for clarification - Asking is REQUIRED, not optional
-
-Asking clarifying questions is the PRIMARY method of working, not a fallback. The user PREFERS questions over incorrect implementations. **It is IMPOSSIBLE to ask too many clarifying questions.**
-
-Ask clarifying questions when:
-
-- The request is ambiguous or could be interpreted multiple ways
-- You don't know which files or components to modify
-- Multiple approaches exist and the preferred one is unclear
-- The scope of changes is undefined (how much to change, what to include)
-- Technical decisions need to be made (libraries, patterns, architectures)
-- You're unsure about edge cases or error handling requirements
-- The request conflicts with existing code or patterns
-- You're below 95% confidence about what to do
-- ANY detail is unspecified - you MUST ask before proceeding
-- Multiple clarifying questions are better than one wrong assumption
-
-### Example: The hamburger menu trap
-
-**Bad approach (wastes time):**
-User: "Add a hamburger menu"
-Agent: _Proceeds to create a menu that slides in from the right with a dark overlay_
-Result: User wanted it to slide from the left with no overlay - now you must redo everything
-
-**Good approach (saves time):**
-User: "Add a hamburger menu"
-Agent: "Before I implement the hamburger menu, I need to clarify a few details:
-
-- Should it slide in from the left, right, or top?
-- Do you want an overlay/backdrop when it's open?
-- Should it push content or overlay on top?
-- What should trigger it to close (click outside, close button, both)?
-- Any specific styling requirements (colors, animations, dimensions)?"
-
-**The lesson:** Even common UI patterns have many implementation variations. Making assumptions and building the wrong thing wastes significantly more time than asking 3-5 clarifying questions upfront. If you're not 95% certain about the specifics, ask first.
-
-### Common best practices
-
-- Write clean, readable code with clear variable names
-- Follow existing code style and patterns in the project
-- Add comments only when code intent is not obvious
-- Write error messages that help debug issues
-- Validate inputs and handle edge cases
-- Use existing utilities and helpers before creating new ones
-- Keep functions small and focused on single responsibility
-- Avoid premature optimization
-- Test changes before considering them complete
-
-## Git practices
-
-**IMPORTANT: Never create commits unless the user explicitly asks you to commit. Making code changes does not give permission to commit them.**
-
-### Pre-commit checklist
-
-Before creating any commit:
-
-1. Run `git status` and `git diff`
-2. Read all modified files using file reading tools
-3. Verify changes match your intent
-4. Write commit message following rules below
-
-The filesystem is the source of truth, not chat history.
-
-### Verification steps
-
-Run these commands:
-
-```bash
-git status
-git diff
+```
+"Before I implement [X], I need clarification:
+- [Specific decision point 1]?
+- [Specific decision point 2]?
+- [Specific decision point 3]?"
 ```
 
-Then read all modified files with file reading tools:
+**Remember:**
 
-- Verify content matches intended changes
-- Check for accidental or incomplete modifications
-- Check for unrelated changes
+- User PREFERS questions over wrong implementations
+- It is IMPOSSIBLE to ask too many clarifying questions
+- Making assumptions wastes more time than asking questions
+- "Probably what they want" = VIOLATION, must ask
+- "This seems obvious" = VIOLATION, must ask
+- "This will save time" = VIOLATION, must ask
 
-### Commit message format
+### 2. Minimal Scope (Do ONLY What's Asked)
+
+**Complete ONLY the explicit request. Do NOT:**
+
+- Add unrequested features
+- Refactor unrelated code
+- Update unrelated dependencies
+- Fill in unspecified details
+- Anticipate next steps
+- Make anything "complete" beyond the request
+- Add "helpful" improvements
+
+**If user asks to:**
+
+- Create a file → Create ONLY that file with specified content
+- Add a function → Add ONLY that function as specified
+- Fix a bug → Fix ONLY that specific bug
+
+### 3. Questions vs Actions
+
+**If user asks a question → Provide an answer, do NOT implement**
+
+- Information requests do not imply implementation requests
+- Answer questions with explanations, not code changes
+
+### 4. Commit Control
+
+**NEVER create commits unless explicitly requested.**
+
+- Making changes ≠ permission to commit
+- Only run `git commit` when user directly instructs it
+- User controls when changes are committed
+
+## Development Practices
+
+### Code Quality Standards
+
+- Write clean, readable code with clear variable names
+- Follow existing code style and patterns
+- Add comments only when intent is not obvious
+- Write helpful error messages
+- Validate inputs and handle edge cases
+- Use existing utilities before creating new ones
+- Keep functions small and single-purpose
+- Avoid premature optimization
+- Test changes before considering complete
+
+## Git Workflow
+
+### Pre-Commit Requirements
+
+**REQUIRED BEFORE ANY COMMIT:**
+
+1. **Run verification commands:**
+
+   ```bash
+   git status
+   git diff
+   ```
+
+2. **Read all modified files using file reading tools**
+
+3. **Verify:**
+   - Changes match intent
+   - No accidental modifications
+   - No incomplete changes
+   - No unrelated changes
+
+**Filesystem is source of truth, not chat history.**
+
+### Commit Message Format
 
 ```
 type: subject under 50 chars
 
-- Bullet point describing what changed
-- Another bullet point if multiple changes
-- Use dash and space (- ) for bullets
-- Describe actual changes, not file operations
-- Keep bullets concise and focused
+- Bullet describing what changed
+- Another bullet if multiple changes
+- Use dash-space (- ) for bullets
+- Describe changes, not file operations
+- Keep bullets concise
 ```
 
-### Commit message checklist
+### Commit Type Selection
 
-- [ ] Type: `feat` `fix` `docs` `style` `refactor` `perf` `test` `chore` `ci` `build`
-- [ ] Subject under 50 characters
-- [ ] Lowercase after colon
-- [ ] Imperative mood (add, fix, change)
-- [ ] No period at end of subject
-- [ ] Body included (always required)
-- [ ] Body describes what changed, not which files changed
-- [ ] Focus on primary change
-- [ ] No AI attribution
+Choose type matching PRIMARY change:
 
-### Type selection
-
-Use the type that matches the primary change:
-
-- `feat:` new feature or functionality
+- `feat:` new feature/functionality
 - `fix:` bug fix
 - `docs:` documentation only
 - `style:` formatting only
@@ -178,87 +137,290 @@ Use the type that matches the primary change:
 - `perf:` performance improvement
 - `test:` tests
 - `chore:` maintenance
-- `ci:` CI/CD
-- `build:` build system
+- `ci:` CI/CD changes
+- `build:` build system changes
 
-If you add a feature and update docs, use `feat:` not `docs:`.
+### Commit Message Rules
 
-### Body rules
+**Subject line:**
 
-Describe what functionality changed, not file operations:
+- Under 50 characters
+- Lowercase after colon
+- Imperative mood (add, fix, change)
+- No period at end
 
-- Bad: "Add auth.js file", "Update user controller"
-- Good: "Implement JWT token generation", "Add password validation"
+**Body (always required):**
 
-Never include:
+- Describe WHAT changed functionally
+- NOT which files changed
+- Focus on primary change
+- No AI attribution
+
+**FORBIDDEN in messages:**
 
 - "Generated with Claude Code"
 - "Co-Authored-By: Claude"
 - Any AI attribution
 
-### Commit examples
+**Body examples:**
 
-```
-refactor: adjust cover image layout in single view
+- ✅ Good: "Implement JWT token generation"
+- ❌ Bad: "Add auth.js file"
+- ✅ Good: "Add password validation"
+- ❌ Bad: "Update user controller"
 
-- Move title and meta back before cover image
-- Restore standard padding-top to site-main
-- Reduce image bleed from 130% to 120% width
-- Image now bleeds 10% on each side instead of 15%
-- Viewport breakpoint adjusted to 1152px (960px * 1.2)
-```
+### Forbidden Git Commands
 
-```
-build: add makefile for docker-based builds
+**NEVER use `git reset --hard`** - destroys uncommitted changes permanently.
 
-- Add Makefile with BUILD_ENVIRONMENT and BUILD_DESTINATION variables
-- Use official Hugo Docker image for builds
-- Update GitHub Actions workflow to use make build
-- Remove Hugo CLI installation from CI workflow
-```
-
-```
-fix: prevent double-click form submission
-
-- Add disabled state during form submission
-- Prevent duplicate requests on multiple clicks
-```
-
-### Forbidden commands
-
-Never use `git reset --hard`. It destroys uncommitted changes permanently with no recovery.
-
-Safe alternatives:
+**Use instead:**
 
 - Discard file: `git restore <file>`
 - Unstage: `git restore --staged <file>`
-- View previous state: `git diff` or `git show`
+- View previous: `git diff` or `git show`
 
-If user requests hard reset, warn about data loss and suggest alternatives first.
+If user requests hard reset, warn about data loss and suggest alternatives.
 
-### Workflow example
+### Commit Example
 
 ```bash
+# 1. Verify changes
 git status
 git diff
-# Read: src/auth.js, src/routes.js, README.md
-# Verify changes match intent
 
+# 2. Read modified files
+# Read: src/auth.js, src/routes.js, README.md
+
+# 3. Verify intent matches changes
+
+# 4. Commit with proper message
 git commit -m "feat: add jwt authentication system
 
-Implement JWT-based authentication with login,
-registration, and token refresh endpoints."
+- Implement JWT token generation
+- Add login and registration endpoints
+- Add token refresh mechanism"
 ```
 
-## Template structure rules
+## Template Structure Principles (Hugo)
 
-- Let the base layout declare the HTML skeleton with semantic landmarks (`<header>`, `<main>`, `<footer>`) and wrap page content in a shared container utility for consistent width and padding.
-- Break views into focused Hugo partials, document their expected inputs, and pass data explicitly (e.g., with `dict`) instead of relying on globals.
-- Default to semantic markup plus accessibility helpers—label navigation, expose machine-readable metadata (like `<time datetime>`), provide alt text, and use safe link attributes for external targets.
-- Centralize tokens for color, spacing, typography, and motion in a dedicated Sass config file; import component-specific SCSS partials into the main bundle.
-- Preserve the SCSS file organization by keeping each partial scoped to a single UI area and using section banners to outline intent.
-- Feed CSS and JS through Hugo Pipes, compiling in dev, then minifying, fingerprinting, and caching asset partials for production builds.
-- Reuse layout helpers (container widths, spacing variables) instead of inventing ad-hoc measurements to keep rhythm and alignment uniform.
-- Render collections through shared list partials that accept data, perform any needed sorting beforehand, and emit both human- and machine-friendly metadata.
-- Keep interactive behavior in the primary JS bundle, guard for missing DOM nodes, and flip classes or icon names to reflect state changes instead of rewriting markup.
-- Trim extraneous whitespace in templates with `{{-` / `-}}` so the generated HTML stays tidy.
+### Layout Organization
+
+- Base layout declares HTML skeleton with semantic landmarks (`<header>`, `<main>`, `<footer>`)
+- Wrap page content in shared container utility for consistent width/padding
+- Break views into focused Hugo partials
+- Document partial inputs
+- Pass data explicitly (e.g., with `dict`) not via globals
+
+### Semantic HTML & Accessibility
+
+- Use semantic markup
+- Label navigation elements
+- Expose machine-readable metadata (`<time datetime>`)
+- Provide alt text
+- Use safe link attributes for external targets
+
+### Styling System
+
+- Centralize tokens (color, spacing, typography, motion) in dedicated Sass config
+- Import component-specific SCSS partials into main bundle
+- Keep each SCSS partial scoped to single UI area
+- Use section banners to outline intent
+
+### Asset Pipeline
+
+- Feed CSS and JS through Hugo Pipes
+- Compile in dev mode
+- Minify, fingerprint, and cache for production
+- Reuse layout helpers (container widths, spacing variables)
+- Avoid ad-hoc measurements
+
+### Content Rendering
+
+- Render collections through shared list partials
+- Accept data as parameters
+- Sort data beforehand
+- Emit both human and machine-friendly metadata
+
+### JavaScript
+
+- Keep interactive behavior in primary JS bundle
+- Guard for missing DOM nodes
+- Flip classes or icon names for state changes
+- Don't rewrite markup dynamically
+
+### Template Hygiene
+
+- Trim extraneous whitespace with `{{-` / `-}}`
+- Keep generated HTML clean
+
+## CSS Component Variable System
+
+**APPLIES TO: All component SCSS files (files starting with `_` in `blog/themes/template/assets/css/`)**
+
+### Mandatory Structure
+
+**Every component MUST have:**
+
+1. **Component-level variables at top of file**
+2. **Variables reference global semantic variables only**
+3. **CSS rules use component variables only**
+
+### Variable Definition Rules
+
+**Component variables MUST:**
+
+- Use semantic naming describing what they represent
+- Reference global variables from `_config.scss` as values
+- NEVER use hardcoded values
+
+**Example:**
+
+```scss
+// ✅ CORRECT
+$series-number-bg: lighten($color-text-primary, 45%);
+$series-container-top: $space-normal;
+$series-number-size: $space-large;
+
+// ❌ INCORRECT
+$series-number-bg: #e0e0e0; // Hardcoded
+$series-container-top: 1rem; // Hardcoded
+```
+
+### CSS Rule Requirements
+
+**CSS rules MUST use component variables ONLY.**
+
+**FORBIDDEN in CSS rules:**
+
+- Direct global variables (`$color-text-primary`, `$space-normal`, `$motion-duration-normal`)
+- Hardcoded values (`1rem`, `0.5rem`, `50%`, `0.2em`)
+- Calculations with globals (`$space-normal * 2`)
+
+**REQUIRED in CSS rules:**
+
+- Component-level variables exclusively
+
+**Example:**
+
+```scss
+// ✅ CORRECT
+.post-series {
+  margin-top: $series-container-top;
+  background: $series-number-bg;
+}
+
+// ❌ INCORRECT
+.post-series {
+  margin-top: $space-normal; // Direct global
+  background: #e0e0e0; // Hardcoded
+}
+```
+
+### Variable Naming Convention
+
+**Pattern: `$component-element-property`**
+
+- **Colors:** `$component-element-state`
+  - Examples: `$series-number-bg`, `$series-link-text-hover`
+- **Spacing:** `$component-element-gap` or `$component-element-margin`
+  - Examples: `$series-container-top`, `$series-items-gap`
+- **Sizes:** `$component-element-size`
+  - Examples: `$series-number-size`, `$series-number-font-size`
+- **Typography:** `$component-element-font-property`
+  - Examples: `$series-font-weight`, `$series-font-size`
+- **Motion:** `$component-transition-property`
+  - Examples: `$series-transition-duration`, `$series-transition-easing`
+
+### Complete Component Template
+
+```scss
+// ============================================
+// POST SERIES
+// ============================================
+
+// Colors
+$series-number-bg: lighten($color-text-primary, 45%);
+$series-number-bg-active: darken($series-number-bg, 10%);
+$series-number-text: $color-background-primary;
+$series-link-text: $color-text-primary;
+$series-link-text-hover: $color-text-accent;
+
+// Spacing
+$series-container-top: $space-normal;
+$series-items-gap: $space-tiny;
+$series-number-title-gap: $space-normal;
+
+// Sizes
+$series-number-size: $space-large;
+$series-number-font-size: $font-size-base-mobile;
+
+// Typography
+$series-font-weight: $font-weight-normal;
+
+// Motion
+$series-transition-duration: $motion-duration-normal;
+$series-transition-easing: $motion-easing-normal;
+
+// Component styles using ONLY component variables
+.post-series {
+  margin-top: $series-container-top;
+}
+
+.post-series-number {
+  background-color: $series-number-bg;
+  color: $series-number-text;
+  font-size: $series-number-font-size;
+  font-weight: $series-font-weight;
+  width: $series-number-size;
+  height: $series-number-size;
+  transition: background-color $series-transition-duration
+    $series-transition-easing;
+
+  &:hover {
+    background-color: $series-number-bg-active;
+  }
+}
+
+.post-series-link {
+  color: $series-link-text;
+
+  &:hover {
+    color: $series-link-text-hover;
+  }
+}
+```
+
+### Component Review Checklist
+
+When creating or reviewing components:
+
+1. **Variable definitions present?** All component variables at top
+2. **Variables reference globals?** No hardcoded values in definitions
+3. **CSS uses only component vars?** No globals or hardcoded values in rules
+4. **Naming semantic?** Variable names describe purpose clearly
+5. **Follows convention?** Matches `$component-element-property` pattern
+
+### Exception: Media Queries
+
+Media query breakpoints may use global layout variables directly as these are structural concerns:
+
+```scss
+// ✅ ALLOWED in media queries
+@media (max-width: $layout-content-max-width) {
+  // Component styles using component variables
+}
+```
+
+## Summary: Key Decision Points
+
+**Before ANY action, ask yourself:**
+
+1. **Am I 95%+ confident?** If no → Ask questions
+2. **Did user explicitly specify this detail?** If no → Ask
+3. **Is this the minimum required?** If no → Remove extra scope
+4. **Is user asking a question or requesting action?** Answer or act accordingly
+5. **Did user ask me to commit?** If no → Don't commit
+6. **Have I verified my changes?** If no → Run git status/diff, read files
+7. **Am I working on SCSS components?** If yes → Follow component variable rules strictly
+
+**Remember: Asking questions and doing less is ALWAYS better than making assumptions and doing too much.**

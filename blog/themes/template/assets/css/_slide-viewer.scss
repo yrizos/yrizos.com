@@ -18,8 +18,25 @@ $space-slide-bullets-gap: $space-small;
 $space-slide-arrow-bullet-gap: $space-normal;
 
 // Slide viewer sizes
-$size-slide-arrow-font: 1.5rem;
-$size-slide-bullet: 0.5rem;
+$size-slide-arrow-font: $font-size-lg;
+$size-slide-bullet: $space-small;
+$border-slide-arrow-radius: $border-radius-small;
+$border-slide-picture-radius: $border-radius-normal;
+
+// Slide viewer layout
+$layout-slide-picture-max-width: $layout-cover-max-width;
+$layout-slide-controls-max-width: $layout-content-max-width;
+
+// Slide viewer colors
+$color-slide-arrow-active-bg: $color-text-accent;
+$color-slide-arrow-active-text: $color-background-primary;
+$color-slide-bullet-active: $color-text-accent;
+
+// Slide viewer motion
+$motion-slide-arrow-duration: $motion-duration-normal;
+$motion-slide-arrow-easing: $motion-easing-normal;
+$motion-slide-bullet-duration: $motion-duration-normal;
+$motion-slide-bullet-easing: $motion-easing-normal;
 
 .slide-viewer {
   margin: 0;
@@ -35,7 +52,7 @@ $size-slide-bullet: 0.5rem;
 .slide-viewer-picture {
   display: block;
   width: 100%;
-  max-width: $layout-cover-max-width;
+  max-width: $layout-slide-picture-max-width;
   margin: 0 auto;
   overflow: hidden;
   position: relative;
@@ -68,9 +85,9 @@ $size-slide-bullet: 0.5rem;
 }
 
 // Rounded corners on desktop (matching post-cover)
-@media (min-width: $layout-cover-max-width) {
+@media (min-width: $layout-slide-picture-max-width) {
   .slide-viewer-picture {
-    border-radius: $border-radius-normal;
+    border-radius: $border-slide-picture-radius;
   }
 }
 
@@ -82,7 +99,7 @@ $size-slide-bullet: 0.5rem;
   justify-content: center;
   align-items: center;
   margin-top: $space-slide-controls-top;
-  max-width: $layout-content-max-width;
+  max-width: $layout-slide-controls-max-width;
   margin-left: auto;
   margin-right: auto;
   padding: 0;
@@ -99,8 +116,8 @@ $size-slide-bullet: 0.5rem;
   font-size: $size-slide-arrow-font;
   line-height: 1;
   padding: $space-slide-arrow-padding;
-  border-radius: $border-radius-small;
-  transition: background-color $motion-duration-normal $motion-easing-normal, color $motion-duration-normal $motion-easing-normal;
+  border-radius: $border-slide-arrow-radius;
+  transition: background-color $motion-slide-arrow-duration $motion-slide-arrow-easing, color $motion-slide-arrow-duration $motion-slide-arrow-easing;
   flex-shrink: 0;
   margin: 0;
   outline: none;
@@ -111,8 +128,8 @@ $size-slide-bullet: 0.5rem;
   }
 
   &:active {
-    background-color: $color-text-accent;
-    color: $color-background-primary;
+    background-color: $color-slide-arrow-active-bg;
+    color: $color-slide-arrow-active-text;
   }
 }
 
@@ -133,7 +150,7 @@ $size-slide-bullet: 0.5rem;
   height: $size-slide-bullet;
   width: $size-slide-bullet;
   padding: 0;
-  transition: background-color $motion-duration-normal $motion-easing-normal;
+  transition: background-color $motion-slide-bullet-duration $motion-slide-bullet-easing;
   outline: none;
 
   &:hover:not(&--active),
@@ -142,11 +159,11 @@ $size-slide-bullet: 0.5rem;
   }
 
   &--active {
-    background-color: $color-text-accent;
+    background-color: $color-slide-bullet-active;
   }
 
   &--active:hover,
   &--active:focus {
-    background-color: $color-text-accent;
+    background-color: $color-slide-bullet-active;
   }
 }
