@@ -26,10 +26,13 @@ theme = 'template'
 
 [params]
   description = 'Writing about building systems meant to last, the trade-offs that come with them, and the organizational forces that shape them. Exploring software architecture, engineering leadership, system failures, and the decisions that matter when building for the long term.'
-  recentPostsLimit = 6
+  recentPostsLimit = 10
 
 [params.social]
 linkedin = 'https://www.linkedin.com/in/yrizos/'
 github = 'https://github.com/yrizos'
 medium = 'https://medium.com/@yrizos'
 goodreads = 'https://www.goodreads.com/user/show/68793210-yannis-rizos'
+
+[params.analytics]
+goatcounter = 'https://yrizos.goatcounter.com/count'

@@ -127,3 +127,6 @@
 {{- end -}}
 {{ partialCached "head/css.html" . }}
 {{ partialCached "head/js.html" . }}
+{{- with site.Params.analytics.goatcounter }}
+<script data-goatcounter="{{ . }}" async src="//gc.zgo.at/count.js"></script>
+{{- end }}
