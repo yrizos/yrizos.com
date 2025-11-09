@@ -222,7 +222,7 @@
 <p>She would be done soon, full of stories about whatever small discovery the morning had brought. I had nothing equivalent to offer. Just a finished book and the quiet knowledge that some part of my mind had been clearing itself while I read about characters building games.</p>
 <p>The best decisions might require this same patience. The willingness to pull back when proximity distorts perspective. The discipline to stop analyzing and trust that answers will surface on their own schedule.</p>
 <p>I wonder how often I resist this at work, convinced that more hours or deeper analysis will break something open, when walking away might be exactly what the problem needs.</p>
-]]></content:encoded><media:content url="https://yrizos.com/images/writing/where-do-you-do-your-best-thinking.png" type="image/png" medium="image"><media:title>Home</media:title></media:content></item><item><title>The Mars Rover Challenge in Rust: Houston, Do You Copy?</title><link>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-houston-do-you-copy/</link><guid>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-houston-do-you-copy/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Mon, 18 Nov 2024 11:59:45 UTC</pubDate><category>r</category><category>u</category><category>s</category><category>t</category><category>,</category><category/><category>b</category><category>e</category><category>g</category><category>i</category><category>n</category><category>n</category><category>e</category><category>r</category><category>s</category><category>,</category><category/><category>k</category><category>a</category><category>t</category><category>a</category><description><![CDATA[<p>Our rover navigation system is ready for its maiden voyage, but first, it needs to know where to go! The mission parameters have provided specific test scenarios to validate our implementation. My rover needs to interpret these commands:</p>
+]]></content:encoded><media:content url="https://yrizos.com/images/writing/where-do-you-do-your-best-thinking.png" type="image/png" medium="image"><media:title>Home</media:title></media:content></item><item><title>The Mars Rover Challenge in Rust: Houston, Do You Copy?</title><link>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-houston-do-you-copy/</link><guid>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-houston-do-you-copy/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Mon, 18 Nov 2024 11:59:45 UTC</pubDate><category>rust</category><category>beginners</category><category>kata</category><description><![CDATA[<p>Our rover navigation system is ready for its maiden voyage, but first, it needs to know where to go! The mission parameters have provided specific test scenarios to validate our implementation. My rover needs to interpret these commands:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>5 5
 </span></span><span style="display:flex;"><span>1 2 N
 </span></span><span style="display:flex;"><span>LMLMLMLMM
@@ -517,7 +517,7 @@
 <hr>
 <p>The journey through this challenge has finally reached its conclusion, and what a gratifying experience it turned out to be. While Rust Analyzer flags a couple of minor issues, the robust test suite provides confidence that these will be straightforward fixes.</p>
 <p>The code is available for <a href="https://github.com/yrizos/mars-rover-rs">perusal on Github</a>, marking the end of this rewarding coding adventure.</p>
-]]></content:encoded></item><item><title>The Mars Rover Challenge in Rust: Let's Get Moving!</title><link>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-lets-get-moving/</link><guid>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-lets-get-moving/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Mon, 18 Nov 2024 11:52:37 UTC</pubDate><category>r</category><category>u</category><category>s</category><category>t</category><category>,</category><category/><category>b</category><category>e</category><category>g</category><category>i</category><category>n</category><category>n</category><category>e</category><category>r</category><category>s</category><category>,</category><category/><category>k</category><category>a</category><category>t</category><category>a</category><description><![CDATA[<p>Now that the challenge is clear, it&rsquo;s time to start coding.</p>
+]]></content:encoded></item><item><title>The Mars Rover Challenge in Rust: Let's Get Moving!</title><link>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-lets-get-moving/</link><guid>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-lets-get-moving/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Mon, 18 Nov 2024 11:52:37 UTC</pubDate><category>rust</category><category>beginners</category><category>kata</category><description><![CDATA[<p>Now that the challenge is clear, it&rsquo;s time to start coding.</p>
 <p>To kick things off, I got my project set up using Cargo – nothing fancy, just the basics:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cargo new mars-rover-rust
 </span></span><span style="display:flex;"><span>cd mars-rover-rust
@@ -724,7 +724,7 @@
 </span></span></code></pre></div><hr>
 <p>And there you have it! Our Mars Rover is now ready to explore its virtual plateau. I&rsquo;ve got to say, as someone still getting their feet wet with Rust, seeing this all come together has been incredibly satisfying. The code might not be perfect by Rust standards, but hey, it works!</p>
 <p>Next up on my list is handling user input and prettifying the output. But that&rsquo;s a story for another day!</p>
-]]></content:encoded></item><item><title>The Mars Rover Challenge in Rust: Setting the Scene</title><link>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-setting-the-scene/</link><guid>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-setting-the-scene/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Mon, 18 Nov 2024 11:52:03 UTC</pubDate><category>r</category><category>u</category><category>s</category><category>t</category><category>,</category><category/><category>b</category><category>e</category><category>g</category><category>i</category><category>n</category><category>n</category><category>e</category><category>r</category><category>s</category><category>,</category><category/><category>k</category><category>a</category><category>t</category><category>a</category><description><![CDATA[<p>As a Rust beginner, I was looking for a project that would both teach me the language fundamentals and keep me engaged. The Mars Rover Challenge fits perfectly - it&rsquo;s an intriguing problem that simulates robotic exploration of Mars while introducing key programming concepts.</p>
+]]></content:encoded></item><item><title>The Mars Rover Challenge in Rust: Setting the Scene</title><link>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-setting-the-scene/</link><guid>https://yrizos.com/writing/the-mars-rover-challenge-in-rust-setting-the-scene/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Mon, 18 Nov 2024 11:52:03 UTC</pubDate><category>rust</category><category>beginners</category><category>kata</category><description><![CDATA[<p>As a Rust beginner, I was looking for a project that would both teach me the language fundamentals and keep me engaged. The Mars Rover Challenge fits perfectly - it&rsquo;s an intriguing problem that simulates robotic exploration of Mars while introducing key programming concepts.</p>
 <h2 id="setting-the-scene">Setting the Scene</h2>
 <p>Imagine controlling rovers tasked with exploring the Martian terrain. These rovers need to navigate a rectangular plateau while sending visual data back to Earth. The challenge involves translating simple commands into precise rover movements, and dealing with positioning, orientation, and grid-based navigation.</p>]]></description><content:encoded><![CDATA[<p>As a Rust beginner, I was looking for a project that would both teach me the language fundamentals and keep me engaged. The Mars Rover Challenge fits perfectly - it&rsquo;s an intriguing problem that simulates robotic exploration of Mars while introducing key programming concepts.</p>
 <h2 id="setting-the-scene">Setting the Scene</h2>
@@ -749,9 +749,9 @@ The position is made up of two integers and a letter separated by spaces, corres
 </span></span><span style="display:flex;"><span>3 3 E
 </span></span><span style="display:flex;"><span>MMRMMRMRRM
 </span></span></code></pre></div><h3 id="test-output">Test Output:</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>1 3 N
-</span></span><span style="display:flex;"><span>5 1 E
-</span></span></code></pre></div><h2 id="breaking-down-the-requirements">Breaking Down the Requirements</h2>
+<pre tabindex="0"><code>1 3 N
+5 1 E
+</code></pre><h2 id="breaking-down-the-requirements">Breaking Down the Requirements</h2>
 <p>Let&rsquo;s analyze what we&rsquo;re dealing with:</p>
 <ol>
 <li>
@@ -798,39 +798,38 @@ The position is made up of two integers and a letter separated by spaces, corres
 </ul>
 <hr>
 <p>P.S. If you&rsquo;d like to dive straight into the code, you can find the implementation on <a href="https://github.com/yrizos/mars-rover-rs">GitHub</a>.</p>
-]]></content:encoded></item><item><title>Setting Up Visual Studio Code for Rust on macOS</title><link>https://yrizos.com/writing/setting-up-visual-studio-code-for-rust-on-macos/</link><guid>https://yrizos.com/writing/setting-up-visual-studio-code-for-rust-on-macos/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Sun, 17 Nov 2024 11:50:12 UTC</pubDate><category>r</category><category>u</category><category>s</category><category>t</category><category>,</category><category/><category>v</category><category>s</category><category>c</category><category>o</category><category>d</category><category>e</category><category>,</category><category/><category>b</category><category>e</category><category>g</category><category>i</category><category>n</category><category>n</category><category>e</category><category>r</category><category>s</category><description><![CDATA[<p>Setting up Visual Studio Code for Rust development is quick and straightforward. While I prefer PHPStorm for larger projects, VS Code is perfect for smaller ones. It’s fast, lightweight, and just works. For this guide, I’m assuming you already have <a href="https://dev.to/yrizos/installing-rust-on-macos-with-homebrew-51fk">Rust installed via Homebrew</a>.</p>
+]]></content:encoded></item><item><title>Setting Up Visual Studio Code for Rust on macOS</title><link>https://yrizos.com/writing/setting-up-visual-studio-code-for-rust-on-macos/</link><guid>https://yrizos.com/writing/setting-up-visual-studio-code-for-rust-on-macos/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Sun, 17 Nov 2024 11:50:12 UTC</pubDate><category>rust</category><category>vscode</category><category>beginners</category><description><![CDATA[<p>Setting up Visual Studio Code for Rust development is quick and straightforward. While I prefer PHPStorm for larger projects, VS Code is perfect for smaller ones. It’s fast, lightweight, and just works. For this guide, I’m assuming you already have <a href="https://dev.to/yrizos/installing-rust-on-macos-with-homebrew-51fk">Rust installed via Homebrew</a>.</p>
 <h3 id="step-1-grab-vs-code">Step 1: Grab VS Code</h3>
 <p>Head over to <a href="https://code.visualstudio.com/">code.visualstudio.com</a> and download VS Code. Follow the installation instructions provided for MacOS to set it up.</p>
 <h3 id="step-2-create-a-hello-world-project-with-cargo">Step 2: Create a Hello World Project with cargo</h3>
 <ol>
-<li>Open Terminal and create a new Rust project:</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cargo new hello_world
-</span></span></code></pre></div><ol start="2">
-<li>Navigate into the project folder:</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd hello_world
-</span></span></code></pre></div><ol start="3">
-<li>Open the project in VS Code:</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>code .
-</span></span></code></pre></div><p>If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type &ldquo;Shell Command,&rdquo; and select &ldquo;Install &lsquo;code&rsquo; command in PATH.&rdquo; Then try again.</p>]]></description><content:encoded><![CDATA[<p>Setting up Visual Studio Code for Rust development is quick and straightforward. While I prefer PHPStorm for larger projects, VS Code is perfect for smaller ones. It’s fast, lightweight, and just works. For this guide, I’m assuming you already have <a href="https://dev.to/yrizos/installing-rust-on-macos-with-homebrew-51fk">Rust installed via Homebrew</a>.</p>
+<li>
+<p>Open Terminal and create a new Rust project:</p>]]></description><content:encoded><![CDATA[<p>Setting up Visual Studio Code for Rust development is quick and straightforward. While I prefer PHPStorm for larger projects, VS Code is perfect for smaller ones. It’s fast, lightweight, and just works. For this guide, I’m assuming you already have <a href="https://dev.to/yrizos/installing-rust-on-macos-with-homebrew-51fk">Rust installed via Homebrew</a>.</p>
 <h3 id="step-1-grab-vs-code">Step 1: Grab VS Code</h3>
 <p>Head over to <a href="https://code.visualstudio.com/">code.visualstudio.com</a> and download VS Code. Follow the installation instructions provided for MacOS to set it up.</p>
 <h3 id="step-2-create-a-hello-world-project-with-cargo">Step 2: Create a Hello World Project with cargo</h3>
 <ol>
-<li>Open Terminal and create a new Rust project:</li>
+<li>
+<p>Open Terminal and create a new Rust project:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"></code></pre></div></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cargo new hello_world
-</span></span></code></pre></div><ol start="2">
-<li>Navigate into the project folder:</li>
+<p>cargo new hello_world
+```</p>
+<ol start="2">
+<li>
+<p>Navigate into the project folder:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"></code></pre></div></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd hello_world
-</span></span></code></pre></div><ol start="3">
-<li>Open the project in VS Code:</li>
+<p>cd hello_world
+```</p>
+<ol start="3">
+<li>
+<p>Open the project in VS Code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"></code></pre></div></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>code .
-</span></span></code></pre></div><p>If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type &ldquo;Shell Command,&rdquo; and select &ldquo;Install &lsquo;code&rsquo; command in PATH.&rdquo; Then try again.</p>
+<p>code .
+```</p>
+<p>If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type &ldquo;Shell Command,&rdquo; and select &ldquo;Install &lsquo;code&rsquo; command in PATH.&rdquo; Then try again.</p>
 <h3 id="step-3-add-the-rust-analyzer-extension">Step 3: Add the Rust Analyzer Extension</h3>
 <ol>
 <li>Open VS Code and press ⇧ + ⌘ + X to open the Extensions view.</li>
@@ -867,19 +866,23 @@ The position is made up of two integers and a letter separated by spaces, corres
 </span></span></code></pre></div><h3 id="step-5-run-your-program-with-cargo">Step 5: Run your program with cargo</h3>
 <ol>
 <li>
-<p>Open the integrated terminal in VS Code by pressing ⌃ + <code>`</code> (Control and backtick).</p>
+<p>Open the integrated terminal in VS Code by pressing ⌃ + <code>`</code>  (Control and backtick).</p>
 </li>
 <li>
 <p>Run the program:</p>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"></code></pre></div></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cargo run
-</span></span></code></pre></div><ol start="3">
-<li>You should see the output:</li>
+<p>cargo run
+```</p>
+<ol start="3">
+<li>
+<p>You should see the output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"></code></pre></div></li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>Hello, world!
-</span></span></code></pre></div><p>And there you have it. Your setup is ready, and you’re all set to dive into Rust development with VS Code. Time to build something amazing!</p>
-]]></content:encoded></item><item><title>Installing Rust on macOS with Homebrew</title><link>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</link><guid>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Sun, 17 Nov 2024 09:28:59 UTC</pubDate><category>r</category><category>u</category><category>s</category><category>t</category><category>,</category><category/><category>h</category><category>o</category><category>m</category><category>e</category><category>b</category><category>r</category><category>e</category><category>w</category><category>,</category><category/><category>b</category><category>e</category><category>g</category><category>i</category><category>n</category><category>n</category><category>e</category><category>r</category><category>s</category><description><![CDATA[<p>This Sunday, I had a bit of extra time, so I decided to brush up on <a href="https://www.rust-lang.org/">Rust</a>. Whether you are a seasoned developer or just starting out, getting your tools set up is always the first step.</p>
+<p>Hello, world!
+```</p>
+<p>And there you have it. Your setup is ready, and you’re all set to dive into Rust development with VS Code. Time to build something amazing!</p>
+]]></content:encoded></item><item><title>Installing Rust on macOS with Homebrew</title><link>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</link><guid>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Sun, 17 Nov 2024 09:28:59 UTC</pubDate><category>rust</category><category>homebrew</category><category>beginners</category><description><![CDATA[<p>This Sunday, I had a bit of extra time, so I decided to brush up on <a href="https://www.rust-lang.org/">Rust</a>. Whether you are a seasoned developer or just starting out, getting your tools set up is always the first step.</p>
 <p>While Rust’s official installation tool, <code>rustup</code>, is excellent and versatile, I prefer using <a href="https://brew.sh/">Homebrew</a> whenever possible. It is simple, familiar, and keeps everything neatly managed in one place.</p>
 <h2 id="step-1-install-rust">Step 1: Install Rust</h2>
 <p>Launch the terminal and run the following command to install Rust:</p>]]></description><content:encoded><![CDATA[<p>This Sunday, I had a bit of extra time, so I decided to brush up on <a href="https://www.rust-lang.org/">Rust</a>. Whether you are a seasoned developer or just starting out, getting your tools set up is always the first step.</p>

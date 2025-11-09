@@ -33,18 +33,8 @@
 &lt;p&gt;Head over to &lt;a href="https://code.visualstudio.com/"&gt;code.visualstudio.com&lt;/a&gt; and download VS Code. Follow the installation instructions provided for MacOS to set it up.&lt;/p&gt;
 &lt;h3 id="step-2-create-a-hello-world-project-with-cargo"&gt;Step 2: Create a Hello World Project with cargo&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;Open Terminal and create a new Rust project:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cargo new hello_world
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
-&lt;li&gt;Navigate into the project folder:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;cd hello_world
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
-&lt;li&gt;Open the project in VS Code:&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;code .
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type &amp;ldquo;Shell Command,&amp;rdquo; and select &amp;ldquo;Install &amp;lsquo;code&amp;rsquo; command in PATH.&amp;rdquo; Then try again.&lt;/p&gt;</description></item><item><title>Installing Rust on macOS with Homebrew</title><link>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</link><pubDate>Sun, 17 Nov 2024 09:28:59 +0000</pubDate><guid>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</guid><description>&lt;p&gt;This Sunday, I had a bit of extra time, so I decided to brush up on &lt;a href="https://www.rust-lang.org/"&gt;Rust&lt;/a&gt;. Whether you are a seasoned developer or just starting out, getting your tools set up is always the first step.&lt;/p&gt;
+&lt;li&gt;
+&lt;p&gt;Open Terminal and create a new Rust project:&lt;/p&gt;</description></item><item><title>Installing Rust on macOS with Homebrew</title><link>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</link><pubDate>Sun, 17 Nov 2024 09:28:59 +0000</pubDate><guid>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</guid><description>&lt;p&gt;This Sunday, I had a bit of extra time, so I decided to brush up on &lt;a href="https://www.rust-lang.org/"&gt;Rust&lt;/a&gt;. Whether you are a seasoned developer or just starting out, getting your tools set up is always the first step.&lt;/p&gt;
 &lt;p&gt;While Rust’s official installation tool, &lt;code&gt;rustup&lt;/code&gt;, is excellent and versatile, I prefer using &lt;a href="https://brew.sh/"&gt;Homebrew&lt;/a&gt; whenever possible. It is simple, familiar, and keeps everything neatly managed in one place.&lt;/p&gt;
 &lt;h2 id="step-1-install-rust"&gt;Step 1: Install Rust&lt;/h2&gt;
 &lt;p&gt;Launch the terminal and run the following command to install Rust:&lt;/p&gt;</description></item></channel></rss>
