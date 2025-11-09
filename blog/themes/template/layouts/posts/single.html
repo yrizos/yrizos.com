@@ -5,7 +5,8 @@
       {{ partial "post-meta.html" (dict "page" .) }}
 
       {{- if .Params.series_title }}
-      <section class="post-series">
+      <nav class="post-series" aria-labelledby="series-heading">
+        <h3 id="series-heading" class="visually-hidden">Series: {{ .Params.series_title }}</h3>
         <ol class="post-series-list">
           {{- $currentPage := . -}}
           {{- $seriesPages := where site.RegularPages "Params.series_title" .Params.series_title -}}
@@ -15,14 +16,14 @@
             <li class="post-series-item{{ if $isCurrent }} post-series-item--current{{ end }}">
               <span class="post-series-number">{{ .Params.series_order }}</span>
               {{- if $isCurrent }}
-                <span class="post-series-link">{{ .Title }}</span>
+                <span class="post-series-link" aria-current="location">{{ .Title }}</span>
               {{- else }}
                 <a href="{{ .RelPermalink }}" class="post-series-link">{{ .Title }}</a>
               {{- end }}
             </li>
           {{- end }}
         </ol>
-      </section>
+      </nav>
       {{- end }}
     </header>
 

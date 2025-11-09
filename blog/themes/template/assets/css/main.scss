@@ -17,6 +17,23 @@
 @import 'syntax-override';
 @import '404';
 
+// ============================================
+// UTILITIES
+// ============================================
+
+// Visually hidden but accessible to screen readers
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 html {
   background-color: $color-background-primary;
   height: 100%;
