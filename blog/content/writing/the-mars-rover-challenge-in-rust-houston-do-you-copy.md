@@ -2,8 +2,9 @@
 title = "The Mars Rover Challenge in Rust: Houston, Do You Copy?"
 date = "2024-11-18T11:59:45+00:00"
 draft = false
+type = "posts"
 canonical_url = "https://dev.to/yrizos/the-mars-rover-challenge-in-rust-houston-do-you-copy-334o"
-tags = ["r", "u", "s", "t", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s", ",", " ", "k", "a", "t", "a"]
+tags = ["rust", "beginners", "kata"]
 +++
 
 Our rover navigation system is ready for its maiden voyage, but first, it needs to know where to go! The mission parameters have provided specific test scenarios to validate our implementation. My rover needs to interpret these commands:

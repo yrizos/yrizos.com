@@ -2,8 +2,9 @@
 title = "The Mars Rover Challenge in Rust: Let's Get Moving!"
 date = "2024-11-18T11:52:37+00:00"
 draft = false
+type = "posts"
 canonical_url = "https://dev.to/yrizos/the-mars-rover-challenge-in-rust-lets-get-moving-3a32"
-tags = ["r", "u", "s", "t", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s", ",", " ", "k", "a", "t", "a"]
+tags = ["rust", "beginners", "kata"]
 +++
 
 Now that the challenge is clear, it's time to start coding.

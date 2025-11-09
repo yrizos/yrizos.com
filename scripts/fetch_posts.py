@@ -315,7 +315,14 @@ def parse_devto_entry(entry) -> BlogPost:
                 image_alt = thumb.get("title", "")
 
     # Get tags from API response
-    tags = [tag for tag in api_data.get("tag_list", [])]
+    tag_list = api_data.get("tag_list", [])
+    # Handle both list and comma-separated string formats from API
+    if isinstance(tag_list, str):
+        tags = [tag.strip() for tag in tag_list.split(",") if tag.strip()]
+    elif isinstance(tag_list, list):
+        tags = [str(tag).strip() for tag in tag_list if tag]
+    else:
+        tags = []
 
     return BlogPost(
         title=title,

@@ -2,8 +2,9 @@
 title = "Setting Up Visual Studio Code for Rust on macOS"
 date = "2024-11-17T11:50:12+00:00"
 draft = false
+type = "posts"
 canonical_url = "https://dev.to/yrizos/setting-up-visual-studio-code-for-rust-on-macos-95k"
-tags = ["r", "u", "s", "t", ",", " ", "v", "s", "c", "o", "d", "e", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s"]
+tags = ["rust", "vscode", "beginners"]
 +++
 
 Setting up Visual Studio Code for Rust development is quick and straightforward. While I prefer PHPStorm for larger projects, VS Code is perfect for smaller ones. It’s fast, lightweight, and just works. For this guide, I’m assuming you already have [Rust installed via Homebrew](https://dev.to/yrizos/installing-rust-on-macos-with-homebrew-51fk).
@@ -16,30 +17,30 @@ Head over to [code.visualstudio.com](https://code.visualstudio.com/) and downloa
 
 1. Open Terminal and create a new Rust project:
 
-```sh
+     ```sh
 cargo new hello_world
-```
+     ```
 
 2. Navigate into the project folder:
 
-```sh
+     ```sh
 cd hello_world
-```
+     ```
 
 3. Open the project in VS Code:
 
-```sh
+     ```sh
 code .
-```
+     ```
 
-If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type "Shell Command," and select "Install 'code' command in PATH." Then try again.
+   If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type "Shell Command," and select "Install 'code' command in PATH." Then try again.
 
 ### Step 3: Add the Rust Analyzer Extension
 
 1. Open VS Code and press ⇧ + ⌘ + X to open the Extensions view.
 2. Search for "Rust Analyzer" and click **Install**.
 
-Rust Analyzer provides features like syntax highlighting, error checking, and improved code navigation.
+Rust Analyzer provides features like syntax highlighting, error checking, and improved code navigation. 
 
 Once the extension is installed, open the `main.rs` file located in the `src` folder of your project. You should now see:
 
@@ -53,7 +54,7 @@ To test the error checking feature, introduce a simple mistake in your code. For
 println!("Hello, world!");
 ```
 
-to:
+to: 
 
 ```rust
 rintln!("Hello, world!");
@@ -84,18 +85,18 @@ fn main() {
 
 ### Step 5: Run your program with cargo
 
-1.  Open the integrated terminal in VS Code by pressing ⌃ + `` ` `` (Control and backtick).
+1. Open the integrated terminal in VS Code by pressing ⌃ + `` ` ``  (Control and backtick).
 
-2.  Run the program:
+2. Run the program:
 
-```sh
+     ```sh
 cargo run
-```
+     ```
 
-3.  You should see the output:
+3. You should see the output:
 
-```plaintext
+     ```plaintext
 Hello, world!
-```
+     ```
 
 And there you have it. Your setup is ready, and you’re all set to dive into Rust development with VS Code. Time to build something amazing!

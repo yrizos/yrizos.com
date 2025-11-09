@@ -2,8 +2,9 @@
 title = "The Mars Rover Challenge in Rust: Setting the Scene"
 date = "2024-11-18T11:52:03+00:00"
 draft = false
+type = "posts"
 canonical_url = "https://dev.to/yrizos/the-mars-rover-challenge-in-rust-setting-the-scene-49l8"
-tags = ["r", "u", "s", "t", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s", ",", " ", "k", "a", "t", "a"]
+tags = ["rust", "beginners", "kata"]
 +++
 
 As a Rust beginner, I was looking for a project that would both teach me the language fundamentals and keep me engaged. The Mars Rover Challenge fits perfectly - it's an intriguing problem that simulates robotic exploration of Mars while introducing key programming concepts.
@@ -46,9 +47,9 @@ LMLMLMLMM
 MMRMMRMRRM
 ```
 
-### Test Output:
+### Test Output: 
 
-```plaintext
+```
 1 3 N
 5 1 E
 ```
@@ -58,19 +59,17 @@ MMRMMRMRRM
 Let's analyze what we're dealing with:
 
 1. **The Environment**
-
    - A rectangular plateau defined by coordinates
    - Grid-based movement system
    - Origin point (0,0) at bottom-left
 
 2. **Rover Capabilities**
-
    - Position tracking (x,y coordinates)
    - Cardinal direction orientation (N,E,S,W)
    - Three basic commands:
-     - Rotate left 90° (L)
-     - Rotate right 90° (R)
-     - Move forward one grid unit (M)
+     * Rotate left 90° (L)
+     * Rotate right 90° (R)
+     * Move forward one grid unit (M)
 
 3. **System Behavior**
    - Sequential rover movement (one at a time)

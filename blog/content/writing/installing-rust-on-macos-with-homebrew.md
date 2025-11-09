@@ -2,8 +2,9 @@
 title = "Installing Rust on macOS with Homebrew"
 date = "2024-11-17T09:28:59+00:00"
 draft = false
+type = "posts"
 canonical_url = "https://dev.to/yrizos/installing-rust-on-macos-with-homebrew-51fk"
-tags = ["r", "u", "s", "t", ",", " ", "h", "o", "m", "e", "b", "r", "e", "w", ",", " ", "b", "e", "g", "i", "n", "n", "e", "r", "s"]
+tags = ["rust", "homebrew", "beginners"]
 +++
 
 This Sunday, I had a bit of extra time, so I decided to brush up on [Rust](https://www.rust-lang.org/). Whether you are a seasoned developer or just starting out, getting your tools set up is always the first step.
