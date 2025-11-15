@@ -11,7 +11,7 @@
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mapping</span>.<span style="color:#a6e22e">targetCode</span>
 </span></span><span style="display:flex;"><span>)
 </span></span></code></pre></div><p>As a sidenote, TypeScript didn&rsquo;t exist back then. The actual code was Java, but I <em>really don&rsquo;t love Java</em>.</p>
-<h2 id="for-a-while-everything-worked-fine">For a while, everything worked fine.</h2>
+<h2 id="for-a-while-everything-worked-fine">For a While, Everything Worked Fine</h2>
 <p>Then, one afternoon, a product stopped appearing in the store. It should have been a quick fix. I expected to find some data validation issue or maybe a network timeout. Instead, I spent nearly two hours jumping between files trying to understand what had gone wrong. The system had multiple layers (controllers, services, helpers, integration adapters) and every function accepted plain strings. Nothing in the signatures gave me any hint about which string represented which concept.</p>
 <p>By the time I traced the problem to its source, I discovered I&rsquo;d passed the store code where the ERP code should have been. The function had accepted both values without complaint because they were both strings. The type system had nothing to say about it. I fixed the bug in about thirty seconds. Then I sat there feeling annoyed that I&rsquo;d wasted two hours on something so trivial.</p>
 <p>I remember thinking there had to be a better way to write this kind of code. Not some grand revelation. Just frustration mixed with the feeling that my tools should have caught this.</p>
