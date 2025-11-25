@@ -277,6 +277,45 @@ def remove_skipped_books() -> None:
         print(f"Removed {removed_count} books from skip list.")
 
 
+def remove_books_not_in_feed(books_in_feed: List[Book]) -> None:
+    """Remove existing books that are not in the feed."""
+    if not BOOKS_DIR.exists():
+        return
+
+    # Create a set of book_ids from the feed (including skipped ones)
+    feed_book_ids = {book.book_id for book in books_in_feed}
+    # Also keep books in the skip list
+    keep_book_ids = feed_book_ids | SKIP_BOOK_IDS
+
+    removed_count = 0
+    for book_file in BOOKS_DIR.glob("*.md"):
+        try:
+            content = book_file.read_text(encoding="utf-8")
+            book_id_match = re.search(r'book_id\s*=\s*"([^"]+)"', content)
+            if book_id_match:
+                book_id = book_id_match.group(1)
+                if book_id not in keep_book_ids:
+                    # Get title for logging
+                    title_match = re.search(r'title\s*=\s*"([^"]+)"', content)
+                    title = title_match.group(1) if title_match else book_file.stem
+                    
+                    book_file.unlink()
+                    image_match = re.search(r'image\s*=\s*"([^"]+)"', content)
+                    if image_match:
+                        image_path = image_match.group(1)
+                        image_file = IMAGES_DIR / pathlib.Path(image_path).name
+                        if image_file.exists():
+                            image_file.unlink()
+                    removed_count += 1
+                    print(f"Removed book not in feed: {title}")
+        except Exception as err:
+            print(f"Error checking {book_file.name}: {err}")
+            continue
+
+    if removed_count > 0:
+        print(f"Removed {removed_count} books not in feed.")
+
+
 def main() -> None:
     """Main entry point."""
     print("Fetching currently-reading books from Goodreads...")
@@ -287,9 +326,14 @@ def main() -> None:
 
     if not books:
         print("No books found in feed.")
+        # Still remove books not in feed (empty feed means remove all)
+        remove_books_not_in_feed([])
         return
 
     print(f"Found {len(books)} books in feed.")
+
+    # Remove books that are no longer in the feed
+    remove_books_not_in_feed(books)
 
     saved_count = 0
     skipped_count = 0
