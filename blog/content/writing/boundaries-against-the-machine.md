@@ -5,7 +5,7 @@ draft = false
 type = "posts"
 canonical_url = "https://blog.talentlms.io/posts/boundaries-against-the-machine/"
 image = "images/writing/boundaries-against-the-machine.png"
-imageAlt = ""
+imageAlt = "Two abstract painted figures seated at a desk studying multiple maps with boundaries and routes on a warm background"
 tags = ["legacy-systems", "software-architecture", "domain-driven-design"]
 +++
 
