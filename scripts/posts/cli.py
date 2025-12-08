@@ -93,7 +93,16 @@ def to_toml_value(value) -> str:
 
 def download_image(url: str, destination: pathlib.Path) -> None:
     """Download the image for the post."""
-    response = requests.get(url, timeout=30)
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    })
+    
+    if "medium.com" in url or "cdn-images-1.medium.com" in url:
+        session.headers["Referer"] = "https://medium.com/"
+    
+    response = session.get(url, timeout=30)
     response.raise_for_status()
     destination.parent.mkdir(parents=True, exist_ok=True)
     with destination.open("wb") as handle:
