@@ -8,6 +8,6 @@ isbn = "1718501188"
 rating = "5"
 image = "images/books/recommendations/kill-it-with-fire-manage-aging-computer-systems-and-future-proof-modern-ones-marianne-bellotti.jpg"
 date_read = "2023-06-28"
-tags = ["tech"]
+tags = ["tech", "non-fiction"]
 +++
 

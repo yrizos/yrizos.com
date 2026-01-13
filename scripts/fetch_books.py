@@ -142,7 +142,7 @@ def build_front_matter(book: Book, image_path: str) -> str:
         "rating": book.rating,
         "image": image_path,
     }
-
+    
     # Only include date_read if it has a value
     if book.date_read:
         fields["date_read"] = book.date_read
@@ -260,24 +260,70 @@ def determine_image_filename(slug: str, image_url: str) -> str:
     return f"{slug}{suffix}"
 
 
-def process_book(book: Book) -> bool:
-    """Process a single book: download image and create content file."""
-    # Check if book with same book_id already exists
+def process_book(book: Book) -> tuple[bool, str]:
+    """Process a single book: download image and create content file, or update existing.
+    
+    Returns:
+        tuple[bool, str]: (success, action) where action is "created", "updated", or "skipped"
+    """
+    BOOKS_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Find existing book by book_id
+    existing_file = None
+    existing_image_path = None
+    
     if BOOKS_DIR.exists():
-        for existing_file in BOOKS_DIR.glob("*.md"):
+        for book_file in BOOKS_DIR.glob("*.md"):
             try:
-                content = existing_file.read_text(encoding="utf-8")
+                content = book_file.read_text(encoding="utf-8")
                 book_id_match = re.search(r'book_id\s*=\s*"([^"]+)"', content)
                 if book_id_match and book_id_match.group(1) == book.book_id:
-                    return False  # Book already exists
+                    existing_file = book_file
+                    # Extract existing image path
+                    image_match = re.search(r'image\s*=\s*"([^"]+)"', content)
+                    if image_match:
+                        existing_image_path = image_match.group(1)
+                    break
             except Exception:
                 continue
 
-    book_file = BOOKS_DIR / f"{book.slug}.md"
+    # If book exists, update it without refetching image
+    if existing_file:
+        # Use existing image path if available, otherwise try to get one
+        if existing_image_path:
+            image_path_relative = existing_image_path
+        else:
+            # Try to get image URL for new books that somehow don't have images
+            image_url = book.image_url
+            if not image_url:
+                image_url = get_image_url_from_sources(
+                    book.book_id, book.isbn, book.title, book.author)
+            
+            if image_url:
+                image_filename = determine_image_filename(book.slug, image_url)
+                image_path_local = IMAGES_DIR / image_filename
+                
+                if not image_path_local.exists():
+                    try:
+                        download_image(image_url, image_path_local)
+                    except Exception as err:
+                        print(f"Failed to download image for '{book.title}': {err}")
+                        return False, "skipped"
+                
+                image_path_relative = f"images/books/recommendations/{image_filename}"
+            else:
+                # No image available, skip update
+                print(f"Skipping update for '{book.title}' - no image available")
+                return False, "skipped"
+        
+        front_matter = build_front_matter(book, image_path_relative)
+        content = f"{front_matter}\n\n"
+        
+        existing_file.write_text(content, encoding="utf-8")
+        print(f"Updated: {book.title}")
+        return True, "updated"
 
-    if book_file.exists():
-        return False
-
+    # New book - need to download image
     image_url = book.image_url
 
     # If no image from RSS, try alternative sources
@@ -287,29 +333,29 @@ def process_book(book: Book) -> bool:
 
     if not image_url:
         print(f"Skipping '{book.title}' - no image available")
-        return False
+        return False, "skipped"
 
     image_filename = determine_image_filename(book.slug, image_url)
     image_path_local = IMAGES_DIR / image_filename
 
+    # Download image for new books
     if not image_path_local.exists():
         try:
             download_image(image_url, image_path_local)
         except Exception as err:
             print(f"Failed to download image for '{book.title}': {err}")
-            return False
-
-    BOOKS_DIR.mkdir(parents=True, exist_ok=True)
+            return False, "skipped"
 
     # Image path relative to assets/
     image_path_relative = f"images/books/recommendations/{image_filename}"
 
+    book_file = BOOKS_DIR / f"{book.slug}.md"
     front_matter = build_front_matter(book, image_path_relative)
     content = f"{front_matter}\n\n"
 
     book_file.write_text(content, encoding="utf-8")
-    print(f"Saved: {book.title}")
-    return True
+    print(f"Created: {book.title}")
+    return True, "created"
 
 
 def remove_skipped_books() -> None:
@@ -457,19 +503,24 @@ def main() -> None:
     print(f"Found {len(books)} favorite books in feed.")
 
     feed_book_ids = {book.book_id for book in books}
-
+    
     remove_books_not_in_feed(feed_book_ids)
 
-    saved_count = 0
+    created_count = 0
+    updated_count = 0
     skipped_count = 0
 
     for book in books:
-        if process_book(book):
-            saved_count += 1
+        success, action = process_book(book)
+        if success:
+            if action == "created":
+                created_count += 1
+            elif action == "updated":
+                updated_count += 1
         else:
             skipped_count += 1
 
-    print(f"\nSaved: {saved_count}, Skipped: {skipped_count}")
+    print(f"\nCreated: {created_count}, Updated: {updated_count}, Skipped: {skipped_count}")
 
 
 if __name__ == "__main__":
