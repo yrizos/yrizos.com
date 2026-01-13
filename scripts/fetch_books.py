@@ -6,18 +6,19 @@ import requests
 import pathlib
 import re
 from typing import List, Optional
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from urllib.parse import urlparse
 from datetime import datetime
 
 GOODREADS_FEED = "https://www.goodreads.com/review/list_rss/68793210?key=Q5sTrEOdYsUhUSrXK0J7wg9adkkcAuTFlIKN8-TetPnEWK2-&shelf=favorites"
 
-SKIP_BOOK_IDS = {"29630264", "40186304", "32855235", "7930361160", "216017751", "41832736", "16146899", "46184813", "64238935", "5973243", "6416196", "17340660", "60233239", "36223859", "57987464", "8176978", "36844711", "56377548", "8442726", "6567483", "56791389", "126917757", "6488124", "52949193", "18938240", "20572455", "8123311", "6219313", "62193738", "40053399", "43812338", "34810395", "40396699"}
+SKIP_BOOK_IDS = {"29630264", "40186304", "32855235", "7930361160", "216017751", "41832736", "16146899", "46184813", "64238935", "5973243", "6416196", "17340660", "60233239", "36223859", "57987464", "8176978",
+                 "36844711", "56377548", "8442726", "6567483", "56791389", "126917757", "6488124", "52949193", "18938240", "20572455", "8123311", "6219313", "62193738", "40053399", "43812338", "34810395", "40396699"}
 
 ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 BLOG_DIR = ROOT_DIR / "blog"
-BOOKS_DIR = BLOG_DIR / "content/books/read"
-IMAGES_DIR = BLOG_DIR / "assets/images/books/read"
+BOOKS_DIR = BLOG_DIR / "content/books/recommendations"
+IMAGES_DIR = BLOG_DIR / "assets/images/books/recommendations"
 
 
 @dataclass
@@ -31,6 +32,7 @@ class Book:
     rating: str
     date_read: str
     image_url: Optional[str] = None
+    tags: List[str] = field(default_factory=list)
 
 
 def slugify(text: str) -> str:
@@ -115,6 +117,12 @@ def to_toml_value(value) -> str:
         return str(value).lower()
     if isinstance(value, (int, float)):
         return str(value)
+    if isinstance(value, list):
+        escaped_items = []
+        for item in value:
+            escaped = item.replace("\\", "\\\\").replace('"', '\\"')
+            escaped_items.append(f'"{escaped}"')
+        return f"[{', '.join(escaped_items)}]"
     if isinstance(value, str):
         escaped = value.replace("\\", "\\\\").replace('"', '\\"')
         return f'"{escaped}"'
@@ -134,10 +142,14 @@ def build_front_matter(book: Book, image_path: str) -> str:
         "rating": book.rating,
         "image": image_path,
     }
-    
+
     # Only include date_read if it has a value
     if book.date_read:
         fields["date_read"] = book.date_read
+
+    # Only include tags if they exist
+    if book.tags:
+        fields["tags"] = book.tags
 
     lines = ["+++"]
     for key, value in fields.items():
@@ -181,7 +193,8 @@ def fetch_goodreads_books() -> List[Book]:
         date_read = ""
         if date_read_raw:
             try:
-                dt = datetime.strptime(date_read_raw, "%a, %d %b %Y %H:%M:%S %z")
+                dt = datetime.strptime(
+                    date_read_raw, "%a, %d %b %Y %H:%M:%S %z")
                 date_read = dt.strftime("%Y-%m-%d")
             except (ValueError, AttributeError):
                 # If parsing fails, keep original
@@ -190,6 +203,18 @@ def fetch_goodreads_books() -> List[Book]:
         image_url = entry.get("book_large_image_url",
                               "") or entry.get("book_image_url", "")
         image_url = image_url.strip() if image_url else None
+
+        # Extract tags from user_shelves
+        # Feedparser stores all RSS item fields directly accessible via dict access
+        tags = []
+        user_shelves = entry.get("user_shelves", "")
+        if user_shelves:
+            # Split by comma, strip, and exclude "favorites"
+            tags = [
+                tag.strip()
+                for tag in str(user_shelves).split(",")
+                if tag.strip() and tag.strip().lower() != "favorites"
+            ]
 
         slug = slugify(f"{title}-{author}")
 
@@ -203,6 +228,7 @@ def fetch_goodreads_books() -> List[Book]:
             rating=rating,
             date_read=date_read,
             image_url=image_url,
+            tags=tags,
         ))
 
     return books
@@ -246,9 +272,9 @@ def process_book(book: Book) -> bool:
                     return False  # Book already exists
             except Exception:
                 continue
-    
+
     book_file = BOOKS_DIR / f"{book.slug}.md"
-    
+
     if book_file.exists():
         return False
 
@@ -276,7 +302,7 @@ def process_book(book: Book) -> bool:
     BOOKS_DIR.mkdir(parents=True, exist_ok=True)
 
     # Image path relative to assets/
-    image_path_relative = f"images/books/read/{image_filename}"
+    image_path_relative = f"images/books/recommendations/{image_filename}"
 
     front_matter = build_front_matter(book, image_path_relative)
     content = f"{front_matter}\n\n"
@@ -323,7 +349,7 @@ def remove_duplicate_books() -> None:
 
     # Group books by book_id, storing file path and content
     books_by_id: dict[str, list[tuple[pathlib.Path, str]]] = {}
-    
+
     for book_file in BOOKS_DIR.glob("*.md"):
         try:
             content = book_file.read_text(encoding="utf-8")
@@ -342,34 +368,38 @@ def remove_duplicate_books() -> None:
         if len(file_data) > 1:
             # Sort by content length (longer usually means more complete title with series info)
             file_data.sort(key=lambda x: len(x[1]), reverse=True)
-            
+
             # Keep the first one (longest content)
             keep_file, keep_content = file_data[0]
-            
+
             # Get the image path from the file we're keeping
-            keep_image_match = re.search(r'image\s*=\s*"([^"]+)"', keep_content)
+            keep_image_match = re.search(
+                r'image\s*=\s*"([^"]+)"', keep_content)
             keep_image_name = None
             if keep_image_match:
                 keep_image_path = keep_image_match.group(1)
                 keep_image_name = pathlib.Path(keep_image_path).name
-            
+
             for duplicate_file, duplicate_content in file_data[1:]:
                 try:
                     # Get image path before removing file
-                    image_match = re.search(r'image\s*=\s*"([^"]+)"', duplicate_content)
+                    image_match = re.search(
+                        r'image\s*=\s*"([^"]+)"', duplicate_content)
                     if image_match:
                         image_path = image_match.group(1)
                         image_file = IMAGES_DIR / pathlib.Path(image_path).name
                         # Only remove image if it's different from the one we're keeping
                         if image_file.exists() and image_file.name != keep_image_name:
                             image_file.unlink()
-                    
+
                     # Remove the duplicate file
                     duplicate_file.unlink()
                     removed_count += 1
-                    print(f"Removed duplicate: {duplicate_file.stem} (same book_id as {keep_file.stem})")
+                    print(
+                        f"Removed duplicate: {duplicate_file.stem} (same book_id as {keep_file.stem})")
                 except Exception as err:
-                    print(f"Error removing duplicate {duplicate_file.name}: {err}")
+                    print(
+                        f"Error removing duplicate {duplicate_file.name}: {err}")
                     continue
 
     if removed_count > 0:
@@ -427,7 +457,7 @@ def main() -> None:
     print(f"Found {len(books)} favorite books in feed.")
 
     feed_book_ids = {book.book_id for book in books}
-    
+
     remove_books_not_in_feed(feed_book_ids)
 
     saved_count = 0
@@ -444,4 +474,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

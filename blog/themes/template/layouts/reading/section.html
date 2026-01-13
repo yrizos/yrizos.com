@@ -44,7 +44,7 @@
         <h2>Favourites</h2>
         <div class="books-list">
           {{- $readBooks := where .Site.RegularPages "Section" "books" -}}
-          {{- $readBooks = where $readBooks "File.Dir" "books/read/" -}}
+          {{- $readBooks = where $readBooks "File.Dir" "books/recommendations/" -}}
           {{- $readBooks = where $readBooks "Params.date_read" "!=" "" -}}
           {{- $sortedBooks := slice }}
           {{- range $readBooks }}
