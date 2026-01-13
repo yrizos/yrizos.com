@@ -41,24 +41,46 @@
       </section>
 
       <section>
-        <h2>Favourites</h2>
+        <h2>Recommendations</h2>
         <div class="books-list">
-          {{- $readBooks := where .Site.RegularPages "Section" "books" -}}
-          {{- $readBooks = where $readBooks "File.Dir" "books/recommendations/" -}}
-          {{- $readBooks = where $readBooks "Params.date_read" "!=" "" -}}
+          {{- $allBooks := where .Site.RegularPages "Section" "books" -}}
+          {{- $allBooks = where $allBooks "File.Dir" "books/recommendations/" -}}
+          {{- $allBooks = where $allBooks "Params.date_read" "!=" "" -}}
           {{- $sortedBooks := slice }}
-          {{- range $readBooks }}
-            {{- $dateStr := .Params.date_read }}
-            {{- $sortTime := time "1970-01-01" }}
-            {{- if and $dateStr (eq (len $dateStr) 10) }}
-              {{- $parsedTime := time $dateStr }}
-              {{- if $parsedTime }}
-                {{- $sortTime = $parsedTime }}
+          {{- range $allBooks }}
+            {{- $hasNonFiction := false }}
+            {{- $hasTech := false }}
+            {{- $hasGraphicNovel := false }}
+            {{- if .Params.tags }}
+              {{- range .Params.tags }}
+                {{- if eq . "non-fiction" }}
+                  {{- $hasNonFiction = true }}
+                {{- end }}
+                {{- if eq . "tech" }}
+                  {{- $hasTech = true }}
+                {{- end }}
+                {{- if eq . "graphic-novel" }}
+                  {{- $hasGraphicNovel = true }}
+                {{- end }}
               {{- end }}
             {{- end }}
-            {{- $sortedBooks = $sortedBooks | append (dict "page" . "sortTime" $sortTime) }}
+            {{- $sortKey := "" }}
+            {{- if $hasNonFiction }}
+              {{- $sortKey = "1" }}
+            {{- else }}
+              {{- $sortKey = "2" }}
+            {{- end }}
+            {{- if $hasTech }}
+              {{- $sortKey = printf "%s-0" $sortKey }}
+            {{- else if $hasGraphicNovel }}
+              {{- $sortKey = printf "%s-9" $sortKey }}
+            {{- else }}
+              {{- $sortKey = printf "%s-5" $sortKey }}
+            {{- end }}
+            {{- $sortKey = printf "%s-%s" $sortKey .Title }}
+            {{- $sortedBooks = $sortedBooks | append (dict "page" . "sortKey" $sortKey) }}
           {{- end }}
-          {{- $sortedBooks = sort $sortedBooks "sortTime" "desc" }}
+          {{- $sortedBooks = sort $sortedBooks "sortKey" "asc" }}
           {{- range $sortedBooks }}
           {{- if .page.Params.goodreads_url }}
           <div class="book-item" itemscope itemtype="https://schema.org/Book">
