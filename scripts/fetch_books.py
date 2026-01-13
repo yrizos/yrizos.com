@@ -236,6 +236,17 @@ def determine_image_filename(slug: str, image_url: str) -> str:
 
 def process_book(book: Book) -> bool:
     """Process a single book: download image and create content file."""
+    # Check if book with same book_id already exists
+    if BOOKS_DIR.exists():
+        for existing_file in BOOKS_DIR.glob("*.md"):
+            try:
+                content = existing_file.read_text(encoding="utf-8")
+                book_id_match = re.search(r'book_id\s*=\s*"([^"]+)"', content)
+                if book_id_match and book_id_match.group(1) == book.book_id:
+                    return False  # Book already exists
+            except Exception:
+                continue
+    
     book_file = BOOKS_DIR / f"{book.slug}.md"
     
     if book_file.exists():
@@ -305,6 +316,66 @@ def remove_skipped_books() -> None:
         print(f"Removed {removed_count} books from skip list.")
 
 
+def remove_duplicate_books() -> None:
+    """Remove duplicate books that have the same book_id."""
+    if not BOOKS_DIR.exists():
+        return
+
+    # Group books by book_id, storing file path and content
+    books_by_id: dict[str, list[tuple[pathlib.Path, str]]] = {}
+    
+    for book_file in BOOKS_DIR.glob("*.md"):
+        try:
+            content = book_file.read_text(encoding="utf-8")
+            book_id_match = re.search(r'book_id\s*=\s*"([^"]+)"', content)
+            if book_id_match:
+                book_id = book_id_match.group(1)
+                if book_id not in books_by_id:
+                    books_by_id[book_id] = []
+                books_by_id[book_id].append((book_file, content))
+        except Exception as err:
+            print(f"Error checking {book_file.name}: {err}")
+            continue
+
+    removed_count = 0
+    for book_id, file_data in books_by_id.items():
+        if len(file_data) > 1:
+            # Sort by content length (longer usually means more complete title with series info)
+            file_data.sort(key=lambda x: len(x[1]), reverse=True)
+            
+            # Keep the first one (longest content)
+            keep_file, keep_content = file_data[0]
+            
+            # Get the image path from the file we're keeping
+            keep_image_match = re.search(r'image\s*=\s*"([^"]+)"', keep_content)
+            keep_image_name = None
+            if keep_image_match:
+                keep_image_path = keep_image_match.group(1)
+                keep_image_name = pathlib.Path(keep_image_path).name
+            
+            for duplicate_file, duplicate_content in file_data[1:]:
+                try:
+                    # Get image path before removing file
+                    image_match = re.search(r'image\s*=\s*"([^"]+)"', duplicate_content)
+                    if image_match:
+                        image_path = image_match.group(1)
+                        image_file = IMAGES_DIR / pathlib.Path(image_path).name
+                        # Only remove image if it's different from the one we're keeping
+                        if image_file.exists() and image_file.name != keep_image_name:
+                            image_file.unlink()
+                    
+                    # Remove the duplicate file
+                    duplicate_file.unlink()
+                    removed_count += 1
+                    print(f"Removed duplicate: {duplicate_file.stem} (same book_id as {keep_file.stem})")
+                except Exception as err:
+                    print(f"Error removing duplicate {duplicate_file.name}: {err}")
+                    continue
+
+    if removed_count > 0:
+        print(f"Removed {removed_count} duplicate books.")
+
+
 def remove_books_not_in_feed(feed_book_ids: set[str]) -> None:
     """Remove existing books that are not in the feed."""
     if not BOOKS_DIR.exists():
@@ -343,6 +414,7 @@ def main() -> None:
     print("Fetching favorite books from Goodreads...")
 
     remove_skipped_books()
+    remove_duplicate_books()
 
     books = fetch_goodreads_books()
 
