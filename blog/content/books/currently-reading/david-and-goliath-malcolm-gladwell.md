@@ -6,5 +6,6 @@ goodreads_url = "https://www.goodreads.com/review/show/8223645015"
 book_id = "22433143"
 isbn = "0241959594"
 image = "images/books/currently-reading/david-and-goliath-malcolm-gladwell.jpg"
+date = "2026-01-13"
 +++
 

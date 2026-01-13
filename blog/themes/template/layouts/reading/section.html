@@ -8,6 +8,8 @@
         <div class="books-list">
           {{- $currentlyReading := where .Site.RegularPages "Section" "books" -}}
           {{- $currentlyReading = where $currentlyReading "File.Dir" "books/currently-reading/" -}}
+          {{- $currentlyReading = sort $currentlyReading "Date" "desc" -}}
+          {{- $currentlyReading = first 5 $currentlyReading -}}
           {{- range $currentlyReading }}
           {{- if .Params.goodreads_url }}
           <div class="book-item" itemscope itemtype="https://schema.org/Book">

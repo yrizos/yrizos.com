@@ -28,6 +28,7 @@ class Book:
     book_id: str
     isbn: str
     image_url: Optional[str] = None
+    date_added: Optional[str] = None
 
 
 def slugify(text: str) -> str:
@@ -156,6 +157,10 @@ def build_front_matter(book: Book, image_path: str) -> str:
         "image": image_path,
     }
 
+    # Add date if available
+    if book.date_added:
+        fields["date"] = book.date_added
+
     lines = ["+++"]
     for key, value in fields.items():
         lines.append(f"{key} = {to_toml_value(value)}")
@@ -195,6 +200,18 @@ def fetch_goodreads_books() -> List[Book]:
                               "") or entry.get("book_image_url", "")
         image_url = image_url.strip() if image_url else None
 
+        # Get date from RSS entry (when added to currently-reading shelf)
+        date_added = None
+        date_added_raw = entry.get("user_date_added", "").strip()
+        if date_added_raw:
+            try:
+                from datetime import datetime
+                dt = datetime.strptime(
+                    date_added_raw, "%a, %d %b %Y %H:%M:%S %z")
+                date_added = dt.strftime("%Y-%m-%d")
+            except (ValueError, AttributeError):
+                pass
+
         slug = slugify(f"{title}-{author}")
 
         books.append(Book(
@@ -205,6 +222,7 @@ def fetch_goodreads_books() -> List[Book]:
             book_id=book_id,
             isbn=isbn,
             image_url=image_url,
+            date_added=date_added,
         ))
 
     return books
@@ -297,8 +315,9 @@ def remove_books_not_in_feed(books_in_feed: List[Book]) -> None:
                 if book_id not in keep_book_ids:
                     # Get title for logging
                     title_match = re.search(r'title\s*=\s*"([^"]+)"', content)
-                    title = title_match.group(1) if title_match else book_file.stem
-                    
+                    title = title_match.group(
+                        1) if title_match else book_file.stem
+
                     book_file.unlink()
                     image_match = re.search(r'image\s*=\s*"([^"]+)"', content)
                     if image_match:
