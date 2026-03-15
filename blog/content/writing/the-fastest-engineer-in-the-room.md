@@ -9,25 +9,25 @@ imageAlt = "A large tornado tears through the centre of the scene, scattering de
 tags = ["engineering-leadership", "software-design", "software-architecture", "technical-debt"]
 +++
 
-A colleague mentioned the **tactical tornado** the other day. The phrase landed in a way it hadn’t in years, and I found myself back in two places at once: the pages of John Ousterhout’s [*A Philosophy of Software Design*](https://www.amazon.com/Philosophy-Software-Design-2nd/dp/173210221X), which I read back in 2021, and a meeting room where someone was asking me, as diplomatically as they could, to please slow down.
+A colleague mentioned the **tactical tornado** the other day. The phrase landed in a way it hadn’t in years, and I found myself back in two places at once: the pages of John Ousterhout’s [*A Philosophy of Software Design*](https://www.amazon.com/Philosophy-Software-Design-2nd/dp/173210221X), and a meeting room where someone was asking me, as diplomatically as they could, to please slow down.
 
 I have… opinions about the book. Some of its prescriptions feel too neat for the messy reality of production systems. But the tactical tornado was a direct hit. Ousterhout named something I had seen repeatedly but never had a clean language for.
 
-And more uncomfortably, he named something I had *been*.
+And more uncomfortably, he named something I had been.
 
-## What Ousterhout Named
+## Visible Output Wins
 
-Ousterhout’s central thesis is that complexity is the root problem of software, and that it accumulates incrementally. Nobody decides to build a complex system. It emerges through hundreds of small decisions, each one seemingly harmless, each one adding a thin layer of friction that the next developer will have to work through.
+Ousterhout’s central thesis is that complexity is the root problem of software and that it accumulates incrementally. Nobody decides to build a complex system. It emerges from hundreds of small decisions, each seemingly harmless, each adding a thin layer of friction that the next developer will have to work through.
 
 The tactical tornado is the human embodiment of this accumulation: someone who makes those small decisions faster than anyone else, and always in the direction of more complexity.
 
-His distinction between tactical and strategic programming provides the framework. Tactical programming optimizes for the next feature, the next fix, the next thing that needs to ship. Strategic programming treats working code as necessary but insufficient; the real goal is a great design that also happens to work. The tornado is the extreme case of the tactical mindset: zero investment in design, maximum visible output, and a trail of shallow modules left behind for others to navigate.
+Ousterhout draws a distinction between tactical and strategic programming. Tactical optimizes for the next feature, the next fix, the next thing that needs to ship. Strategic treats working code as necessary but insufficient; the real goal is a great design that also happens to work. The tornado is the extreme case of the tactical mindset: zero investment in design, maximum visible output, and a trail of shallow abstractions left behind for others to navigate.
 
-The sharpest observation in that chapter is the social one. Tactical tornadoes often get praised and promoted because their output is visible and their damage is not. The engineers who clean up after them appear to be making slower progress by comparison.
+Tactical tornadoes often get praised and promoted because their output is visible and their damage is not. The engineers who clean up after them appear to be making slower progress by comparison. This is how the incentive structure ends up working against the people doing the harder, more valuable work.
 
-The incentive structure works against the people doing the harder, more valuable work. It does so reliably enough that you can predict the outcome: the tornado rises, the maintainers burn out, and the codebase degrades.
+It does so reliably enough that you can predict the outcome: the tornado rises, the maintainers burn out, and the codebase degrades.
 
-## The Recovering Tornado
+## Built for the System
 
 As I have already mentioned, I’m not writing this from the outside.
 
@@ -39,13 +39,13 @@ That feeling is what makes the tactical tornado so difficult to correct. The spe
 
 I am not alone in this recognition. In an [SE Radio interview](https://se-radio.net/2022/07/episode-520-john-ousterhout-on-a-philosophy-of-software-design/), Jeff Doolittle told Ousterhout that there is a whole unnamed category of *recovering tactical tornadoes*, people who were never acting out of malice but responding to the incentives around them.
 
-Ousterhout seemed to agree and pointed to a part of his framework that deserves more attention than it gets.
+That framing matters.
 
 The tornado is not a villain. They are often the person most adapted to survive in the system they are in.
 
 If you treat the tornado as a character flaw, the solution is coaching or removal. If you treat it as a system outcome, the solution is to redesign the incentives. Both may be necessary, but only the second one prevents the next tornado from forming.
 
-## What Nobody Talks About
+## Deeper Than Code
 
 Most commentary on the tactical tornado stays at the level of code quality. The tornado writes messy code, others clean it up, and complexity grows. That framing is accurate but incomplete, because it misses the organizational dimension entirely.
 
@@ -59,13 +59,13 @@ Even after the tornado moves on, or slows down, or gets promoted out of the code
 
 That is what makes the tornado problem an architectural problem, not just a code quality problem. The damage is sociotechnical. Refactoring the code is necessary but insufficient. You also have to refactor the team’s relationship to the code, which is a much harder and longer process.
 
-Code can be rewritten in a quarter. Organizational scar tissue takes years to heal, if it heals at all.
+Code can be rewritten in a quarter. Organizational scar tissue takes years to heal.
 
 The effect is, of course, amplified when the tornado is also a senior engineer or a team lead. Their design decisions carry organizational weight. Their module boundaries become team boundaries. Their shortcuts become conventions. The system calcifies around their tactical choices, and what started as one person’s speed becomes the entire organization’s constraint.
 
 The tactical tornado is not just a complexity accelerator. They are an organizational architect, designing the team’s communication structure without realizing it, and without anyone reviewing the design.
 
-## The New Tornado
+## Mess, Accelerated
 
 All this was already true long before augmented coding entered the room. What AI adds to the mess is scale.
 
@@ -83,7 +83,7 @@ The Conway’s Law dimension makes this exponentially worse. If AI-generated cod
 
 We are not just scaling the tornado’s code output. We are scaling the organizational distortion that follows it.
 
-## Speed Has Its Place
+## Speed Is a Choice
 
 Having been the tornado myself, I can deliver this counterargument without hedging.
 
@@ -99,9 +99,7 @@ The tornado invests zero. They are not failing to invest. They are *actively div
 
 The question every team should ask is not whether they have a tactical tornado. It is whether their incentive structure would produce one.
 
-## The Meeting
-
-I started this article with a colleague’s mention and a memory. I want to end with the memory, because it carries the part of the argument that the framework cannot.
+## Listen to the Room
 
 Being asked to slow down did not feel like a gift at the time. It felt like a misunderstanding. I was producing more than anyone around me. The metrics confirmed it. The feedback from stakeholders confirmed it. The only people who seemed unhappy were the engineers working alongside me, and I could not yet see that their unhappiness was the most important signal in the room.
 

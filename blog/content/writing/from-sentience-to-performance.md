@@ -9,7 +9,7 @@ imageAlt = "Abstract painted figure transitioning from human-like form seeking r
 tags = ["star-trek", "artificial-intelligence"]
 +++
 
-I had a bit of time between Christmas and New Year’s, and I watched a few _Star Trek: The Next Generation_ episodes. And by a few, I mean more than I’m comfortable admitting. I hadn’t watched TNG since before the generative AI wave, and something about Data felt different. Not the character himself, but the questions he represented.
+I had a bit of time between Christmas and New Year’s, and I watched a few *Star Trek: The Next Generation* episodes. And by a few, I mean more than I’m comfortable admitting. I hadn’t watched TNG since before the generative AI wave, and something about Data felt different. Not the character himself, but the questions he represented.
 
 Data spent seven seasons pursuing what seemed like a central question: could a machine become enough like us to count as one of us? He painted. He composed music. He kept a cat. He formed friendships and tried to understand humor. The show treated his journey toward humanity as the natural arc of advanced AI. If you built something intelligent enough, it would want to be human, and we would need to decide whether to accept it as such.
 
@@ -19,19 +19,19 @@ Watching those episodes now, that entire framing feels like archaeology. We buil
 
 When I was a kid, Data was how I thought about AI. Not because the show predicted neural networks or anything that technical. He just made the whole thing feel concrete. An android smart enough to serve on a starship bridge would naturally want recognition as a person. The show never questioned this premise. Neither did I.
 
-Another favourite, Isaac Asimov’s “_The Bicentennial Man,_” operated from the same assumption, only more explicitly. Andrew Martin starts as a household robot, a roomba on steroids, who discovers creativity and the desire for recognition. He spends decades pursuing legal status as a human being, accepting mortality so society will finally see him as a man rather than property. The story culminates in his death being recognized as the death of a person, not the deactivation of a machine. Both stories treat capability as the prelude and recognition as the inevitable fight. Intelligence implies personhood. Personhood requires the desire to belong.
+Another favourite, Isaac Asimov’s “*The Bicentennial Man,*” operated from the same assumption, only more explicitly. Andrew Martin starts as a household robot, a roomba on steroids, who discovers creativity and the desire for recognition. He spends decades pursuing legal status as a human being, accepting mortality so society will finally see him as a man rather than property. The story culminates in his death being recognized as the death of a person, not the deactivation of a machine. Both stories treat capability as the prelude and recognition as the inevitable fight. Intelligence implies personhood. Personhood requires the desire to belong.
 
 The logic seemed airtight. Once that premise is accepted, the rest follows. Building sufficiently advanced AI would force us to answer hard questions. Does consciousness emerge from complexity? What separates persons from sophisticated tools? Data serving on a starship bridge meant confronting those questions. Andrew cleaning a household meant the same thing. The technical problems would get solved, and then the real challenge would begin.
 
 ## **A Test for Thinking Machines**
 
-Alan Turing gave us one answer to that recognition problem. His 1950 paper “_Computing Machinery and Intelligence_” proposed a deceptively simple test: if a machine could participate in a conversation well enough that a human observer couldn’t reliably distinguish its responses from those of another human, we should grant that the machine was thinking. The elegance of the Turing Test was in sidestepping metaphysics entirely. Instead of debating what consciousness really is, Turing suggested we could evaluate intelligence through observable behavior.
+Alan Turing gave us one answer to that recognition problem. His 1950 paper “*Computing Machinery and Intelligence*” proposed a deceptively simple test: if a machine could participate in a conversation well enough that a human observer couldn’t reliably distinguish its responses from those of another human, we should grant that the machine was thinking. The elegance of the Turing Test was in sidestepping metaphysics entirely. Instead of debating what consciousness really is, Turing suggested we could evaluate intelligence through observable behavior.
 
 The test embedded an assumption that stayed with us for decades. Human-like performance in conversation became the benchmark for intelligence. If you could fool someone into thinking you were human, you had crossed a threshold that mattered. The test didn’t require the machine to want anything or feel anything. It just needed to produce the right outputs in the right context. But it still pointed toward human-like interaction as the thing worth measuring.
 
 ## **When Performance Became Enough**
 
-I remember when Deep Blue beat Kasparov in 1997. It felt like a threshold moment. _A machine had beaten the best human player_. When that happened, it should have triggered the questions that Data and Andrew made central. Did Deep Blue want to win? Did it experience satisfaction? Should we care?
+I remember when Deep Blue beat Kasparov in 1997. It felt like a threshold moment. *A machine had beaten the best human player*. When that happened, it should have triggered the questions that Data and Andrew made central. Did Deep Blue want to win? Did it experience satisfaction? Should we care?
 
 Nobody seriously argued it should be treated as a person. The machine beat the world’s best human player, but no one suggested it deserved rights or recognition. Deep Blue did something useful. That was enough. The reaction was scoreboard-based. The system didn’t need to present as a mind. It needed to win. The evaluation harness was performance, not personhood.
 
@@ -63,6 +63,4 @@ Data wanted to be human. We built tools that perform tasks.
 
 Only one of those futures shipped.
 
----
-
-PS: If you haven’t seen TNG and want somewhere to start, I’d wholeheartedly recommend Season 2, Episode 9, _The Measure of a Man_.
+PS: If you haven’t seen TNG and want somewhere to start, I’d wholeheartedly recommend Season 2, Episode 9, *The Measure of a Man*.
