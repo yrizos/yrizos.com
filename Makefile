@@ -50,6 +50,7 @@ help:
 	@echo "  fetch-books      - Fetch favorite books from Goodreads RSS"
 	@echo "  fetch-reading    - Fetch currently-reading books from Goodreads"
 	@echo "  pdf-to-images    - Convert PDF slides to images"
+	@echo "  test             - Run Python tests"
 	@echo ""
 	@echo "$(BOLD)Parameters:$(RESET)"
 	@echo "  $(YELLOW)PORT=8080$(RESET)        - Change server port (default: 1313)"
@@ -145,3 +146,6 @@ pdf-to-images: python-build
 	fi
 	$(PYTHON_RUN) python scripts/pdf_to_images.py $(PDF)
 
+.PHONY: test
+test: python-build
+	docker run --rm -v $(PWD):/app -w /app $(PYTHON_IMAGE) python -m pytest tests/

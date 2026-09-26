@@ -12,8 +12,41 @@ from datetime import datetime
 
 GOODREADS_FEED = "https://www.goodreads.com/review/list_rss/68793210?key=Q5sTrEOdYsUhUSrXK0J7wg9adkkcAuTFlIKN8-TetPnEWK2-&shelf=favorites"
 
-SKIP_BOOK_IDS = {"29630264", "40186304", "32855235", "7930361160", "216017751", "41832736", "16146899", "46184813", "64238935", "5973243", "6416196", "17340660", "60233239", "36223859", "57987464", "8176978",
-                 "36844711", "56377548", "8442726", "6567483", "56791389", "126917757", "6488124", "52949193", "18938240", "20572455", "8123311", "6219313", "62193738", "40053399", "43812338", "34810395", "40396699"}
+SKIP_BOOK_IDS = {
+    "29630264",
+    "40186304",
+    "32855235",
+    "7930361160",
+    "216017751",
+    "41832736",
+    "16146899",
+    "46184813",
+    "64238935",
+    "5973243",
+    "6416196",
+    "17340660",
+    "60233239",
+    "36223859",
+    "57987464",
+    "8176978",
+    "36844711",
+    "56377548",
+    "8442726",
+    "6567483",
+    "56791389",
+    "126917757",
+    "6488124",
+    "52949193",
+    "18938240",
+    "20572455",
+    "8123311",
+    "6219313",
+    "62193738",
+    "40053399",
+    "43812338",
+    "34810395",
+    "40396699",
+}
 
 ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 BLOG_DIR = ROOT_DIR / "blog"
@@ -38,13 +71,15 @@ class Book:
 def slugify(text: str) -> str:
     """Convert text to a filesystem-friendly slug."""
     slug = text.lower()
-    slug = re.sub(r'[^\w\s-]', '', slug)
-    slug = re.sub(r'[-\s]+', '-', slug)
-    slug = slug.strip('-')
+    slug = re.sub(r"[^\w\s-]", "", slug)
+    slug = re.sub(r"[-\s]+", "-", slug)
+    slug = slug.strip("-")
     return slug
 
 
-def get_image_url_from_sources(book_id: str, isbn: str, title: str, author: str) -> Optional[str]:
+def get_image_url_from_sources(
+    book_id: str, isbn: str, title: str, author: str
+) -> Optional[str]:
     """Try multiple sources to get book cover image URL."""
     if isbn:
         isbn_clean = isbn.strip()
@@ -61,13 +96,16 @@ def get_image_url_from_sources(book_id: str, isbn: str, title: str, author: str)
         isbn_clean = isbn.strip()
         if isbn_clean and len(isbn_clean) >= 10:
             try:
-                google_url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn_clean}"
+                google_url = (
+                    f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn_clean}"
+                )
                 response = requests.get(google_url, timeout=5)
                 if response.status_code == 200:
                     data = response.json()
                     if data.get("items") and len(data["items"]) > 0:
-                        image_links = data["items"][0].get(
-                            "volumeInfo", {}).get("imageLinks", {})
+                        image_links = (
+                            data["items"][0].get("volumeInfo", {}).get("imageLinks", {})
+                        )
                         if image_links.get("extraLarge"):
                             return image_links.get("extraLarge")
                         if image_links.get("large"):
@@ -83,8 +121,9 @@ def get_image_url_from_sources(book_id: str, isbn: str, title: str, author: str)
             if response.status_code == 200:
                 data = response.json()
                 if data.get("items") and len(data["items"]) > 0:
-                    image_links = data["items"][0].get(
-                        "volumeInfo", {}).get("imageLinks", {})
+                    image_links = (
+                        data["items"][0].get("volumeInfo", {}).get("imageLinks", {})
+                    )
                     if image_links.get("extraLarge"):
                         return image_links.get("extraLarge")
                     if image_links.get("large"):
@@ -142,7 +181,7 @@ def build_front_matter(book: Book, image_path: str) -> str:
         "rating": book.rating,
         "image": image_path,
     }
-    
+
     # Only include date_read if it has a value
     if book.date_read:
         fields["date_read"] = book.date_read
@@ -183,25 +222,27 @@ def fetch_goodreads_books() -> List[Book]:
         if goodreads_url:
             if "?utm_medium=api&utm_source=rss" in goodreads_url:
                 goodreads_url = goodreads_url.replace(
-                    "?utm_medium=api&utm_source=rss", "")
+                    "?utm_medium=api&utm_source=rss", ""
+                )
             elif "&utm_medium=api&utm_source=rss" in goodreads_url:
                 goodreads_url = goodreads_url.replace(
-                    "&utm_medium=api&utm_source=rss", "")
+                    "&utm_medium=api&utm_source=rss", ""
+                )
 
         # Only use user_read_at, not user_date_added (which is when added to favorites)
         date_read_raw = entry.get("user_read_at", "").strip()
         date_read = ""
         if date_read_raw:
             try:
-                dt = datetime.strptime(
-                    date_read_raw, "%a, %d %b %Y %H:%M:%S %z")
+                dt = datetime.strptime(date_read_raw, "%a, %d %b %Y %H:%M:%S %z")
                 date_read = dt.strftime("%Y-%m-%d")
             except (ValueError, AttributeError):
                 # If parsing fails, keep original
                 date_read = date_read_raw
 
-        image_url = entry.get("book_large_image_url",
-                              "") or entry.get("book_image_url", "")
+        image_url = entry.get("book_large_image_url", "") or entry.get(
+            "book_image_url", ""
+        )
         image_url = image_url.strip() if image_url else None
 
         # Extract tags from user_shelves
@@ -218,18 +259,20 @@ def fetch_goodreads_books() -> List[Book]:
 
         slug = slugify(f"{title}-{author}")
 
-        books.append(Book(
-            title=title,
-            author=author,
-            slug=slug,
-            goodreads_url=goodreads_url,
-            book_id=book_id,
-            isbn=isbn,
-            rating=rating,
-            date_read=date_read,
-            image_url=image_url,
-            tags=tags,
-        ))
+        books.append(
+            Book(
+                title=title,
+                author=author,
+                slug=slug,
+                goodreads_url=goodreads_url,
+                book_id=book_id,
+                isbn=isbn,
+                rating=rating,
+                date_read=date_read,
+                image_url=image_url,
+                tags=tags,
+            )
+        )
 
     return books
 
@@ -237,10 +280,12 @@ def fetch_goodreads_books() -> List[Book]:
 def download_image(url: str, destination: pathlib.Path) -> None:
     """Download image from URL."""
     session = requests.Session()
-    session.headers.update({
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-    })
+    session.headers.update(
+        {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        }
+    )
 
     if "goodreads.com" in url or "gr-assets.com" in url:
         session.headers["Referer"] = "https://www.goodreads.com/"
@@ -262,16 +307,16 @@ def determine_image_filename(slug: str, image_url: str) -> str:
 
 def process_book(book: Book) -> tuple[bool, str]:
     """Process a single book: download image and create content file, or update existing.
-    
+
     Returns:
         tuple[bool, str]: (success, action) where action is "created", "updated", or "skipped"
     """
     BOOKS_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     # Find existing book by book_id
     existing_file = None
     existing_image_path = None
-    
+
     if BOOKS_DIR.exists():
         for book_file in BOOKS_DIR.glob("*.md"):
             try:
@@ -297,28 +342,29 @@ def process_book(book: Book) -> tuple[bool, str]:
             image_url = book.image_url
             if not image_url:
                 image_url = get_image_url_from_sources(
-                    book.book_id, book.isbn, book.title, book.author)
-            
+                    book.book_id, book.isbn, book.title, book.author
+                )
+
             if image_url:
                 image_filename = determine_image_filename(book.slug, image_url)
                 image_path_local = IMAGES_DIR / image_filename
-                
+
                 if not image_path_local.exists():
                     try:
                         download_image(image_url, image_path_local)
                     except Exception as err:
                         print(f"Failed to download image for '{book.title}': {err}")
                         return False, "skipped"
-                
+
                 image_path_relative = f"images/books/recommendations/{image_filename}"
             else:
                 # No image available, skip update
                 print(f"Skipping update for '{book.title}' - no image available")
                 return False, "skipped"
-        
+
         front_matter = build_front_matter(book, image_path_relative)
         content = f"{front_matter}\n\n"
-        
+
         existing_file.write_text(content, encoding="utf-8")
         print(f"Updated: {book.title}")
         return True, "updated"
@@ -329,7 +375,8 @@ def process_book(book: Book) -> tuple[bool, str]:
     # If no image from RSS, try alternative sources
     if not image_url:
         image_url = get_image_url_from_sources(
-            book.book_id, book.isbn, book.title, book.author)
+            book.book_id, book.isbn, book.title, book.author
+        )
 
     if not image_url:
         print(f"Skipping '{book.title}' - no image available")
@@ -419,8 +466,7 @@ def remove_duplicate_books() -> None:
             keep_file, keep_content = file_data[0]
 
             # Get the image path from the file we're keeping
-            keep_image_match = re.search(
-                r'image\s*=\s*"([^"]+)"', keep_content)
+            keep_image_match = re.search(r'image\s*=\s*"([^"]+)"', keep_content)
             keep_image_name = None
             if keep_image_match:
                 keep_image_path = keep_image_match.group(1)
@@ -429,8 +475,7 @@ def remove_duplicate_books() -> None:
             for duplicate_file, duplicate_content in file_data[1:]:
                 try:
                     # Get image path before removing file
-                    image_match = re.search(
-                        r'image\s*=\s*"([^"]+)"', duplicate_content)
+                    image_match = re.search(r'image\s*=\s*"([^"]+)"', duplicate_content)
                     if image_match:
                         image_path = image_match.group(1)
                         image_file = IMAGES_DIR / pathlib.Path(image_path).name
@@ -442,10 +487,10 @@ def remove_duplicate_books() -> None:
                     duplicate_file.unlink()
                     removed_count += 1
                     print(
-                        f"Removed duplicate: {duplicate_file.stem} (same book_id as {keep_file.stem})")
+                        f"Removed duplicate: {duplicate_file.stem} (same book_id as {keep_file.stem})"
+                    )
                 except Exception as err:
-                    print(
-                        f"Error removing duplicate {duplicate_file.name}: {err}")
+                    print(f"Error removing duplicate {duplicate_file.name}: {err}")
                     continue
 
     if removed_count > 0:
@@ -503,7 +548,7 @@ def main() -> None:
     print(f"Found {len(books)} favorite books in feed.")
 
     feed_book_ids = {book.book_id for book in books}
-    
+
     remove_books_not_in_feed(feed_book_ids)
 
     created_count = 0
@@ -520,7 +565,9 @@ def main() -> None:
         else:
             skipped_count += 1
 
-    print(f"\nCreated: {created_count}, Updated: {updated_count}, Skipped: {skipped_count}")
+    print(
+        f"\nCreated: {created_count}, Updated: {updated_count}, Skipped: {skipped_count}"
+    )
 
 
 if __name__ == "__main__":

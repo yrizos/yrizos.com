@@ -15,12 +15,14 @@ from rich.theme import Theme
 from .blog_post import BlogPost
 from .cli import clean_url, parse_publish_date, slugify
 
-console = Console(theme=Theme(
-    {"prompt": "bold cyan", "choice": "bold green", "error": "bold red"}))
+console = Console(
+    theme=Theme({"prompt": "bold cyan", "choice": "bold green", "error": "bold red"})
+)
 
 ORIGINAL_LINE_PATTERN = re.compile(r"Originally published at", re.IGNORECASE)
 ORIGINAL_DATE_PATTERN = re.compile(
-    r"on\s+([A-Za-z]+\s+\d{1,2},\s+\d{4})", re.IGNORECASE)
+    r"on\s+([A-Za-z]+\s+\d{1,2},\s+\d{4})", re.IGNORECASE
+)
 TRACKING_IMAGE_PATTERNS = [
     re.compile(r"medium\.com/_/stat", re.IGNORECASE),
 ]
@@ -58,7 +60,9 @@ def pop_first_image(soup: BeautifulSoup) -> Tuple[Optional[str], str]:
     return None, ""
 
 
-def extract_original_metadata(soup: BeautifulSoup) -> Tuple[Optional[str], Optional[datetime]]:
+def extract_original_metadata(
+    soup: BeautifulSoup,
+) -> Tuple[Optional[str], Optional[datetime]]:
     """Extract original publication URL and date from the article body."""
     for element in soup.find_all(["p", "div", "section"]):
         text = element.get_text(separator=" ", strip=True)
@@ -72,8 +76,9 @@ def extract_original_metadata(soup: BeautifulSoup) -> Tuple[Optional[str], Optio
             if date_match:
                 date_str = date_match.group(1)
                 try:
-                    parsed_date = datetime.strptime(
-                        date_str, "%B %d, %Y").replace(tzinfo=timezone.utc)
+                    parsed_date = datetime.strptime(date_str, "%B %d, %Y").replace(
+                        tzinfo=timezone.utc
+                    )
                 except ValueError:
                     parsed_date = None
             element.decompose()
@@ -103,8 +108,7 @@ def extract_tags(entry) -> List[str]:
     tags: List[str] = []
     seen = set()
     for tag in entry.get("tags", []):
-        term = tag.get("term") if isinstance(
-            tag, dict) else getattr(tag, "term", None)
+        term = tag.get("term") if isinstance(tag, dict) else getattr(tag, "term", None)
         if not term:
             continue
         normalized = str(term).strip()
@@ -119,8 +123,7 @@ def fetch_medium_posts(feed_url: str) -> List[BlogPost]:
     """Fetch Medium posts using the RSS feed."""
     parsed = feedparser.parse(feed_url)
     if parsed.bozo:
-        raise ValueError(
-            f"Failed to parse Medium feed: {parsed.bozo_exception}")
+        raise ValueError(f"Failed to parse Medium feed: {parsed.bozo_exception}")
 
     posts: List[BlogPost] = []
     for entry in parsed.entries:
@@ -132,8 +135,7 @@ def fetch_medium_posts(feed_url: str) -> List[BlogPost]:
         try:
             posts.append(parse_medium_entry(entry))
         except ValueError as err:
-            console.print(
-                f"Skipping Medium entry '{title}': {err}", style="error")
+            console.print(f"Skipping Medium entry '{title}': {err}", style="error")
     return posts
 
 
@@ -142,8 +144,7 @@ def parse_medium_entry(entry) -> BlogPost:
     title: str = entry.title
     slug = slugify(title)
 
-    published = parse_publish_date(
-        entry.get("published"), entry.get("updated"), title)
+    published = parse_publish_date(entry.get("published"), entry.get("updated"), title)
 
     content_html: Optional[str] = None
     if entry.get("content"):

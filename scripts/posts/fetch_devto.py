@@ -11,8 +11,9 @@ from rich.theme import Theme
 from .blog_post import BlogPost
 from .cli import clean_url, parse_publish_date, slugify
 
-console = Console(theme=Theme(
-    {"prompt": "bold cyan", "choice": "bold green", "error": "bold red"}))
+console = Console(
+    theme=Theme({"prompt": "bold cyan", "choice": "bold green", "error": "bold red"})
+)
 
 DEVTO_SKIP_SLUGS = {"building-a-chess-game-with-python-and-openai-3knn"}
 
@@ -49,13 +50,16 @@ def fetch_series_title(username: str, collection_id: int) -> Optional[str]:
         # Extract title from HTML <title> tag
         import re
         import html
-        match = re.search(r'<title>(.+?)</title>', response.text)
+
+        match = re.search(r"<title>(.+?)</title>", response.text)
         if match:
             title = match.group(1)
             # Decode HTML entities (e.g., &#39; -> ')
             title = html.unescape(title)
             # Remove "Series' Articles - DEV Community" suffix (handles ' or &#39;)
-            title = re.sub(r"\s+Series['\u2019]?\s+Articles\s*-\s*DEV Community.*$", "", title)
+            title = re.sub(
+                r"\s+Series['\u2019]?\s+Articles\s*-\s*DEV Community.*$", "", title
+            )
             return title.strip()
     except Exception:
         # If we can't fetch series title, just return None
@@ -63,7 +67,9 @@ def fetch_series_title(username: str, collection_id: int) -> Optional[str]:
     return None
 
 
-def calculate_series_order(username: str, collection_id: int, article_id: int) -> Optional[int]:
+def calculate_series_order(
+    username: str, collection_id: int, article_id: int
+) -> Optional[int]:
     """Calculate the article's position in the series based on publish date."""
     try:
         # Fetch all articles for the user
@@ -74,8 +80,7 @@ def calculate_series_order(username: str, collection_id: int, article_id: int) -
 
         # Filter articles by collection_id and sort by published_at
         series_articles = [
-            a for a in articles
-            if a.get("collection_id") == collection_id
+            a for a in articles if a.get("collection_id") == collection_id
         ]
         series_articles.sort(key=lambda x: x.get("published_at", ""))
 
@@ -108,8 +113,7 @@ def extract_tags(entry) -> List[str]:
     tags: List[str] = []
     seen = set()
     for tag in entry.get("tags", []):
-        term = tag.get("term") if isinstance(
-            tag, dict) else getattr(tag, "term", None)
+        term = tag.get("term") if isinstance(tag, dict) else getattr(tag, "term", None)
         if not term:
             continue
         normalized = str(term).strip()
@@ -124,8 +128,7 @@ def fetch_devto_posts(feed_url: str) -> List[BlogPost]:
     """Fetch Dev.to posts using the RSS feed."""
     parsed = feedparser.parse(feed_url)
     if parsed.bozo:
-        raise ValueError(
-            f"Failed to parse Dev.to feed: {parsed.bozo_exception}")
+        raise ValueError(f"Failed to parse Dev.to feed: {parsed.bozo_exception}")
 
     posts: List[BlogPost] = []
     for entry in parsed.entries:
@@ -139,8 +142,7 @@ def fetch_devto_posts(feed_url: str) -> List[BlogPost]:
         try:
             posts.append(parse_devto_entry(entry))
         except ValueError as err:
-            console.print(
-                f"Skipping Dev.to entry '{title}': {err}", style="error")
+            console.print(f"Skipping Dev.to entry '{title}': {err}", style="error")
     return posts
 
 
@@ -149,8 +151,7 @@ def parse_devto_entry(entry) -> BlogPost:
     title: str = entry.title
     slug = slugify(title)
 
-    published = parse_publish_date(
-        entry.get("published"), entry.get("updated"), title)
+    published = parse_publish_date(entry.get("published"), entry.get("updated"), title)
 
     original_url = entry.get("link") or entry.get("url")
     if not original_url:

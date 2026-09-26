@@ -34,13 +34,15 @@ class Book:
 def slugify(text: str) -> str:
     """Convert text to a filesystem-friendly slug."""
     slug = text.lower()
-    slug = re.sub(r'[^\w\s-]', '', slug)
-    slug = re.sub(r'[-\s]+', '-', slug)
-    slug = slug.strip('-')
+    slug = re.sub(r"[^\w\s-]", "", slug)
+    slug = re.sub(r"[-\s]+", "-", slug)
+    slug = slug.strip("-")
     return slug
 
 
-def get_image_url_from_sources(book_id: str, isbn: str, title: str, author: str) -> Optional[str]:
+def get_image_url_from_sources(
+    book_id: str, isbn: str, title: str, author: str
+) -> Optional[str]:
     """Try multiple sources to get book cover image URL."""
     if isbn:
         isbn_clean = isbn.strip()
@@ -57,13 +59,16 @@ def get_image_url_from_sources(book_id: str, isbn: str, title: str, author: str)
         isbn_clean = isbn.strip()
         if isbn_clean and len(isbn_clean) >= 10:
             try:
-                google_url = f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn_clean}"
+                google_url = (
+                    f"https://www.googleapis.com/books/v1/volumes?q=isbn:{isbn_clean}"
+                )
                 response = requests.get(google_url, timeout=5)
                 if response.status_code == 200:
                     data = response.json()
                     if data.get("items") and len(data["items"]) > 0:
-                        image_links = data["items"][0].get(
-                            "volumeInfo", {}).get("imageLinks", {})
+                        image_links = (
+                            data["items"][0].get("volumeInfo", {}).get("imageLinks", {})
+                        )
                         if image_links.get("extraLarge"):
                             return image_links.get("extraLarge")
                         if image_links.get("large"):
@@ -79,8 +84,9 @@ def get_image_url_from_sources(book_id: str, isbn: str, title: str, author: str)
             if response.status_code == 200:
                 data = response.json()
                 if data.get("items") and len(data["items"]) > 0:
-                    image_links = data["items"][0].get(
-                        "volumeInfo", {}).get("imageLinks", {})
+                    image_links = (
+                        data["items"][0].get("volumeInfo", {}).get("imageLinks", {})
+                    )
                     if image_links.get("extraLarge"):
                         return image_links.get("extraLarge")
                     if image_links.get("large"):
@@ -110,10 +116,12 @@ def get_image_url_from_sources(book_id: str, isbn: str, title: str, author: str)
 def download_image(url: str, destination: pathlib.Path) -> None:
     """Download image from URL."""
     session = requests.Session()
-    session.headers.update({
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-    })
+    session.headers.update(
+        {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        }
+    )
 
     if "goodreads.com" in url or "gr-assets.com" in url:
         session.headers["Referer"] = "https://www.goodreads.com/"
@@ -191,13 +199,16 @@ def fetch_goodreads_books() -> List[Book]:
         if goodreads_url:
             if "?utm_medium=api&utm_source=rss" in goodreads_url:
                 goodreads_url = goodreads_url.replace(
-                    "?utm_medium=api&utm_source=rss", "")
+                    "?utm_medium=api&utm_source=rss", ""
+                )
             elif "&utm_medium=api&utm_source=rss" in goodreads_url:
                 goodreads_url = goodreads_url.replace(
-                    "&utm_medium=api&utm_source=rss", "")
+                    "&utm_medium=api&utm_source=rss", ""
+                )
 
-        image_url = entry.get("book_large_image_url",
-                              "") or entry.get("book_image_url", "")
+        image_url = entry.get("book_large_image_url", "") or entry.get(
+            "book_image_url", ""
+        )
         image_url = image_url.strip() if image_url else None
 
         # Get date from RSS entry (when added to currently-reading shelf)
@@ -206,24 +217,26 @@ def fetch_goodreads_books() -> List[Book]:
         if date_added_raw:
             try:
                 from datetime import datetime
-                dt = datetime.strptime(
-                    date_added_raw, "%a, %d %b %Y %H:%M:%S %z")
+
+                dt = datetime.strptime(date_added_raw, "%a, %d %b %Y %H:%M:%S %z")
                 date_added = dt.strftime("%Y-%m-%d")
             except (ValueError, AttributeError):
                 pass
 
         slug = slugify(f"{title}-{author}")
 
-        books.append(Book(
-            title=title,
-            author=author,
-            slug=slug,
-            goodreads_url=goodreads_url,
-            book_id=book_id,
-            isbn=isbn,
-            image_url=image_url,
-            date_added=date_added,
-        ))
+        books.append(
+            Book(
+                title=title,
+                author=author,
+                slug=slug,
+                goodreads_url=goodreads_url,
+                book_id=book_id,
+                isbn=isbn,
+                image_url=image_url,
+                date_added=date_added,
+            )
+        )
 
     return books
 
@@ -235,7 +248,8 @@ def process_book(book: Book) -> bool:
     # If no image from RSS, try alternative sources
     if not image_url:
         image_url = get_image_url_from_sources(
-            book.book_id, book.isbn, book.title, book.author)
+            book.book_id, book.isbn, book.title, book.author
+        )
 
     if not image_url:
         print(f"Skipping '{book.title}' - no image available")
@@ -315,8 +329,7 @@ def remove_books_not_in_feed(books_in_feed: List[Book]) -> None:
                 if book_id not in keep_book_ids:
                     # Get title for logging
                     title_match = re.search(r'title\s*=\s*"([^"]+)"', content)
-                    title = title_match.group(
-                        1) if title_match else book_file.stem
+                    title = title_match.group(1) if title_match else book_file.stem
 
                     book_file.unlink()
                     image_match = re.search(r'image\s*=\s*"([^"]+)"', content)

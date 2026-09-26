@@ -14,8 +14,9 @@ from rich.theme import Theme
 
 from .blog_post import BlogPost
 
-console = Console(theme=Theme(
-    {"prompt": "bold cyan", "choice": "bold green", "error": "bold red"}))
+console = Console(
+    theme=Theme({"prompt": "bold cyan", "choice": "bold green", "error": "bold red"})
+)
 
 DEFAULT_MEDIUM_FEED = "https://medium.com/feed/@yrizos"
 DEFAULT_DEVTO_FEED = "https://dev.to/feed/yrizos"
@@ -40,7 +41,9 @@ def clean_url(url: str) -> str:
     return urlunsplit((split.scheme, split.netloc, split.path, "", ""))
 
 
-def parse_publish_date(raw_value: Optional[str], fallback: Optional[str], title: str) -> datetime:
+def parse_publish_date(
+    raw_value: Optional[str], fallback: Optional[str], title: str
+) -> datetime:
     """Parse publication date from the feed entry."""
     from datetime import timezone
     from email.utils import parsedate_to_datetime
@@ -94,14 +97,16 @@ def to_toml_value(value) -> str:
 def download_image(url: str, destination: pathlib.Path) -> None:
     """Download the image for the post."""
     session = requests.Session()
-    session.headers.update({
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
-    })
-    
+    session.headers.update(
+        {
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        }
+    )
+
     if "medium.com" in url or "cdn-images-1.medium.com" in url:
         session.headers["Referer"] = "https://medium.com/"
-    
+
     response = session.get(url, timeout=30)
     response.raise_for_status()
     destination.parent.mkdir(parents=True, exist_ok=True)
@@ -131,8 +136,7 @@ def write_post(post: BlogPost) -> None:
         image_web_path = WEB_IMAGE_PREFIX / image_filename
 
     front_matter = build_front_matter(post, image_web_path)
-    post_path.write_text(
-        f"{front_matter}\n\n{post.markdown_body}\n", encoding="utf-8")
+    post_path.write_text(f"{front_matter}\n\n{post.markdown_body}\n", encoding="utf-8")
 
 
 def prompt_for_post(post: BlogPost) -> str:
@@ -141,16 +145,18 @@ def prompt_for_post(post: BlogPost) -> str:
         f"\n[choice]{post.title}[/choice]\n  Published: {post.date.strftime('%Y-%m-%d')}\n  URL: {post.original_url}"
     )
     while True:
-        decision = console.input(
-            "[prompt]Import this post? (yes/no/exit): [/prompt]").strip().lower()
+        decision = (
+            console.input("[prompt]Import this post? (yes/no/exit): [/prompt]")
+            .strip()
+            .lower()
+        )
         if decision in {"yes", "y"}:
             return "yes"
         if decision in {"no", "n"}:
             return "no"
         if decision in {"exit", "e"}:
             return "exit"
-        console.print(
-            "Please answer with 'yes', 'no', or 'exit'.", style="error")
+        console.print("Please answer with 'yes', 'no', or 'exit'.", style="error")
 
 
 def process_posts(posts: Iterable[BlogPost]) -> None:
@@ -166,8 +172,7 @@ def process_posts(posts: Iterable[BlogPost]) -> None:
             write_post(post)
             console.print(f"[green]Saved:[/green] {post.title}")
         except Exception as err:  # noqa: BLE001
-            console.print(
-                f"Failed to save '{post.title}': {err}", style="error")
+            console.print(f"Failed to save '{post.title}': {err}", style="error")
 
 
 def run(feed_fetcher: Callable[[str], List[BlogPost]], feed_url: str) -> None:
@@ -181,21 +186,17 @@ def run(feed_fetcher: Callable[[str], List[BlogPost]], feed_url: str) -> None:
 
 def main() -> None:
     """Main CLI entry point with argparse subcommands."""
-    parser = argparse.ArgumentParser(
-        description="Fetch posts from Medium or Dev.to")
-    subparsers = parser.add_subparsers(
-        dest="source", help="Source to fetch from")
+    parser = argparse.ArgumentParser(description="Fetch posts from Medium or Dev.to")
+    subparsers = parser.add_subparsers(dest="source", help="Source to fetch from")
 
-    medium_parser = subparsers.add_parser(
-        "medium", help="Fetch posts from Medium")
+    medium_parser = subparsers.add_parser("medium", help="Fetch posts from Medium")
     medium_parser.add_argument(
         "--feed-url",
         default=DEFAULT_MEDIUM_FEED,
         help=f"Medium feed URL (default: {DEFAULT_MEDIUM_FEED})",
     )
 
-    devto_parser = subparsers.add_parser(
-        "devto", help="Fetch posts from Dev.to")
+    devto_parser = subparsers.add_parser("devto", help="Fetch posts from Dev.to")
     devto_parser.add_argument(
         "--feed-url",
         default=DEFAULT_DEVTO_FEED,
