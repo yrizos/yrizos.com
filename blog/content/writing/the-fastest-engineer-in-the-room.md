@@ -9,7 +9,7 @@ imageAlt = "A large tornado tears through the centre of the scene, scattering de
 tags = ["engineering-leadership", "software-design", "software-architecture", "technical-debt"]
 +++
 
-A colleague mentioned the **tactical tornado** the other day. The phrase landed in a way it hadn’t in years, and I found myself back in two places at once: the pages of John Ousterhout’s [_A Philosophy of Software Design_](https://www.amazon.com/Philosophy-Software-Design-2nd/dp/173210221X), and a meeting room where someone was asking me, as diplomatically as they could, to please slow down.
+A colleague mentioned the **tactical tornado** the other day. The phrase landed in a way it hadn’t in years, and I found myself back in two places at once: the pages of John Ousterhout’s [*A Philosophy of Software Design*](https://www.amazon.com/Philosophy-Software-Design-2nd/dp/173210221X), and a meeting room where someone was asking me, as diplomatically as they could, to please slow down.
 
 I have… opinions about the book. Some of its prescriptions feel too neat for the messy reality of production systems. But the tactical tornado was a direct hit. Ousterhout named something I had seen repeatedly but never had a clean language for.
 
@@ -37,7 +37,7 @@ At the time, I understood the feedback intellectually while feeling, somewhere d
 
 That feeling is what makes the tactical tornado so difficult to correct. The speed is real. The output is real. The praise is real. The damage is real, too, but it is distributed across other people’s schedules, other people’s frustration, and future sprints that haven’t happened yet. The feedback loop that would correct the behaviour is delayed long enough that the behaviour gets reinforced instead.
 
-I am not alone in this recognition. In an [SE Radio interview](https://se-radio.net/2022/07/episode-520-john-ousterhout-on-a-philosophy-of-software-design/), Jeff Doolittle told Ousterhout that there is a whole unnamed category of _recovering tactical tornadoes_, people who were never acting out of malice but responding to the incentives around them.
+I am not alone in this recognition. In an [SE Radio interview](https://se-radio.net/2022/07/episode-520-john-ousterhout-on-a-philosophy-of-software-design/), Jeff Doolittle told Ousterhout that there is a whole unnamed category of *recovering tactical tornadoes*, people who were never acting out of malice but responding to the incentives around them.
 
 That framing matters.
 
@@ -55,7 +55,7 @@ When a tornado moves through a codebase, other engineers route around the damage
 
 The tornado’s code is shaping the organization.
 
-Even after the tornado moves on, or slows down, or gets promoted out of the code, the team carries the scar tissue. People still avoid those modules. Knowledge remains siloed in whoever was brave enough to touch it. New engineers inherit not just the messy code but the organizational habits that formed around it: the workarounds, the _unwritten rules_ about which parts of the system you simply do not touch.
+Even after the tornado moves on, or slows down, or gets promoted out of the code, the team carries the scar tissue. People still avoid those modules. Knowledge remains siloed in whoever was brave enough to touch it. New engineers inherit not just the messy code but the organizational habits that formed around it: the workarounds, the *unwritten rules* about which parts of the system you simply do not touch.
 
 That is what makes the tornado problem an architectural problem, not just a code quality problem. The damage is sociotechnical. Refactoring the code is necessary but insufficient. You also have to refactor the team’s relationship to the code, which is a much harder and longer process.
 
@@ -95,7 +95,7 @@ The problem is not speed itself but the failure to recognize when speed has beco
 
 Ousterhout suggests investing 10 to 20 percent of development time in design improvement. That number is less important than the principle behind it: strategic thinking is not a separate activity from coding. It is a continuous investment, a small tax on every task that pays compound returns over time.
 
-The tornado invests zero. They are not failing to invest. They are _actively divesting_, extracting design capital from the codebase, and converting it into visible output.
+The tornado invests zero. They are not failing to invest. They are *actively divesting*, extracting design capital from the codebase, and converting it into visible output.
 
 The question every team should ask is not whether they have a tactical tornado. It is whether their incentive structure would produce one.
 
