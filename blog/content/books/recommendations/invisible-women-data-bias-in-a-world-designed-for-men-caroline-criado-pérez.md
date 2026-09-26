@@ -10,4 +10,3 @@ image = "images/books/recommendations/invisible-women-data-bias-in-a-world-desig
 date_read = "2020-11-29"
 tags = ["non-fiction", "tech"]
 +++
-

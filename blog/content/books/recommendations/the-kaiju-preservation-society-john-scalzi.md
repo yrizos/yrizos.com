@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/the-kaiju-preservation-society-john-scalzi.jpg"
 date_read = "2023-01-15"
 +++
-

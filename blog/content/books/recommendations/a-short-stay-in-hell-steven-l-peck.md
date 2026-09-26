@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/a-short-stay-in-hell-steven-l-peck.jpg"
 date_read = "2024-09-29"
 +++
-

@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/to-be-taught-if-fortunate-becky-chambers.jpg"
 date_read = "2021-04-22"
 +++
-

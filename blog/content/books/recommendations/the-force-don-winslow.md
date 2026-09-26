@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/the-force-don-winslow.jpg"
 date_read = "2020-06-19"
 +++
-

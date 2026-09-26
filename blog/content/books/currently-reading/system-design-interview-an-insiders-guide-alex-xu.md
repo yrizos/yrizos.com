@@ -8,4 +8,3 @@ isbn = ""
 image = "images/books/currently-reading/system-design-interview-an-insiders-guide-alex-xu.jpg"
 date = "2025-06-27"
 +++
-

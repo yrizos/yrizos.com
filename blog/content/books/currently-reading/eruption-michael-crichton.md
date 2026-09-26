@@ -8,4 +8,3 @@ isbn = "0316565083"
 image = "images/books/currently-reading/eruption-michael-crichton.jpg"
 date = "2026-03-17"
 +++
-

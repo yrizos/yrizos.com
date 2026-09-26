@@ -10,4 +10,3 @@ image = "images/books/recommendations/το-ξύλινο-τείχος-maria-lampa
 date_read = "2019-03-19"
 tags = ["greek-authors"]
 +++
-

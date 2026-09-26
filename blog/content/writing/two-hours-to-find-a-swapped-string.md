@@ -13,18 +13,15 @@ The requirements seemed straightforward enough. The ERP would send product infor
 
 ```ts
 function bridgeItem(erpCode: string, storeCode: string) {
-  const record = readErp(erpCode)
-  return writeStore(storeCode, record)
+  const record = readErp(erpCode);
+  return writeStore(storeCode, record);
 }
 ```
 
 The function signatures looked clean. The calls looked reasonable.
 
 ```ts
-bridgeItem(
-  product.code,
-  mapping.targetCode
-)
+bridgeItem(product.code, mapping.targetCode);
 ```
 
 As a sidenote, TypeScript didn't exist back then. The actual code was Java, but I _really don't love Java_.
@@ -42,9 +39,9 @@ I remember thinking there had to be a better way to write this kind of code. Not
 Once I noticed the problem, I started seeing it everywhere in the codebase. We had product codes from the ERP, internal codes used only within our system, and store codes required by the e-commerce platform. Each type of code followed different validation rules and represented a completely different concept, but they all looked identical to TypeScript's type system.
 
 ```ts
-type ProductCode = string
-type InternalCode = string
-type StoreCode = string
+type ProductCode = string;
+type InternalCode = string;
+type StoreCode = string;
 ```
 
 These type aliases were essentially documentation. They described intent without enforcing anything. The compiler treated them all as interchangeable strings, which meant I could accidentally pass one where another belonged, and the code would compile without warnings.
@@ -53,7 +50,7 @@ Boolean flags created similar confusion. One boolean meant the product was ready
 
 ```ts
 if (isReady && isActive && isSynced) {
-  runSync()
+  runSync();
 }
 ```
 
@@ -61,21 +58,21 @@ Numbers presented their own challenges. Some represented milliseconds, others re
 
 ```ts
 function scheduleRetry(delay: number) {
-  setTimeout(runRetry, delay)
+  setTimeout(runRetry, delay);
 }
 ```
 
 Calling this function with the wrong unit would compile successfully and fail at runtime.
 
 ```ts
-scheduleRetry(5)
+scheduleRetry(5);
 ```
 
 The pattern was consistent. I was using primitive types to represent domain concepts, and then compensating by scattering validation logic throughout the codebase.
 
 ## Learning It Had a Name
 
-A few years later, I was reading about common code smells when I came across an article on Refactoring Guru that described exactly what I'd been doing. It seems I was [obsessed with primitives](https://refactoring.guru/smells/primitive-obsession): 
+A few years later, I was reading about common code smells when I came across an article on Refactoring Guru that described exactly what I'd been doing. It seems I was [obsessed with primitives](https://refactoring.guru/smells/primitive-obsession):
 
 > Primitive Obsession is a code smell that arises when simple primitive types are used instead of small objects for simple tasks
 
@@ -87,17 +84,17 @@ If I were building that old system today, I'd give each domain concept its own t
 
 ```ts
 class ProductCode {
-  private readonly value: string
+  private readonly value: string;
 
   constructor(value: string) {
     if (value.trim() === "") {
-      throw new Error("Invalid product code")
+      throw new Error("Invalid product code");
     }
-    this.value = value
+    this.value = value;
   }
 
   raw(): string {
-    return this.value
+    return this.value;
   }
 }
 ```
@@ -107,10 +104,10 @@ With this structure, the function signature communicates much more clearly what 
 ```ts
 function bridgeItem(
   erpProductCode: ProductCode,
-  storeProductCode: ProductCode
+  storeProductCode: ProductCode,
 ) {
-  const record = readErp(erpProductCode.raw())
-  return writeStore(storeProductCode.raw(), record)
+  const record = readErp(erpProductCode.raw());
+  return writeStore(storeProductCode.raw(), record);
 }
 ```
 
@@ -120,15 +117,15 @@ The same approach works for other domain concepts. Time values become clearer wh
 
 ```ts
 class Milliseconds {
-  private readonly value: number
+  private readonly value: number;
 
   constructor(value: number) {
-    if (value < 0) throw new Error("Negative time not allowed")
-    this.value = value
+    if (value < 0) throw new Error("Negative time not allowed");
+    this.value = value;
   }
 
   raw(): number {
-    return this.value
+    return this.value;
   }
 }
 ```
@@ -137,7 +134,7 @@ Now the scheduling function's signature tells you exactly what it needs.
 
 ```ts
 function scheduleRetry(delay: Milliseconds) {
-  setTimeout(runRetry, delay.raw())
+  setTimeout(runRetry, delay.raw());
 }
 ```
 
@@ -149,15 +146,15 @@ Some domain concepts benefit from carrying behavior alongside their data. A dime
 class Dimensions {
   constructor(
     public readonly width: number,
-    public readonly height: number
+    public readonly height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error("Invalid dimensions")
+      throw new Error("Invalid dimensions");
     }
   }
 
   area(): number {
-    return this.width * this.height
+    return this.width * this.height;
   }
 }
 ```
@@ -174,15 +171,15 @@ A monetary value makes a good example of this pattern in action.
 
 ```ts
 class Money {
-  private readonly amount: number
+  private readonly amount: number;
 
   constructor(amount: number) {
-    if (amount < 0) throw new Error("Invalid amount")
-    this.amount = amount
+    if (amount < 0) throw new Error("Invalid amount");
+    this.amount = amount;
   }
 
   raw(): number {
-    return this.amount
+    return this.amount;
   }
 }
 ```
@@ -191,7 +188,7 @@ Functions that work with money become more explicit about their contracts.
 
 ```ts
 function publish(price: Money, discount: Money) {
-  return applyRules(price, discount)
+  return applyRules(price, discount);
 }
 ```
 
@@ -207,15 +204,15 @@ Here's another example that keeps validation close to the data.
 
 ```ts
 class EmailAddress {
-  private readonly value: string
+  private readonly value: string;
 
   constructor(value: string) {
-    if (!value.includes("@")) throw new Error("Invalid email")
-    this.value = value
+    if (!value.includes("@")) throw new Error("Invalid email");
+    this.value = value;
   }
 
   raw(): string {
-    return this.value
+    return this.value;
   }
 }
 ```
@@ -228,6 +225,6 @@ I never went back and rewrote that old integration system. By the time I underst
 
 These days, I try to use Value Objects by default. Not because of some architectural dogma. Not because Domain-Driven Design says so, though that's where they come from. Because the work becomes easier when domain concepts have an explicit structure. The code reads better. The compiler helps more. The bugs show up earlier.
 
-Domain-Driven Design gave Value Objects their formal name and placed them within a larger framework, but the practical benefit stands on its own. When you stop representing meaningful concepts as primitive types, the code becomes easier to reason about. 
+Domain-Driven Design gave Value Objects their formal name and placed them within a larger framework, but the practical benefit stands on its own. When you stop representing meaningful concepts as primitive types, the code becomes easier to reason about.
 
 That's worth the extra few lines of class definition.

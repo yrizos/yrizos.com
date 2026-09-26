@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/σταθμός-έντεκα-emily-st-john-mandel.jpg"
 date_read = "2020-04-20"
 +++
-

@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/the-travelling-cat-chronicles-hiro-arikawa.jpg"
 date_read = "2020-08-16"
 +++
-

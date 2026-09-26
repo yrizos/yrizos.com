@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/κίρκη-madeline-miller.jpg"
 date_read = "2019-05-01"
 +++
-

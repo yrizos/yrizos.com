@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/we-are-legion-we-are-bob-bobiverse-1-dennis-e-taylor.jpg"
 date_read = "2021-11-10"
 +++
-

@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/η-γιαγιά-μου-σας-χαιρετά-και-ζητάει-συγγνώμη-fredrik-backman.jpg"
 date_read = "2019-04-28"
 +++
-

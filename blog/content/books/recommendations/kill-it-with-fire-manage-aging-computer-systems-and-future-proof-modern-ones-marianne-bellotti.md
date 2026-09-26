@@ -10,4 +10,3 @@ image = "images/books/recommendations/kill-it-with-fire-manage-aging-computer-sy
 date_read = "2023-06-28"
 tags = ["tech", "non-fiction"]
 +++
-

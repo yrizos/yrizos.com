@@ -8,4 +8,3 @@ isbn = "1593274580"
 image = "images/books/currently-reading/think-like-a-programmer-an-introduction-to-creative-problem-solving-v-anton-spraul.jpg"
 date = "2026-01-09"
 +++
-

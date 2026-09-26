@@ -8,4 +8,3 @@ isbn = "0804139024"
 rating = "4"
 image = "images/books/recommendations/the-martian-andy-weir.jpg"
 +++
-

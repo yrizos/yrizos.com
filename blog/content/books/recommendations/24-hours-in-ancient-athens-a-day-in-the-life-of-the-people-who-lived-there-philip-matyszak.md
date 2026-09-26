@@ -10,4 +10,3 @@ image = "images/books/recommendations/24-hours-in-ancient-athens-a-day-in-the-li
 date_read = "2021-05-01"
 tags = ["non-fiction", "history"]
 +++
-

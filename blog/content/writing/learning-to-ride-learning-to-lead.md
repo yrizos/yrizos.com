@@ -25,7 +25,7 @@ The first tries were shaky. She would sometimes refuse to move, nervous and unsu
 
 With every stumble and word of support, she grew bolder. Then, she did it. One pedal forward. Then another. Before I knew it, she was riding, truly riding, on her own for the very first time. It must have been a funny sight: a bear of a man loping behind a pink fury, arms spread like he could catch the wind itself.
 
-She did fall once, and I caught her, *barely*. But she got back up and tried again.
+She did fall once, and I caught her, _barely_. But she got back up and tried again.
 
 I swapped with my wife several times, one of us running behind her, the other cheering her on. We shifted between proximity and distance, reading what she needed without asking. When she wobbled badly, one of us stayed close. When she found her rhythm, we gave her space.
 

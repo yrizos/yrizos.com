@@ -10,4 +10,3 @@ image = "images/books/recommendations/ο-γύρος-του-θανάτου-thomas
 date_read = "2021-09-06"
 tags = ["greek-authors"]
 +++
-

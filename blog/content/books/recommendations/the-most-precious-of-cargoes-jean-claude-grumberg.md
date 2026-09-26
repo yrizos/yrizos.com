@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/the-most-precious-of-cargoes-jean-claude-grumberg.jpg"
 date_read = "2022-12-28"
 +++
-

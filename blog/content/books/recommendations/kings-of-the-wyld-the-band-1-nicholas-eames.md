@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/kings-of-the-wyld-the-band-1-nicholas-eames.jpg"
 date_read = "2022-03-25"
 +++
-

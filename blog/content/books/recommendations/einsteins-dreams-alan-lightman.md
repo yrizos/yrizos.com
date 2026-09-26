@@ -8,4 +8,3 @@ isbn = "140007780X"
 rating = "5"
 image = "images/books/recommendations/einsteins-dreams-alan-lightman.jpg"
 +++
-

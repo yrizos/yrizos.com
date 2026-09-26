@@ -8,4 +8,3 @@ isbn = "0156029588"
 rating = "5"
 image = "images/books/recommendations/the-flanders-panel-arturo-pérez-reverte.jpg"
 +++
-

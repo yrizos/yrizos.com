@@ -10,4 +10,3 @@ image = "images/books/recommendations/engineering-management-for-the-rest-of-us-
 date_read = "2023-08-11"
 tags = ["non-fiction", "tech"]
 +++
-

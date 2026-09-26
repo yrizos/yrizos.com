@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/η-δολοφονία-του-πυθαγόρα-marcos-chicot.jpg"
 date_read = "2019-08-22"
 +++
-

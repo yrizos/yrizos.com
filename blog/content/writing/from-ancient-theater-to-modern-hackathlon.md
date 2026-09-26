@@ -55,7 +55,7 @@ I followed up, saying this was my main takeaway from the Open Hackathon and a ke
 
 We discussed approaching accessibility as lived experience rather than just compliance checklist thinking. The difference is profound. Compliance asks whether minimum requirements are met. Lived experience asks whether the solution improves daily life. That same thought echoed what my colleague Thanassis Parathyras had captured in his [blog post about the June hackathon](https://www.starttech.vc/blog/2025/hack-for-fun-and-a-noble-purpose/):
 
-> *It’s easy to talk about accessibility in abstract terms. But being in a space where every idea had a human story behind it, that changed something in me.*
+> _It’s easy to talk about accessibility in abstract terms. But being in a space where every idea had a human story behind it, that changed something in me._
 
 ## Final Presentations
 

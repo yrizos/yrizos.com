@@ -8,4 +8,3 @@ isbn = "1484221583"
 image = "images/books/currently-reading/managing-humans-biting-and-humorous-tales-of-a-software-engineering-manager-michael-lopp.jpg"
 date = "2025-06-06"
 +++
-

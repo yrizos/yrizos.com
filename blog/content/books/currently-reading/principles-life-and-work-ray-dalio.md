@@ -8,4 +8,3 @@ isbn = "1508243247"
 image = "images/books/currently-reading/principles-life-and-work-ray-dalio.jpg"
 date = "2026-02-02"
 +++
-

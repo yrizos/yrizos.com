@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/οι-καλοί-hannah-kent.jpg"
 date_read = "2019-12-31"
 +++
-

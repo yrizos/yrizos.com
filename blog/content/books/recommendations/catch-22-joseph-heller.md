@@ -8,4 +8,3 @@ isbn = "0684833395"
 rating = "5"
 image = "images/books/recommendations/catch-22-joseph-heller.jpg"
 +++
-

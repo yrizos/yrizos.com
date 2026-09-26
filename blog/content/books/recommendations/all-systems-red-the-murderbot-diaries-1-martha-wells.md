@@ -9,4 +9,3 @@ rating = "4"
 image = "images/books/recommendations/all-systems-red-the-murderbot-diaries-1-martha-wells.jpg"
 date_read = "2021-09-24"
 +++
-

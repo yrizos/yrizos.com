@@ -10,4 +10,3 @@ image = "images/books/recommendations/η-άφιξη-shaun-tan.jpg"
 date_read = "2021-11-14"
 tags = ["graphic-novel"]
 +++
-

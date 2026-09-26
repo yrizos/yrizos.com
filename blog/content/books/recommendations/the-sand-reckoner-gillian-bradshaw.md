@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/the-sand-reckoner-gillian-bradshaw.jpg"
 date_read = "2019-11-30"
 +++
-

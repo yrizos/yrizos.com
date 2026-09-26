@@ -17,32 +17,35 @@ Head over to [code.visualstudio.com](https://code.visualstudio.com/) and downloa
 
 ### Step 2: Create a Hello World Project with cargo
 
-1. Open Terminal and create a new Rust project:
+1.  Open Terminal and create a new Rust project:
 
-     ```sh
-cargo new hello_world
-     ```
+         ```sh
 
-2. Navigate into the project folder:
+    cargo new hello_world
+    ```
 
-     ```sh
-cd hello_world
-     ```
+2.  Navigate into the project folder:
 
-3. Open the project in VS Code:
+         ```sh
 
-     ```sh
-code .
-     ```
+    cd hello_world
+    ```
 
-   If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type "Shell Command," and select "Install 'code' command in PATH." Then try again.
+3.  Open the project in VS Code:
+
+         ```sh
+
+    code .
+    ```
+
+    If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type "Shell Command," and select "Install 'code' command in PATH." Then try again.
 
 ### Step 3: Add the Rust Analyzer Extension
 
 1. Open VS Code and press ⇧ + ⌘ + X to open the Extensions view.
 2. Search for "Rust Analyzer" and click **Install**.
 
-Rust Analyzer provides features like syntax highlighting, error checking, and improved code navigation. 
+Rust Analyzer provides features like syntax highlighting, error checking, and improved code navigation.
 
 Once the extension is installed, open the `main.rs` file located in the `src` folder of your project. You should now see:
 
@@ -56,7 +59,7 @@ To test the error checking feature, introduce a simple mistake in your code. For
 println!("Hello, world!");
 ```
 
-to: 
+to:
 
 ```rust
 rintln!("Hello, world!");
@@ -87,18 +90,20 @@ fn main() {
 
 ### Step 5: Run your program with cargo
 
-1. Open the integrated terminal in VS Code by pressing ⌃ + `` ` ``  (Control and backtick).
+1.  Open the integrated terminal in VS Code by pressing ⌃ + `` ` `` (Control and backtick).
 
-2. Run the program:
+2.  Run the program:
 
-     ```sh
-cargo run
-     ```
+         ```sh
 
-3. You should see the output:
+    cargo run
+    ```
 
-     ```plaintext
-Hello, world!
-     ```
+3.  You should see the output:
+
+         ```plaintext
+
+    Hello, world!
+    ```
 
 And there you have it. Your setup is ready, and you’re all set to dive into Rust development with VS Code. Time to build something amazing!

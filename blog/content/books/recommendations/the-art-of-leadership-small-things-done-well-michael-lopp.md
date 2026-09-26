@@ -10,4 +10,3 @@ image = "images/books/recommendations/the-art-of-leadership-small-things-done-we
 date_read = "2022-12-02"
 tags = ["non-fiction", "tech"]
 +++
-

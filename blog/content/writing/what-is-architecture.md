@@ -17,9 +17,9 @@ I have decided to treat it as the latter and write up what I owe her.
 
 ## The Short Answer Problem
 
-The resistance to a clean answer shows up immediately when you go looking for a definition. The closest thing to a satisfying formulation belongs to Ralph Johnson, one of the four authors of *Design Patterns*, the book that shaped how the industry thinks about software structure. After all that engagement with the problem, Johnson arrived at something that sounds almost flippant:
+The resistance to a clean answer shows up immediately when you go looking for a definition. The closest thing to a satisfying formulation belongs to Ralph Johnson, one of the four authors of _Design Patterns_, the book that shaped how the industry thinks about software structure. After all that engagement with the problem, Johnson arrived at something that sounds almost flippant:
 
-> *Architecture is about the important stuff, whatever that is.*
+> _Architecture is about the important stuff, whatever that is._
 
 Martin Fowler, who often returns to this line, treats the deliberate vagueness as a feature rather than a bug. The longer I’ve spent on architectural problems, the more I think he is right.
 
@@ -43,7 +43,7 @@ The third misconception is that architecture lives in a role. One person or a sm
 
 Clearing those misconceptions away is useful, but it still leaves the original question open. What I’ve found myself reaching for, when people push past the misconceptions and ask what architecture actually is, is this:
 
-> *The practice of deciding which tensions to accept and which to release.*
+> _The practice of deciding which tensions to accept and which to release._
 
 Every structural decision trades something: consistency against availability, deployability against performance, team autonomy against system coherence, and there is no configuration that resolves all of these simultaneously.
 
@@ -67,13 +67,13 @@ If you’ve spent time inside a large engineering organization and wondered why 
 
 That missing half also reshapes how we need to think about the architect’s role. The broken metaphor at the center of how the field thinks about the architectural role is the building architect: design first, hand off to construction, step back.
 
-The word itself comes from the Greek *arkitekton*, meaning chief builder, and the original was not a separate designer standing apart from construction. The chief builder was the most skilled person on the site, someone who understood the full problem from the inside. The software industry borrowed the building architecture metaphor wholesale and quietly erased that origin, replacing it with a designer insulated from consequence.
+The word itself comes from the Greek _arkitekton_, meaning chief builder, and the original was not a separate designer standing apart from construction. The chief builder was the most skilled person on the site, someone who understood the full problem from the inside. The software industry borrowed the building architecture metaphor wholesale and quietly erased that origin, replacing it with a designer insulated from consequence.
 
 Erik Dörnenburg identified this as a [structural information problem](https://erik.doernenburg.com/2014/12/new-recording-of-architecture-without-architects/), not a cultural one. When the decision-maker is systematically insulated from the feedback loop that would otherwise correct bad choices, the design drifts from the reality it is supposed to serve. The distinction Dörnenburg draws is between being aware of consequences and having to live with them, and that gap is where architectural decisions quietly degrade. The moment you separate design from construction, you are separating decision from consequence.
 
 This leads to a formulation that still surprises people when they hear it:
 
-> *An architect’s value is inversely proportional to the number of decisions they make.*
+> _An architect’s value is inversely proportional to the number of decisions they make._
 
 The goal of architectural leadership is to build the capacity for good structural decisions to happen across the teams doing the work, not to own those decisions permanently. This often gets misread as architecture without accountability, which couldn’t be further from the truth. It requires far more architectural maturity, not less, because teams need to maintain decision records, argue trade-offs honestly, and hold themselves to a standard.
 
@@ -81,13 +81,13 @@ The concept only works where that maturity exists, and building that maturity is
 
 ## The Elevator and the Engine Room
 
-What that job looks like across an entire organization is something Gregor Hohpe captures in a [metaphor](https://martinfowler.com/articles/architect-elevator.html) I’ve returned to more than almost anything else in this field. Large organizations are tall buildings. The IT engine room is in the basement: the systems, the infrastructure, the code. The executive penthouse is at the top: the strategy, the resourcing decisions, the market bets. Between them are floors of management, and each floor is a translation layer where information degrades as it moves in either direction, telephone game dynamics at the organizational scale. The architect’s job is to *ride the elevator*, carrying meaning intact in both directions across those translation layers.
+What that job looks like across an entire organization is something Gregor Hohpe captures in a [metaphor](https://martinfowler.com/articles/architect-elevator.html) I’ve returned to more than almost anything else in this field. Large organizations are tall buildings. The IT engine room is in the basement: the systems, the infrastructure, the code. The executive penthouse is at the top: the strategy, the resourcing decisions, the market bets. Between them are floors of management, and each floor is a translation layer where information degrades as it moves in either direction, telephone game dynamics at the organizational scale. The architect’s job is to _ride the elevator_, carrying meaning intact in both directions across those translation layers.
 
 I run an [Architecture Modernization Enabling Team (AMET)](https://esilva.net/amet) at Epignosis, and this is what the work actually looks like in practice. The problems that determine whether a modernization succeeds are not purely technical. They are questions about which teams have capacity for which changes, how organizational constraints shape what sequences of work are even possible, and where leadership understanding needs to deepen before a technical choice can be made safely.
 
 Architecture that stays in the engine room is working with half its inputs. Hohpe puts it plainly:
 
-> *Excessive complexity is nature’s punishment for organizations that are unable to make decisions.*
+> _Excessive complexity is nature’s punishment for organizations that are unable to make decisions._
 
 Architecture is also about options, the right to defer a decision while locking in key parameters. In volatile conditions option value increases, and a system locked by deep coupling has had its options foreclosed. Modernization, in this framing, is not paying off the past. It is rebuilding the capacity to choose.
 
@@ -107,7 +107,7 @@ The common version treats modernization as competing with innovation, time spent
 
 What this misses is that a system that has not been modernized does not just move slowly. It actively constrains which questions engineers are allowed to ask, and when every change requires deep knowledge of how the system currently holds together, the mental load shifts from “what should we build?” to “what can we build without breaking everything?” That is not a resource problem. It is a cognitive constraint that narrows the product imagination of the entire organization.
 
-What modernization actually enables is *optionality*: the capacity to change direction without foreclosing the future, to experiment in one slice of the system without risking another, to run multiple hypotheses simultaneously because the boundaries are clean enough to hold them.
+What modernization actually enables is _optionality_: the capacity to change direction without foreclosing the future, to experiment in one slice of the system without risking another, to run multiple hypotheses simultaneously because the boundaries are clean enough to hold them.
 
 The features you could not build on the old foundation leave no trace, and nobody wrote them on a roadmap. The innovation that never happened is invisible, which is precisely why modernization is chronically undervalued: **its benefits are counterfactual, and counterfactuals do not appear in sprint reports.**
 
@@ -117,8 +117,8 @@ The same invisible cost applies to the question itself. An engineer without lang
 
 Which brings me to the part where I go against everything in this article and add to the pile:
 
-> *Architecture is the practice of maintaining the conditions under which better decisions remain possible.*
+> _Architecture is the practice of maintaining the conditions under which better decisions remain possible._
 
-You can probably drill more holes in it than in most short definitions. But it happens to be the one I *like* the most, and the one I wish I had at the ready four months ago. It would not have been a *satisfactory* answer, of course.
+You can probably drill more holes in it than in most short definitions. But it happens to be the one I _like_ the most, and the one I wish I had at the ready four months ago. It would not have been a _satisfactory_ answer, of course.
 
 But it might, just might, have saved me from that polite nod.

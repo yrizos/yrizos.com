@@ -10,4 +10,3 @@ image = "images/books/recommendations/masters-of-doom-how-two-guys-created-an-em
 date_read = "2023-11-25"
 tags = ["non-fiction", "tech"]
 +++
-

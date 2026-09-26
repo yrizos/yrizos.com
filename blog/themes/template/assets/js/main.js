@@ -1,17 +1,17 @@
 // Reading progress bar
-(function() {
-  'use strict';
+(function () {
+  "use strict";
 
   function initReadingProgress() {
-    const progressBar = document.getElementById('reading-progress');
+    const progressBar = document.getElementById("reading-progress");
     if (!progressBar) return;
 
     // Only show on posts, pages, and talks
-    const isPost = document.querySelector('.post');
-    const isPage = document.querySelector('.page');
-    const isTalk = document.querySelector('.talk');
+    const isPost = document.querySelector(".post");
+    const isPage = document.querySelector(".page");
+    const isTalk = document.querySelector(".talk");
     if (!isPost && !isPage && !isTalk) {
-      progressBar.style.display = 'none';
+      progressBar.style.display = "none";
       return;
     }
 
@@ -20,11 +20,13 @@
     function updateProgress() {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
       const scrollableHeight = documentHeight - windowHeight;
-      const progress = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
+      const progress =
+        scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0;
 
-      progressBar.style.width = Math.min(progress, 100) + '%';
+      progressBar.style.width = Math.min(progress, 100) + "%";
       ticking = false;
     }
 
@@ -36,89 +38,89 @@
     }
 
     // Update on scroll
-    window.addEventListener('scroll', requestTick, { passive: true });
-    
+    window.addEventListener("scroll", requestTick, { passive: true });
+
     // Update on resize
-    window.addEventListener('resize', requestTick, { passive: true });
-    
+    window.addEventListener("resize", requestTick, { passive: true });
+
     // Initial update
     updateProgress();
   }
 
   // Initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initReadingProgress);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initReadingProgress);
   } else {
     initReadingProgress();
   }
 })();
 
 // Progressive loading for post cover and book cover images
-(function() {
-  'use strict';
+(function () {
+  "use strict";
 
   function initProgressiveImages() {
     // Handle post cover images
-    const postCoverImg = document.querySelector('.post-cover-img');
+    const postCoverImg = document.querySelector(".post-cover-img");
     if (postCoverImg) {
       handleImageLoad(postCoverImg);
     }
 
     // Handle book cover images
-    const bookCoverImages = document.querySelectorAll('.book-cover-img');
-    bookCoverImages.forEach(function(img) {
+    const bookCoverImages = document.querySelectorAll(".book-cover-img");
+    bookCoverImages.forEach(function (img) {
       handleImageLoad(img);
     });
   }
 
   function handleImageLoad(img) {
     function markLoaded() {
-      img.classList.add('loaded');
+      img.classList.add("loaded");
     }
 
     // If image is already loaded (cached), show it immediately without transition
     if (img.complete && img.naturalHeight !== 0) {
-      img.style.transition = 'none';
+      img.style.transition = "none";
       markLoaded();
     } else {
-      img.addEventListener('load', markLoaded);
+      img.addEventListener("load", markLoaded);
     }
   }
 
   // Initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initProgressiveImages);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProgressiveImages);
   } else {
     initProgressiveImages();
   }
 })();
 
 // Slide viewer with Glide.js
-(function() {
-  'use strict';
+(function () {
+  "use strict";
 
   function initSlideViewer() {
-    const slideViewer = document.querySelector('.slide-viewer');
+    const slideViewer = document.querySelector(".slide-viewer");
     if (!slideViewer) return;
 
     // Check if Glide is available
-    if (typeof Glide === 'undefined') {
-      console.warn('Glide.js is not loaded');
+    if (typeof Glide === "undefined") {
+      console.warn("Glide.js is not loaded");
       return;
     }
 
-    const glideElement = slideViewer.querySelector('.glide');
+    const glideElement = slideViewer.querySelector(".glide");
     if (!glideElement) return;
 
     // Initialize Glide
     const glide = new Glide(glideElement, {
-      type: 'carousel',
+      type: "carousel",
       startAt: 0,
       perView: 1,
       gap: 0,
       keyboard: true,
       animationDuration: 400,
-      animationTimingFunc: 'ease-in-out',
+      animationTimingFunc: "ease-in-out",
       swipeThreshold: 80,
       dragThreshold: 120,
     });
@@ -127,53 +129,53 @@
     glide.mount();
 
     // Wire up controls outside .glide
-    const leftArrow = slideViewer.querySelector('.slide-viewer-arrow--left');
-    const rightArrow = slideViewer.querySelector('.slide-viewer-arrow--right');
-    const bullets = slideViewer.querySelectorAll('.slide-viewer-bullet');
+    const leftArrow = slideViewer.querySelector(".slide-viewer-arrow--left");
+    const rightArrow = slideViewer.querySelector(".slide-viewer-arrow--right");
+    const bullets = slideViewer.querySelectorAll(".slide-viewer-bullet");
 
     // Set first bullet as active on load
     if (bullets.length > 0) {
-      bullets[0].classList.add('slide-viewer-bullet--active');
+      bullets[0].classList.add("slide-viewer-bullet--active");
     }
 
     if (leftArrow) {
-      leftArrow.addEventListener('click', function() {
-        glide.go('<');
+      leftArrow.addEventListener("click", function () {
+        glide.go("<");
       });
     }
 
     if (rightArrow) {
-      rightArrow.addEventListener('click', function() {
-        glide.go('>');
+      rightArrow.addEventListener("click", function () {
+        glide.go(">");
       });
     }
 
     // Update active bullet on slide change
-    glide.on(['mount.after', 'run'], function() {
-      bullets.forEach(function(bullet, index) {
+    glide.on(["mount.after", "run"], function () {
+      bullets.forEach(function (bullet, index) {
         if (index === glide.index) {
-          bullet.classList.add('slide-viewer-bullet--active');
+          bullet.classList.add("slide-viewer-bullet--active");
         } else {
-          bullet.classList.remove('slide-viewer-bullet--active');
+          bullet.classList.remove("slide-viewer-bullet--active");
         }
       });
     });
 
-    bullets.forEach(function(bullet, index) {
-      bullet.addEventListener('click', function() {
+    bullets.forEach(function (bullet, index) {
+      bullet.addEventListener("click", function () {
         // Set active immediately on click
-        bullets.forEach(function(b) {
-          b.classList.remove('slide-viewer-bullet--active');
+        bullets.forEach(function (b) {
+          b.classList.remove("slide-viewer-bullet--active");
         });
-        bullet.classList.add('slide-viewer-bullet--active');
-        glide.go('=' + index);
+        bullet.classList.add("slide-viewer-bullet--active");
+        glide.go("=" + index);
       });
     });
   }
 
   // Initialize on DOM ready, wait for Glide to be available
   function tryInit() {
-    if (typeof Glide !== 'undefined') {
+    if (typeof Glide !== "undefined") {
       initSlideViewer();
     } else {
       // Retry if Glide hasn't loaded yet
@@ -181,10 +183,9 @@
     }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tryInit);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", tryInit);
   } else {
     tryInit();
   }
 })();
-

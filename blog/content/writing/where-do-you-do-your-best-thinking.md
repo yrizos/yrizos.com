@@ -9,7 +9,7 @@ imageAlt = "Abstract painted view from inside Hymettus Forest looking out toward
 tags = ["personal-growth", "productivity", "mental-health", "work-life-balance"]
 +++
 
-I finished reading Gabrielle Zevin’s *Tomorrow, and Tomorrow, and Tomorrow* on a Saturday morning in October. I had been carrying the final chapter on my old Kindle for 2 weeks, finding reasons to delay. The story deserved better than a rushed ending.
+I finished reading Gabrielle Zevin’s _Tomorrow, and Tomorrow, and Tomorrow_ on a Saturday morning in October. I had been carrying the final chapter on my old Kindle for 2 weeks, finding reasons to delay. The story deserved better than a rushed ending.
 
 The forest was quiet that morning except for the wind moving through pine branches and the occasional distant shout from where the children were learning below.
 

@@ -11,7 +11,7 @@ series_order = 1
 
 This Sunday, I had a bit of extra time, so I decided to brush up on [Rust](https://www.rust-lang.org/). Whether you are a seasoned developer or just starting out, getting your tools set up is always the first step.
 
-While Rust’s official installation tool, `rustup`, is excellent and versatile, I prefer using [Homebrew](https://brew.sh/) whenever possible. It is simple, familiar, and keeps everything neatly managed in one place. 
+While Rust’s official installation tool, `rustup`, is excellent and versatile, I prefer using [Homebrew](https://brew.sh/) whenever possible. It is simple, familiar, and keeps everything neatly managed in one place.
 
 ## Step 1: Install Rust
 

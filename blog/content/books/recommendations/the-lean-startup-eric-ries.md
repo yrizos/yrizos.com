@@ -10,4 +10,3 @@ image = "images/books/recommendations/the-lean-startup-eric-ries.jpg"
 date_read = "2025-12-24"
 tags = ["non-fiction", "tech"]
 +++
-

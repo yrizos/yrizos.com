@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/η-δολοφονία-του-σωκράτη-marcos-chicot.jpg"
 date_read = "2021-08-19"
 +++
-

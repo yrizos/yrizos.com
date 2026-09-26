@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/ο-αφηγητής-του-πρωινού-τρένου-jean-paul-didierlaurent.jpg"
 date_read = "2019-12-29"
 +++
-

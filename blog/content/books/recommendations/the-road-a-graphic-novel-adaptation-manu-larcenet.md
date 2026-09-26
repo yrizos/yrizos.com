@@ -10,4 +10,3 @@ image = "images/books/recommendations/the-road-a-graphic-novel-adaptation-manu-l
 date_read = "2025-06-21"
 tags = ["graphic-novel"]
 +++
-

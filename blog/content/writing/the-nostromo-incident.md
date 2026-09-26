@@ -11,7 +11,7 @@ tags = ["system-failure", "incident-response", "root-cause-analysis"]
 
 ## The Nostromo Incident: A Seven Whys Root Cause Analysis
 
-Ridley Scott’s *Alien* is a masterpiece of sci-fi horror. It is terrifying, suspenseful, and brilliantly crafted. Beneath the xenomorph and the visceral body horror, it shows what happens when a corporation sends people into danger without telling them the truth.
+Ridley Scott’s _Alien_ is a masterpiece of sci-fi horror. It is terrifying, suspenseful, and brilliantly crafted. Beneath the xenomorph and the visceral body horror, it shows what happens when a corporation sends people into danger without telling them the truth.
 
 When disasters happen, the obvious answer rarely explains what went wrong. The 7 whys technique keeps asking why until the real problem emerges. Each answer reveals another layer. The seventh reveals the root.
 
@@ -21,7 +21,7 @@ If you have not seen Alien, major spoilers follow.
 
 ### The incident
 
-The commercial towing vessel *Nostromo* responded to an unidentified distress signal. The crew investigated. They brought a hostile alien organism aboard without realizing it. One by one, every crew member died except Warrant Officer Ellen Ripley.
+The commercial towing vessel _Nostromo_ responded to an unidentified distress signal. The crew investigated. They brought a hostile alien organism aboard without realizing it. One by one, every crew member died except Warrant Officer Ellen Ripley.
 
 Total loss except 1 survivor. Now we trace backward through 7 layers to find what made this inevitable.
 
@@ -35,7 +35,7 @@ Once the creature was loose, the team stood almost no chance. This answer seems 
 
 ### Why 2: Why did the alien get on board?
 
-Executive Officer Kane explored a derelict vessel and discovered a chamber filled with eggs. One hatched when he approached. A creature launched itself at his face, attached, and rendered him unconscious. The away team rushed him back to the *Nostromo* for emergency medical treatment, bringing the parasite with them.
+Executive Officer Kane explored a derelict vessel and discovered a chamber filled with eggs. One hatched when he approached. A creature launched itself at his face, attached, and rendered him unconscious. The away team rushed him back to the _Nostromo_ for emergency medical treatment, bringing the parasite with them.
 
 They made no attempt to remove it outside the ship. They performed no decontamination. The situation looked like a medical emergency. They treated it that way.
 
@@ -67,17 +67,17 @@ The organism could be studied, weaponized, or sold. The company ran the numbers.
 
 The directive given to Ash made this explicit: “Crew expendable.” This was not callousness. It was a calculation. Seven deaths were an acceptable price for acquiring a bioweapon.
 
-Weyland-Yutani knew about the distress signal before the *Nostromo* encountered it. The ship was rerouted deliberately. The crew believed they were on a standard commercial run. They were bait, sent in without warning because informed people might refuse, demand precautions, or successfully enforce quarantine. Ignorance guaranteed compliance.
+Weyland-Yutani knew about the distress signal before the _Nostromo_ encountered it. The ship was rerouted deliberately. The crew believed they were on a standard commercial run. They were bait, sent in without warning because informed people might refuse, demand precautions, or successfully enforce quarantine. Ignorance guaranteed compliance.
 
 By Why 5, the picture is clear. The company chose profit over safety and structured everything to make it happen. Most investigations stop here. Five layers usually expose the decision that enabled failure. You identify what went wrong at the organizational level and recommend fixes: change incentives, strengthen protocols, and increase transparency.
 
-But pushing to 7 reveals something harder. It asks why the conditions existed that made this decision possible in the first place. Not every failure needs this depth. The *Nostromo incident* does, because it exposes how power imbalances create disasters.
+But pushing to 7 reveals something harder. It asks why the conditions existed that made this decision possible in the first place. Not every failure needs this depth. The _Nostromo incident_ does, because it exposes how power imbalances create disasters.
 
 How could the company make this calculation and act on it without anyone stopping them?
 
 ### Why 6: Why was Weyland-Yutani able to operate without accountability?
 
-The company owned the vessel. The crew worked under restrictive employment contracts that gave them little power to refuse assignments. The *Nostromo* operated in deep space, far beyond the reach of anyone who might challenge what the company decided.
+The company owned the vessel. The crew worked under restrictive employment contracts that gave them little power to refuse assignments. The _Nostromo_ operated in deep space, far beyond the reach of anyone who might challenge what the company decided.
 
 Executives had total control. No crew representation. No independent safety oversight. No external authority with the power to intervene.
 
@@ -97,7 +97,7 @@ The governance gap was not accidental. It was intentional.
 
 ### Root cause: A system that prioritized profit over people
 
-The *Nostromo incident* was not an accident. It was the inevitable outcome of a system that gave corporations unchecked power over people in deep space. Weyland-Yutani valued the xenomorph more than 7 human lives because nothing prevented them from making that choice.
+The _Nostromo incident_ was not an accident. It was the inevitable outcome of a system that gave corporations unchecked power over people in deep space. Weyland-Yutani valued the xenomorph more than 7 human lives because nothing prevented them from making that choice.
 
 Every other factor flows from this. The company rerouted the ship because it had the authority. They withheld information because no law required disclosure. They placed an android with overriding control aboard because no regulation prevented it. They violated quarantine because no one could enforce it. They treated the crew as expendable because the system treated them as expendable.
 
@@ -105,8 +105,8 @@ If protections and oversight had extended to deep space operations, the company 
 
 The absence of these protections was not accidental. It was the product of choices that prioritized corporate expansion over human safety. Those choices created the conditions where disaster became inevitable.
 
-Alien endures because it captures something true about institutional power. The horror is not just the xenomorph. It is watching people trapped in a system designed to sacrifice them. The *Nostromo* crew never had a chance. Not because they lacked skill or courage. Because they operated within structures that deliberately denied them the power to protect themselves.
+Alien endures because it captures something true about institutional power. The horror is not just the xenomorph. It is watching people trapped in a system designed to sacrifice them. The _Nostromo_ crew never had a chance. Not because they lacked skill or courage. Because they operated within structures that deliberately denied them the power to protect themselves.
 
-The film’s iconic tagline was *In space, no one can hear you scream*.
+The film’s iconic tagline was _In space, no one can hear you scream_.
 
 The real horror, however, is that no one was listening in the first place.

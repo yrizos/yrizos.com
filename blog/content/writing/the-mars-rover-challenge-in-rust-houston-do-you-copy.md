@@ -26,7 +26,7 @@ And respond with precise positional data:
 5 1 E
 ```
 
-## Establishing Communication: Receiving User Input 
+## Establishing Communication: Receiving User Input
 
 My first challenge was creating a communication channel with Mission Control. I turned to Rust's powerful `std::io` module to establish this vital link:
 

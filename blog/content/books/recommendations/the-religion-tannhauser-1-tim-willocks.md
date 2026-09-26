@@ -8,4 +8,3 @@ isbn = "0374248656"
 rating = "5"
 image = "images/books/recommendations/the-religion-tannhauser-1-tim-willocks.jpg"
 +++
-

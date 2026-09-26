@@ -8,4 +8,3 @@ isbn = "6182201614"
 image = "images/books/currently-reading/η-νύχτα-θα-είναι-μεγάλη-santiago-gamboa.jpg"
 date = "2025-01-28"
 +++
-

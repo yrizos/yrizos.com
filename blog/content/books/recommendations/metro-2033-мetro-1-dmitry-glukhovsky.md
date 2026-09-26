@@ -9,4 +9,3 @@ rating = "5"
 image = "images/books/recommendations/metro-2033-мetro-1-dmitry-glukhovsky.jpg"
 date_read = "2020-02-13"
 +++
-
