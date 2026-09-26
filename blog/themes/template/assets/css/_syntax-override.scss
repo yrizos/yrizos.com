@@ -21,7 +21,7 @@ div.highlight {
     margin-bottom: $space-syntax-override-highlight-bottom;
     overflow: hidden;
   }
-  
+
   .chroma,
   pre,
   code {
@@ -29,20 +29,19 @@ div.highlight {
     margin: 0;
     overflow: auto;
   }
-  
+
   pre {
     padding: $space-syntax-override-pre-padding;
     border-radius: $border-syntax-override-pre-radius;
   }
-  
+
   code {
     font-family: $font-syntax-override-code-family;
     font-size: $font-syntax-override-code-size-desktop;
   }
-  
+
   @media (max-width: $layout-syntax-override-mobile-breakpoint) {
     code {
       font-size: $font-syntax-override-code-size-mobile;
     }
   }
-  

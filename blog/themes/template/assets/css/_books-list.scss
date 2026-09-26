@@ -88,20 +88,20 @@ $motion-books-list-cover-transform-easing: $motion-easing-normal;
   display: flex;
   gap: $space-books-list-rating-gap;
   justify-content: center;
-  
+
   i {
     color: $color-books-list-rating-filled;
     font-size: $font-books-list-rating-size;
   }
-  
+
   .fa-regular {
     color: $color-books-list-rating-empty;
   }
-  
+
   .icon {
     color: $color-books-list-rating-filled;
   }
-  
+
   .icon.icon-empty {
     color: $color-books-list-rating-empty;
   }
@@ -134,4 +134,3 @@ $motion-books-list-cover-transform-easing: $motion-easing-normal;
     opacity: $opacity-books-list-cover-image-visible;
   }
 }
-
