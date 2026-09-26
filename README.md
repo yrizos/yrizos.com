@@ -1,6 +1,6 @@
 # yrizos.com
 
-Hugo-powered personal blog for https://yrizos.com.
+Hugo-powered personal blog, built and served entirely through Docker so no local Hugo or Python install is required.
 
 ## Directory Structure
 
@@ -13,29 +13,32 @@ Hugo-powered personal blog for https://yrizos.com.
 │   ├── archetypes/            # Default front matter templates for new posts
 │   ├── config/                # Environment-specific Hugo configuration files
 │   ├── content/               # Markdown content files rendered into pages
-│   ├── layouts/               # Hugo templates and partials that shape the site
-│   ├── public/                # Generated static output after building
-│   ├── resources/             # Hugo cache and processed pipeline artifacts
-│   ├── static/                # Static assets (images, JS, CSS) served as-is
-│   └── themes/                # Theme packages pulled into the site
-├── scripts/                   # Utility scripts that support the blog workflow
-│   ├── fetch_posts.py         # CLI entry point for post fetching
-│   ├── posts/                 # Post fetching package
-│   │   ├── blog_post.py       # BlogPost data transfer object
-│   │   ├── cli.py             # Common utilities and CLI
-│   │   ├── fetch_medium.py    # Medium-specific fetching logic
-│   │   └── fetch_devto.py     # Dev.to-specific fetching logic
-│   ├── fetch_books.py         # Goodreads favorites import
-│   ├── fetch_reading.py       # Goodreads currently-reading import
-│   └── pdf_to_images.py       # PDF slide conversion to images
-├── Dockerfile.python          # Docker image for Python scripts with dependencies
-├── Makefile                   # Docker-based development commands
-└── CNAME                      # Domain configuration used when deploying the site
+│   ├── layouts/                # Hugo templates and partials that shape the site
+│   ├── public/                 # Generated static output after building
+│   ├── resources/              # Hugo cache and processed pipeline artifacts
+│   ├── static/                 # Static assets (images, JS, CSS) served as-is
+│   └── themes/                 # Theme packages pulled into the site
+├── scripts/                    # Utility scripts that support the blog workflow
+│   ├── fetch_posts.py          # CLI entry point for post fetching
+│   ├── posts/                  # Post fetching package
+│   │   ├── blog_post.py        # BlogPost data transfer object
+│   │   ├── cli.py              # Common utilities and CLI
+│   │   ├── fetch_medium.py     # Medium-specific fetching logic
+│   │   └── fetch_devto.py      # Dev.to-specific fetching logic
+│   ├── fetch_books.py          # Goodreads favorites import
+│   ├── fetch_reading.py        # Goodreads currently-reading import
+│   └── pdf_to_images.py        # PDF slide conversion to images
+├── tests/                       # Pytest suite for the Python scripts
+├── Dockerfile.python            # Docker image for Python scripts with dependencies
+├── Makefile                     # Docker-based development commands
+└── CNAME                        # Domain configuration used when deploying the site
 ```
 
 ## Local Development
 
 The project includes a Makefile with Docker-based commands that don't require local Hugo installation.
+
+Run `make help` at any time for the full command list.
 
 ### Development Server
 
@@ -74,6 +77,33 @@ Static site output goes to `blog/public/`.
 
 - `make clean` - Remove build artifacts
 - `make help` - Show all available commands
+
+### Pre-commit Hooks
+
+Install [pre-commit](https://pre-commit.com/) and enable the repository hooks:
+
+```bash
+brew install pre-commit
+pre-commit install --hook-type pre-commit
+pre-commit install --hook-type commit-msg
+pre-commit install --hook-type pre-push
+```
+
+This installs checks for staged files, Conventional Commit messages, and signatures on commits being pushed.
+
+The file checks include whitespace and conflict markers, YAML/TOML/JSON validation, large-file checks, Gitleaks secret scanning, Ruff for Python scripts, and actionlint for GitHub Actions workflows.
+
+Run the checks on staged files manually:
+
+```bash
+pre-commit run
+```
+
+Run file hooks across all tracked files:
+
+```bash
+pre-commit run --all-files
+```
 
 ## Content Import Scripts
 
@@ -128,3 +158,15 @@ Converts PDF presentation slides to JPG images for use in talk pages.
 ```bash
 make pdf-to-images PDF=path/to/presentation.pdf
 ```
+
+## Testing
+
+Run the Python test suite (also in Docker, dependencies included):
+
+```bash
+make test
+```
+
+## Deployment
+
+Pushes to `main` that touch `blog/**` trigger the [`deploy-blog.yml`](.github/workflows/deploy-blog.yml) GitHub Actions workflow, which builds the Hugo site and publishes it to GitHub Pages.
