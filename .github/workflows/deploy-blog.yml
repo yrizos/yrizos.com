@@ -9,32 +9,33 @@ on:
       - "blog/**"
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 concurrency:
-  group: "deploy-blog"
+  group: "deploy-blog-${{ github.ref }}"
   cancel-in-progress: true
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
         with:
           fetch-depth: 1
 
       - name: Set up Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3.2.1
         with:
           hugo-version: "0.151.2"
           extended: true
 
       - name: Cache Hugo resources
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         with:
           path: blog/resources
           key: ${{ runner.os }}-hugo-${{ hashFiles('blog/**') }}
@@ -45,7 +46,7 @@ jobs:
         run: hugo --source blog --gc --minify --environment production
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
