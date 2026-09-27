@@ -4,7 +4,6 @@
 import pathlib
 import sys
 from dataclasses import dataclass
-from typing import Optional
 
 import feedparser
 import requests
@@ -40,8 +39,8 @@ class Book:
     goodreads_url: str
     book_id: str
     isbn: str
-    image_url: Optional[str] = None
-    date_added: Optional[str] = None
+    image_url: str | None = None
+    date_added: str | None = None
 
 
 def build_front_matter(book: Book, image_path: str) -> str:

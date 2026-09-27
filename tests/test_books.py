@@ -85,7 +85,12 @@ def test_fetch_books_feed_and_process(monkeypatch, tmp_path: Path) -> None:
 
     monkeypatch.setattr(fetch_books_mod, "BOOKS_DIR", tmp_path / "books")
     monkeypatch.setattr(fetch_books_mod, "IMAGES_DIR", tmp_path / "images")
-    monkeypatch.setattr(fetch_books_mod, "download_image", lambda url, destination: destination.write_bytes(b"img"))
+
+    def fake_download_image(url, destination):
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(b"img")
+
+    monkeypatch.setattr(fetch_books_mod, "download_image", fake_download_image)
 
     success, action = fetch_books_mod.process_book(books[0])
     assert success is True
@@ -233,7 +238,12 @@ def test_fetch_reading_feed_and_process(monkeypatch, tmp_path: Path) -> None:
 
     monkeypatch.setattr(fetch_reading_mod, "BOOKS_DIR", tmp_path / "reading")
     monkeypatch.setattr(fetch_reading_mod, "IMAGES_DIR", tmp_path / "reading-images")
-    monkeypatch.setattr(fetch_reading_mod, "download_image", lambda url, destination: destination.write_bytes(b"img"))
+
+    def fake_download_image(url, destination):
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(b"img")
+
+    monkeypatch.setattr(fetch_reading_mod, "download_image", fake_download_image)
 
     saved = fetch_reading_mod.process_book(books[0])
     assert saved is True

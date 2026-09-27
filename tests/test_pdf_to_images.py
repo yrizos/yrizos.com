@@ -93,5 +93,6 @@ def test_fetch_posts_script_wrapper(monkeypatch) -> None:
     calls = []
     fake_posts = types.SimpleNamespace(main=lambda: calls.append("main"))
     monkeypatch.setitem(sys.modules, "posts", fake_posts)
-    runpy.run_path("/Users/yrizos/fun/yrizos.com/scripts/fetch_posts.py", run_name="__main__")
+    script_path = Path(__file__).parents[1] / "scripts" / "fetch_posts.py"
+    runpy.run_path(script_path, run_name="__main__")
     assert calls == ["main"]

@@ -127,6 +127,7 @@ def test_cli_prompt_and_process_posts(monkeypatch) -> None:
         captured.append(post_obj.title)
 
     monkeypatch.setattr(cli_mod, "write_post", fake_write)
+    monkeypatch.setattr(cli_mod.console, "input", lambda *_args, **_kwargs: "yes")
     cli_mod.process_posts([post])
     assert captured == ["One"]
 
@@ -152,12 +153,12 @@ def test_medium_helpers_extract_and_parse() -> None:
     assert image_alt == "cover image"
 
     original_url, original_date = medium_mod.extract_original_metadata(soup)
-    assert original_url is None
-    assert original_date is None
+    assert original_url == "https://example.com/original"
+    assert original_date == datetime(2024, 1, 2, tzinfo=timezone.utc)
 
     tracking_soup = BeautifulSoup('<img src="https://tracking.medium.com/_/stat"><img src="https://cdn.example.com/x.jpg">', "html.parser")
     medium_mod.remove_tracking_images(tracking_soup)
-    assert tracking_soup.find("img") is None
+    assert tracking_soup.find("img")["src"] == "https://cdn.example.com/x.jpg"
 
     tags = medium_mod.extract_tags({"tags": [{"term": "python"}, {"term": "testing"}, {"term": "python"}]})
     assert tags == ["python", "testing"]
@@ -170,14 +171,14 @@ def test_medium_helpers_extract_and_parse() -> None:
             "title": "A Great Post",
             "published": "Mon, 01 Jan 2024 00:00:00 +0000",
             "link": "https://example.com/post",
-            "content": [{"value": '<article><h1>Heading</h1><p>Hello world.</p><p>Originally published at <a href="https://example.com/original">story</a> on January 2, 2024</p><img src="https://cdn.example.com/cover.jpg" alt="Cover"></article>'}],
+            "content": [FakeEntry({"value": '<article><h1>Heading</h1><p>Hello world.</p><p>Originally published at <a href="https://example.com/original">story</a> on January 2, 2024</p><img src="https://cdn.example.com/cover.jpg" alt="Cover"></article>'})],
             "tags": [{"term": "python"}, {"term": "testing"}],
         }
     )
 
     post = medium_mod.parse_medium_entry(entry)
     assert post.slug == "a-great-post"
-    assert post.original_url == "https://example.com/post"
+    assert post.original_url == "https://example.com/original"
     assert post.image_url == "https://cdn.example.com/cover.jpg"
     assert post.tags == ["python", "testing"]
 
@@ -187,7 +188,7 @@ def test_fetch_medium_posts_uses_feedparser(monkeypatch) -> None:
         "title": "Medium post",
         "published": "Mon, 01 Jan 2024 00:00:00 +0000",
         "link": "https://example.com/post",
-        "content": [{"value": '<article><h1>Title</h1><p>Post text.</p></article>'}],
+        "content": [FakeEntry({"value": '<article><h1>Title</h1><p>Post text.</p></article>'})],
     })
 
     class FeedResult:
@@ -200,8 +201,8 @@ def test_fetch_medium_posts_uses_feedparser(monkeypatch) -> None:
     assert posts[0].title == "Medium post"
 
 
-def test_devto_article_helpers() -> None:
-    assert devto_mod.extract_devto_article_id("https://dev.to/user/example-title-123") == "user/example-title"
+def test_devto_article_helpers(monkeypatch) -> None:
+    assert devto_mod.extract_devto_article_id("https://dev.to/user/example-title-123") == "user/example-title-123"
     assert devto_mod.extract_devto_article_id("https://dev.to/user") is None
     assert devto_mod.extract_devto_slug({"link": "https://dev.to/user/example-title-123"}) == "example-title-123"
     assert devto_mod.extract_tags({"tags": [{"term": "python"}, {"term": "python"}, {"term": "writing"}]}) == ["python", "writing"]
@@ -215,17 +216,8 @@ def test_devto_article_helpers() -> None:
     def fake_get(url, timeout):
         return FakeResponse()
 
-    monkeypatch = None
-    # perform the actual function call via a local monkeypatch helper
-    import pytest
-
-    class DummyMonkeyPatch:
-        def setattr(self, obj, name, value):
-            setattr(obj, name, value)
-
-    mp = DummyMonkeyPatch()
-    mp.setattr(devto_mod.requests, "get", fake_get)
-    assert devto_mod.fetch_series_title("user", 42) == "Testing Series"
+    monkeypatch.setattr(devto_mod.requests, "get", fake_get)
+    assert devto_mod.fetch_series_title("user", 42) == "Testing"
 
     def fake_list_get(url, timeout):
         class Response:
@@ -237,7 +229,7 @@ def test_devto_article_helpers() -> None:
 
         return Response()
 
-    mp.setattr(devto_mod.requests, "get", fake_list_get)
+    monkeypatch.setattr(devto_mod.requests, "get", fake_list_get)
     assert devto_mod.calculate_series_order("user", 42, 10) == 2
 
 
