@@ -4,6 +4,7 @@ import pathlib
 import re
 from collections.abc import Callable
 from datetime import datetime
+from typing import Optional, Tuple
 from urllib.parse import urlparse
 
 import requests
@@ -30,7 +31,7 @@ def clean_goodreads_url(url: str) -> str:
     )
 
 
-def parse_goodreads_date(raw: str) -> str | None:
+def parse_goodreads_date(raw: str) -> Optional[str]:
     """Parse a Goodreads RSS date into YYYY-MM-DD, or None if unparseable."""
     if not raw:
         return None
@@ -40,7 +41,7 @@ def parse_goodreads_date(raw: str) -> str | None:
         return None
 
 
-def _google_books_image(query: str) -> str | None:
+def _google_books_image(query: str) -> Optional[str]:
     """Query the Google Books API and return the best cover image URL, if any."""
     try:
         response = requests.get(
@@ -57,7 +58,7 @@ def _google_books_image(query: str) -> str | None:
     return image_links.get("extraLarge") or image_links.get("large")
 
 
-def _isbn_cover_url(isbn_clean: str) -> str | None:
+def _isbn_cover_url(isbn_clean: str) -> Optional[str]:
     """Return the Open Library cover URL for an ISBN if it actually resolves."""
     url = f"https://covers.openlibrary.org/b/isbn/{isbn_clean}-L.jpg"
     try:
@@ -67,7 +68,7 @@ def _isbn_cover_url(isbn_clean: str) -> str | None:
     return url if response.status_code == 200 else None
 
 
-def _openlibrary_search_cover(query: str) -> str | None:
+def _openlibrary_search_cover(query: str) -> Optional[str]:
     """Search Open Library by title/author and return a cover URL, if any."""
     try:
         response = requests.get(
@@ -84,7 +85,7 @@ def _openlibrary_search_cover(query: str) -> str | None:
 
 def get_image_url_from_sources(
     book_id: str, isbn: str, title: str, author: str
-) -> str | None:
+) -> Optional[str]:
     """Try Open Library and Google Books to find a book cover image URL."""
     isbn_clean = isbn.strip() if isbn else ""
     if len(isbn_clean) >= 10:
@@ -140,7 +141,7 @@ def to_toml_value(value) -> str:
     return _escape_toml_string(str(value))
 
 
-def read_book_id_and_image(content: str) -> tuple[str | None, str | None]:
+def read_book_id_and_image(content: str) -> Tuple[Optional[str], Optional[str]]:
     """Extract the book_id and image path from a content file's front matter."""
     book_id_match = BOOK_ID_RE.search(content)
     image_match = IMAGE_PATH_RE.search(content)
@@ -151,7 +152,7 @@ def read_book_id_and_image(content: str) -> tuple[str | None, str | None]:
 
 
 def delete_book(
-    book_file: pathlib.Path, images_dir: pathlib.Path, image_path: str | None
+    book_file: pathlib.Path, images_dir: pathlib.Path, image_path: Optional[str]
 ) -> None:
     """Delete a book content file and its cover image, if any."""
     book_file.unlink()

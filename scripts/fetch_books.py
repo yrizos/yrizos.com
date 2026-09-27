@@ -4,6 +4,7 @@
 import pathlib
 import sys
 from dataclasses import dataclass, field
+from typing import Optional, Tuple
 
 import feedparser
 import requests
@@ -75,7 +76,7 @@ class Book:
     isbn: str
     rating: str
     date_read: str
-    image_url: str | None = None
+    image_url: Optional[str] = None
     tags: list[str] = field(default_factory=list)
 
 
@@ -160,7 +161,7 @@ def fetch_goodreads_books() -> list[Book]:
     return books
 
 
-def _find_existing_book(book_id: str) -> tuple[pathlib.Path | None, str | None]:
+def _find_existing_book(book_id: str) -> Tuple[Optional[pathlib.Path], Optional[str]]:
     """Find an existing book file by book_id, returning (file, image_path)."""
     if not BOOKS_DIR.exists():
         return None, None
@@ -173,7 +174,7 @@ def _find_existing_book(book_id: str) -> tuple[pathlib.Path | None, str | None]:
     return None, None
 
 
-def _ensure_image(book: Book) -> str | None:
+def _ensure_image(book: Book) -> Optional[str]:
     """Download the book's cover image if needed, returning its path relative to assets/."""
     image_url = book.image_url or get_image_url_from_sources(
         book.book_id, book.isbn, book.title, book.author
@@ -193,7 +194,7 @@ def _ensure_image(book: Book) -> str | None:
     return f"images/books/recommendations/{image_filename}"
 
 
-def process_book(book: Book) -> tuple[bool, str]:
+def process_book(book: Book) -> Tuple[bool, str]:
     """Process a single book: download image and create content file, or update existing.
 
     Returns:
