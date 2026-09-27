@@ -1,4 +1,294 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Yannis Rizos</title><link>https://yrizos.com/</link><description>Writing about building systems meant to last, the trade-offs that come with them, and the organizational forces that shape them. Exploring software architecture, engineering leadership, system failures, and the decisions that matter when building for the long term.</description><language>en-us</language><ttl>1209600</ttl><lastBuildDate>Fri, 13 Mar 2026 16:44:20 UTC</lastBuildDate><atom:link href="https://yrizos.com/" rel="self" type="application/rss+xml"/><item><title>The Fastest Engineer in the Room</title><link>https://yrizos.com/writing/the-fastest-engineer-in-the-room/</link><guid>https://yrizos.com/writing/the-fastest-engineer-in-the-room/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Fri, 13 Mar 2026 16:44:20 UTC</pubDate><category>engineering-leadership</category><category>software-design</category><category>software-architecture</category><category>technical-debt</category><description><![CDATA[<p>A colleague mentioned the <strong>tactical tornado</strong> the other day. The phrase landed in a way it hadn’t in years, and I found myself back in two places at once: the pages of John Ousterhout’s <a href="https://www.amazon.com/Philosophy-Software-Design-2nd/dp/173210221X"><em>A Philosophy of Software Design</em></a>, and a meeting room where someone was asking me, as diplomatically as they could, to please slow down.</p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Yannis Rizos</title><link>https://yrizos.com/</link><description>Writing about building systems meant to last, the trade-offs that come with them, and the organizational forces that shape them. Exploring software architecture, engineering leadership, system failures, and the decisions that matter when building for the long term.</description><language>en-us</language><ttl>1209600</ttl><lastBuildDate>Wed, 12 Aug 2026 14:25:51 UTC</lastBuildDate><atom:link href="https://yrizos.com/" rel="self" type="application/rss+xml"/><item><title>Turn the Ship Around!</title><link>https://yrizos.com/writing/turn-the-ship-around/</link><guid>https://yrizos.com/writing/turn-the-ship-around/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Wed, 12 Aug 2026 14:25:51 UTC</pubDate><category>david-marquet</category><category>engineering-leadership</category><category>engineering-management</category><category>book-review</category><description>&lt;p>The part of &lt;em>The Hunt for Red October&lt;/em> that stayed with me was not the defection plot or the torpedo in the final act. It was the control room. A dozen people reading the ocean through sound alone, making calls in seconds that the surface world would have spent a month of meetings on. I did not follow the Cold War politics at all as a child. I followed the room.&lt;/p></description><content:encoded><![CDATA[<p>The part of <em>The Hunt for Red October</em> that stayed with me was not the defection plot or the torpedo in the final act. It was the control room. A dozen people reading the ocean through sound alone, making calls in seconds that the surface world would have spent a month of meetings on. I did not follow the Cold War politics at all as a child. I followed the room.</p>
+<p>That room turns up again in most of what I have loved since about crews who leave the atmosphere instead of the surface. Strip either setting back and the same frame sits underneath, a sealed hull with something outside it that kills on contact, a crew small enough that every person’s competence is load-bearing, and nobody reachable in time to make the decision for them.</p>
+<p>Which is roughly the frame I brought to David Marquet’s <em>Turn the Ship Around</em>, and it is not the one the book gets shelved under. Marquet took command of a submarine he had not been trained on, with no time left to learn it, and for the first stretch that reads as a coordination problem rather than a leadership one. How does a crew make sound decisions before anyone aboard has had time to become the authority on the boat? The leadership argument arrives once those two questions turn out to be the same question.</p>
+<h2 id="santa-fe-and-the-leadership-shift">Santa Fe and the Leadership Shift</h2>
+<p>Marquet had spent close to a year preparing to command a different submarine, learning its systems the way the Navy expects a new captain to. The reassignment to the USS Santa Fe came at the last minute, and it came without a second year attached. He would take over a crew and a set of systems he did not know, on a schedule indifferent to that.</p>
+<p>Santa Fe was the worst-performing submarine in the Pacific fleet at the time. Re-enlistment was the lowest anywhere in it, morale was poor, and officers and crew advanced more slowly than their counterparts on better boats.</p>
+<p>The stakes on that boat are not the stakes of a software organization, and nothing here treats them as though they were. A submarine crew’s mistakes can kill people within minutes. An engineering team’s worst week, genuinely bad as those get, does not run on that clock and does not carry that cost.</p>
+<p>What carries over between the two is narrower and more useful than an analogy. It is the shape of the constraint, a leader with no runway to build expertise before the decisions start arriving anyway.</p>
+<p>Marquet’s response to a boat he did not know was not to out-study it. It was to stop requiring that the expertise sit with him at all.</p>
+<p>The Navy he had come up through ran on what he calls a leader-follower model. Authority concentrated at the top and instructions moved downward, which works well enough while the person at the top genuinely does know the most about the thing being decided. On Santa Fe that condition was simply false, and a crew trained to wait for orders from someone who could not yet give good ones is a crew that waits.</p>
+<p>The leader-leader model he built instead moves authority to wherever the relevant competence and information already sit. Not handed out as a gesture toward autonomy, but relocated to where the knowledge to use it was already sitting.</p>
+<h2 id="the-engineering-bottleneck">The Engineering Bottleneck</h2>
+<p>The version of that constraint I keep meeting at work has nothing to do with hulls. It shows up as decision latency, the gap between a decision becoming necessary and someone with the authority for it actually being available. A team that has to locate an approver before it can act has built a queue into its own operations, and the queue doesn’t care whether the person at the head of it actually knows the most about what’s waiting.</p>
+<p>Incidents make this obvious fastest. Authority to act during an outage belongs with whichever engineer is holding the pager, not with a central approver who has to be found and briefed while the system stays down.</p>
+<p>Design review is the slower version of the same question. Whose opinion counts on an RFC is properly a function of who understands the part of the system under discussion, and a process that weights titles instead ends up with documents approved by people who could not have written them.</p>
+<p>For anyone promoted because they were the strongest engineer in the room, the uncomfortable part is what Marquet calls the expertise trap. The instinct that earned the promotion, taking the hardest problem personally, becomes the ceiling the team cannot grow past. Engineers around that person stop developing judgment nobody ever asks them to use, and the organization ends up with one deep well of competence and a queue in front of it. A captain whose crew will not submerge without checking first has built the same bottleneck by a different route.</p>
+<h2 id="control-competence-clarity">Control, Competence, Clarity</h2>
+<p>Relocating authority only works when three conditions hold at once, and most of the book is a study in what breaks when only two of them do. Marquet names them control, competence, and clarity.</p>
+<p>Control is the decision right itself, sitting with whoever is closest to the work rather than three levels above it. It is also the cheapest of the three to hand over and the most dangerous to hand over alone, since a decision right given to someone not yet equipped to use it is not empowerment.</p>
+<p>Competence is what makes that handover safe rather than reckless, and Santa Fe’s version of it was unglamorous. Sailors qualified for each system they were trusted to make calls about, in front of peers who had already qualified and could ask anything they liked, and a wrong answer meant going back to study rather than being waved through out of politeness. Nobody held authority over a system they could not explain on demand. That is the part of the leader-leader story that gets dropped when the phrase travels on its own.</p>
+<p>Clarity is the shared purpose and standard that keeps a hundred separate good decisions pointing the same way. Without it, control and competence produce a capable crew whose sensible individual calls do not add up to a coherent boat.</p>
+<p>The first mechanism is a change in what officers were permitted to say out loud. Rather than requesting permission to submerge, they stated the intention, and a superior either stopped the sentence or let it stand. An incident commander announcing a rollback instead of paging upward and waiting to be told is running the identical script.</p>
+<p>Deliberate action takes the same instinct further. Before doing anything non-trivial the crew said aloud what they were about to do and paused first, which is the pause separating a reread diff from a trusted commit message.</p>
+<p>Certify, don’t brief inverts who has to demonstrate understanding. Instead of one person walking a plan past a room that nods, the people closest to the decision had to show they understood it themselves, and anyone present could be asked about any part of it on the spot. A design doc that collects a thumbs-up emoji in a channel has been briefed. One whose author gets asked to walk through its failure modes, live, and does, has been certified. The artifact is identical. The difference is whether anyone was tested against it.</p>
+<p>Embrace the inspectors is the one aimed outward. External inspections were treated as free information about the boat rather than an event to survive, which is the posture a mature team already takes toward a security audit.</p>
+<h2 id="judging-thebook">Judging the Book</h2>
+<p>As a book, its strongest quality is honesty, which is rarer in this genre than it should be. Management memoirs tend to arrive pre-polished, the author’s early mistakes edited into foreshadowing. Marquet leaves the false starts in, including orders he gave that turned out to be impossible to carry out, and he mostly resists the vague appeals to vision that pad out the shelf around him.</p>
+<p>The mechanisms are also concrete enough to be tried rather than admired. A team could run the intention-stating change on Monday and know by Friday whether anything moved, which very few leadership books can offer.</p>
+<p>The sharpest thing in it, though, is that Marquet names the expertise trap himself rather than leaving a reader to work it out. He is explicit that the instinct to be the most capable person in the room is the thing a leader has to give up, and that giving it up feels like a loss while it is happening rather than a promotion. Most books in this category gesture at that much. Naming it plainly is what makes this one generalize past submarines at all, more than any of the four mechanisms manage.</p>
+<p>Where it is weaker is in what it takes for granted. The Navy pre-qualifies people against hard technical standards long before they reach a boat, so a large part of Santa Fe’s competence condition was built elsewhere and simply handed to him. Most engineering organizations have no equivalent pipeline and cannot conjure one.</p>
+<p>Marquet’s own autonomy was unusual too, and so was his timing. A captain handed the fleet’s worst boat has room to experiment that a captain of a merely mediocre one does not.</p>
+<p>The later chapters lose their edge as well. The same three-condition logic gets re-applied to fresh scenes without gaining much from the repetition, and the chapter-end summaries with their reflection questions read less like a memoir than like a training module bolted onto the back of one. I found the first half considerably stronger than the second.</p>
+<p>None of which touches the record. Santa Fe went from worst-performing submarine in the Pacific fleet to best-performing in about a year, and the command became an unusual source of officers who went on to lead well elsewhere.</p>
+<p>The fact I find hardest to argue with is what happened after Marquet left. The performance held, which is the detail separating a structural change to a boat from one captain’s force of personality.</p>
+<p>Marquet is explicit that this does not license copying his mechanisms. The exact wording of an intention statement and the specific shape of a qualification board are local artifacts, and the durable layer beneath them is control, competence, and clarity. Which of those three a given organization is actually missing, and what would have to be built to supply it, is a question the book cannot answer from outside and does not pretend to.</p>
+<h2 id="what-transfers-for-engineering-leaders">What Transfers for Engineering Leaders</h2>
+<p>What an engineering leader can take from this is narrower than three memorable words and narrower than the book’s own enthusiasm. It is a reason to treat decision latency as a design problem rather than a personality one, and a question worth asking of every recurring decision, whether the person making it is the best positioned to make it or merely the one with signing authority. Most organizations have more of the second kind than they would guess.</p>
+<p>For a technical leader promoted for exactly the instincts this asks them to set aside, the practical version is smaller than a restructure. It is noticing when a decision has been routed upward out of habit rather than need, and sending it back down to whoever was closest to it.</p>
+<p>I had already <a href="https://blog.talentlms.io/posts/the-job-before-the-job/">designed and run an internal initiative</a> for engineers moving into their first tech lead roles, and I had not read <em>Turn the Ship Around</em> when it was being designed. The overlap between what that work kept circling and what Marquet’s three conditions describe was something I noticed afterwards, not a framework I had been building from. Which says more about how reliably that gap appears than about either.</p>
+<p>Whether the transfer is ever complete is not something the book settles, and I doubt that it is. What it does supply is a name for the bottleneck, early enough to be recognized before a team has learned to wait.</p>
+<p>I’m long overdue a visit to <a href="https://averof.hellenicnavy.gr/en/from-proteus-to-nereus-from-mythology-to-the-silent-power-of-the-fleet/">Proteus</a>, a submarine-turned-museum. It’s not the real thing, but still awesome.</p>
+]]></content:encoded><media:content url="https://yrizos.com/images/writing/turn-the-ship-around.png" type="image/png" medium="image"><media:title>Home</media:title></media:content></item><item><title>The Job Before the Job</title><link>https://yrizos.com/writing/the-job-before-the-job/</link><guid>https://yrizos.com/writing/the-job-before-the-job/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Mon, 22 Jun 2026 00:00:00 UTC</pubDate><category>engineering-leadership</category><category>engineering-mangement</category><category>professional-development</category><description>&lt;p>Back in January, I sat across from a tech lead on a video call and asked what had surprised them most about the role. The answer came back without hesitation: “Nobody tells you that writing code stops being the job.” Then they added the part that lingered: “And nobody tells you that you’ll miss it.”&lt;/p>
+&lt;p>I ran five of these interviews with our tech leads, each built around the same handful of questions. What do you wish you had known? What took the longest to learn? Where did you feel least prepared?&lt;/p></description><content:encoded><![CDATA[<p>Back in January, I sat across from a tech lead on a video call and asked what had surprised them most about the role. The answer came back without hesitation: “Nobody tells you that writing code stops being the job.” Then they added the part that lingered: “And nobody tells you that you’ll miss it.”</p>
+<p>I ran five of these interviews with our tech leads, each built around the same handful of questions. What do you wish you had known? What took the longest to learn? Where did you feel least prepared?</p>
+<p>The answers overlapped far more than I expected. Every one of them named some version of the same gap. The skills that earned the promotion were not the skills the job turned out to need. They had been promoted for being excellent engineers, and the role was quietly asking them to become something else.</p>
+<p>That gap is not ours alone. It is the defining structural problem of technical leadership across the industry. You reward someone for individual excellence, hand them a team, and hope the rest follows. Sometimes it does, and often it does not.</p>
+<p>That is the problem Tech Lead School was built to address. Not to manufacture a tech lead in four weeks, which would be absurd. The aim was smaller and more honest: to give engineers a place to practice the work before the work depended on them getting it right.</p>
+<h2 id="the-shift">The Shift</h2>
+<p>If I had to name the one concept that landed hardest, it would be the shift in identity from maker to multiplier. Pat Kua’s <a href="https://www.patkua.com/blog/maker-vs-multiplier/">framing of that transition</a> was the takeaway nearly every participant reached for first.</p>
+<p>The recognition came quickly, and it was uncomfortable. The job is to make the people around you more effective, rather than to be the most effective individual in the room. That reads cleanly on the page. It is far less clean when you have spent years being rewarded for solving the hardest problems yourself.</p>
+<p>One participant put it plainly:</p>
+<blockquote>
+<p><em>I still measure my productivity by code output. If I am not shipping code, I feel unproductive, but the job asks me to make others more productive.</em></p>
+</blockquote>
+<p>That sentence is the whole transition. A tech lead does not stop being technical. They stop using their own output as the main proof that they are doing the job.</p>
+<p>The same recognition shows up a level higher. In <a href="https://blog.talentlms.io/posts/the-subtraction-job/">The Subtraction Job</a>, Konstantinos Chatzinikolakis opens with the manager’s version of it:</p>
+<blockquote>
+<p><em>For most of my first decade as a manager, I measured myself by what I added.</em></p>
+</blockquote>
+<p>A tech lead feels it as code shipped, a manager as comments and rewrites added, yet it is the same trap underneath. The work changes before the identity has time to catch up.</p>
+<p>I am not writing this as someone who has it all figured out. I delivered five of the presentations myself, across four sessions. I wanted to, and handing them off would have meant watching someone else run them. The whole program was about stepping back, and I would not step back from it. It is hard to demonstrate the trap more clearly than that.</p>
+<p>That tension does not resolve in a single session. It resolves over months, as you keep choosing to unblock someone else instead of writing the code yourself. The harder part is coming to believe that the unblocking was the real work all along.</p>
+<h2 id="the-shape-of-thejob">The Shape of the Job</h2>
+<p>Before building anything, I needed a map.</p>
+<p>The five interviews produced one, and it lined up closely with the formal role definition we already had. Together they named six areas of responsibility that a tech lead has to operate across at the same time.</p>
+<p><img src="https://cdn-images-1.medium.com/max/900/0*TH6GDYjAcgHzaM5s.png" alt="Six equal hexagonal panels form a ring around an empty center, showing the six core responsibility areas of a Tech Lead: Technical Leadership, Team Support, Delivery Ownership, Strategic Involvement, Reliability, and Cross-functional Coordination."></p>
+<p>The breadth is the whole point. A senior engineer can afford to go deep in one or two of these areas. A tech lead does not get that luxury. Technical Leadership, Team Support, Delivery Ownership, Strategic Involvement, Reliability, and Cross-functional Coordination all land in the same week, and that breadth is exactly what nobody practices before stepping into the role.</p>
+<p>Most engineers are promoted because they have proven they can handle difficult technical work. Then the role asks them to hold a far wider field in view. The architecture still matters and the code still matters, but so do the estimates, the reviews, the tradeoffs, the team dynamics, the customer impact, the operational risk, and the conversations happening well outside engineering.</p>
+<h2 id="the-school">The School</h2>
+<p>The program ran in March 2026: eight sessions across four weeks, twenty-three hours in total, with ten participants drawn from teams across engineering. Seventeen people contributed, four of them from outside engineering, in Product, Compliance, Customer Support, and Marketing.</p>
+<p>Several of the participants had come up through <em>Dev Academy</em>, an internal program on SDLC basics that we ran back in 2021 for interns and junior engineers. None of us planned it as a route into technical leadership. It became one anyway.</p>
+<p>The design followed from the role itself. Every hour had to map to one of the six responsibility areas. Nothing earned a place in the curriculum because it seemed interesting. Everything was there because the role demanded it.</p>
+<p>It also had to be practical. Participants made decisions, produced artifacts, and defended their tradeoffs. The exercises carried ambiguity, time pressure, competing priorities, and incomplete information, because clean problems with clean solutions prepare nobody for the actual job.</p>
+<p>The practice stayed concrete. Participants ran a Domain Storytelling workshop and worked through an Elephant Carpaccio slicing exercise as live sessions. In smaller exercises they classified real debt with Fowler’s Technical Debt Quadrant and pulled apart an actual PRD. Take-home work asked them to diagram a greenfield system using the C4 Model, write ADRs, and practice Opportunity Solution Trees and RICE scoring.</p>
+<p>The contributors came to show how they actually do the work, not to read from slides. An architect walked through how they approach a C4 diagram. A product manager explained how they really write PRDs and what they need from engineering in return. A senior tech lead described what changes once you stop measuring yourself by code output.</p>
+<p>The contributors from outside engineering covered the parts of the role engineers rarely see up close. Compliance walked through what a tech lead has to sign off on, and why it matters. Support showed the thankless work that happens long before a ticket ever reaches an engineer. Marketing explained how we reach the real people who use the software, a question most engineers never have to ask.</p>
+<h2 id="the-firstsignals">The First Signals</h2>
+<p>The clearest signals were not the comments people offered at the end of the program. They were the things that shifted inside their teams almost immediately after. These are early signals rather than proof, and the real test is still ahead, but they are the kind worth trusting.</p>
+<p><strong>Estimation changed daily behavior.</strong> The most reported change had less to do with technique than with understanding what an estimate is actually for. One participant put it this way:</p>
+<blockquote>
+<p><em>Estimation is not about getting the number right, it is about surfacing what you do not know.</em></p>
+</blockquote>
+<p>That distinction stuck. A commitment is a promise, while a prediction is only a forecast, and most teams quietly treat the second as if it were the first, then wonder why trust erodes.</p>
+<p><strong>Code review changed first.</strong> One participant described the shift:</p>
+<blockquote>
+<p><em>I stopped writing vague comments like ‘this could be cleaner’ and started naming the actual risk, like ‘if this dual-update is missed, state becomes silently inconsistent.’</em></p>
+</blockquote>
+<p>The comments moved from opinion to observation, from preference to consequence. And they showed up in pull requests within days rather than weeks.</p>
+<p>That is the kind of change I care about most. Not whether someone can recite the name of a framework, but whether the next estimate, review, or team discussion comes out a little more precise because of it.</p>
+<h2 id="the-failure">The Failure</h2>
+<p>I am more interested in what failed than in what succeeded, because the failures are where the design problems actually live.</p>
+<p>The program contradicted one of its own beliefs. We knew leadership development needs practice inside real work, and then we ran two sessions a week for four weeks. New concepts kept landing before anyone had applied the last ones, which was the most consistent complaint we heard and the most warranted.</p>
+<p>The activities themselves were fine. What we squeezed out was the room around them, the space to test the ideas against real work and let them settle.</p>
+<p>The evidence was not subtle. Participants described drifting during back-to-back sessions and asked for more time on exercises that got cut short. One put it as wanting “30% concepts, 70% simulations and real scenarios,” and we had that ratio backwards. The pressure reached the people running the sessions too, and in the worst case I finished my own slides a minute before one began.</p>
+<p>If I could change one decision, I would spread the same material across eight weeks instead of four. The research is clear that training without on-the-job application produces very little lasting change. We knew that going in, and the timeline talked us out of it.</p>
+<p>Cohort 2 will not repeat the mistake. We have taken everything the program produced and started building a Tech Lead Foundations learning path inside our internal installation of TalentLMS, so the next group has plenty to work through before any live session begins. That frees the synchronous hours for what Cohort 1 kept asking for: discussion and hands-on practice instead of presentation.</p>
+<h2 id="the-honestversion">The Honest Version</h2>
+<p>Twenty-three hours will never make someone a tech lead, and I never expected them to. What the program can produce is engineers who have practiced the work before the pressure arrives, who have language for the problems ahead, and who have seen the full breadth of the role before anyone asks them to operate across it.</p>
+<p>That time, multiplied across ten participants and seventeen contributors, is a fair thing to question. None of it paused the work. For participants and contributors alike, the program ran alongside business as usual.</p>
+<p>The honest comparison is not against the hours we spent. It is against the lead who never got to practice, the one who quietly becomes the bottleneck nobody named, whose team learns to wait, who keeps paying a cost that never arrives as an invoice.</p>
+<p>The gap between what earns the promotion and what the job demands does not close in four weeks. It does close faster when people have already made the decisions, met the frameworks, and felt the discomfort of the shift before a team depends on them getting it right.</p>
+<h2 id="the-work-before-thework">The Work Before the Work</h2>
+<p>Five years separate the interns in that first Dev Academy session from the engineers now preparing to lead teams. None of it paid back on the schedule I expected, and that is the part I keep relearning. The investment compounds quietly, in people, long after you have stopped watching for it.</p>
+<p>Building this was hard and slow, and worth every hour. Not because it produced a program, or a next version of something we had already built, but because it created the conditions for people to grow into responsibilities they could not yet name.</p>
+<p>The job will change. Parts of it will be harder than they expect, and parts of it will be difficult precisely because they will miss what they are leaving behind.</p>
+<p>This time, at least, someone told them early enough to practice.</p>
+<p>P.S. For a taste of Tech Lead School, I made our <a href="https://github.com/yrizos/leadership-micro-katas">Leadership Micro Katas</a> public. Small deliberate-practice exercises for engineers not yet in the role. Contributions welcome.</p>
+]]></content:encoded><media:content url="https://yrizos.com/images/writing/the-job-before-the-job.png" type="image/png" medium="image"><media:title>Home</media:title></media:content></item><item><title>Leadership Micro Katas</title><link>https://yrizos.com/writing/leadership-micro-katas/</link><guid>https://yrizos.com/writing/leadership-micro-katas/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Mon, 27 Apr 2026 01:18:18 UTC</pubDate><category>leadership</category><category>learning</category><category>discuss</category><description><![CDATA[<p>About twenty years ago, I broke production. I was a young developer, the rollback was slow, and for a few hours, I was sure the company would close because of me. In hindsight, the impact was barely worth mentioning. At the time, I was devastated.</p>
+<p>A few days later, the team went out for beers. Someone, I no longer remember who, leaned over and said something along these lines:</p>
+<blockquote>
+<p>Anticipate failure. Write down what might go wrong. Then, hope you never have to think about it again.</p>]]></description><content:encoded><![CDATA[<p>About twenty years ago, I broke production. I was a young developer, the rollback was slow, and for a few hours, I was sure the company would close because of me. In hindsight, the impact was barely worth mentioning. At the time, I was devastated.</p>
+<p>A few days later, the team went out for beers. Someone, I no longer remember who, leaned over and said something along these lines:</p>
+<blockquote>
+<p>Anticipate failure. Write down what might go wrong. Then, hope you never have to think about it again.</p>
+</blockquote>
+<p>For a while, it sat in my head as a nice idea I never got around to. A couple of incidents and near-misses later, though, I decided to act on it. Before any change I cared about, I would list what could go wrong, and sometimes change the plan because of what I had just written down.</p>
+<p>I cannot point to the moment it became a habit. By the time I noticed, it already was. That is roughly how a useful practice arrives when nobody is teaching it to you: a throwaway line, a couple of bruises, a slow drift into doing the thing without thinking about it. It works, but the timeline is on the order of years.</p>
+<h2 id="wax-on-wax-off">Wax On, Wax Off</h2>
+<p>I do believe in deliberate practice, and not as a productivity hack or anything I read in a book and decided to import. Long before any of those books, <em>The Karate Kid</em> taught me that repeated, apparently pointless practice becomes useful before the practitioner understands why. Wax on, wax off.</p>
+<p>The trouble is that the engineering defaults that benefit most from repetition are the ones that show up after the promotion, not before. There is no compiler for the question I just answered when someone needed to work it through themselves, no failing test for the risk I noticed and chose not to flag.</p>
+<p>The feedback loops go quiet. The defaults that worked as an engineer (write code, answer questions, fix things) start to cost more than they pay back.</p>
+<p>A short written practice, anchored to a moment I am already in, is one way to manufacture a new loop without waiting for years and bruises to install it. The specificity is what does the work. &ldquo;Communicate more clearly&rdquo; gives me nothing to do at 11:42 on a Tuesday. &ldquo;Write three reasons this could fail in production before you commit to the approach&rdquo; gives me something to do now.</p>
+<p>That second one is, more or less, a kata.</p>
+<h2 id="a-familiar-format">A Familiar Format</h2>
+<p>Code and architectural katas have been around for years, and I am building on the same format. Short, repeatable exercises designed to build fluency through repetition, applied this time to the part of tech leadership that does not announce itself.</p>
+<p>The label <em>micro</em> is deliberate. Ten to fifteen minutes, alone, no team, no coach, no permission. They can be practised before stepping into a lead role, so the habit is in place before the role asks for it.</p>
+<p>I had no plan to write them down. Earlier this year, we started training the next batch of tech leads at <a href="https://www.epignosishq.com/">Epignosis</a>, and twenty years of informal habit had to become something I could hand to someone else. The catalogue came out of that.</p>
+<h2 id="the-catalogue">The Catalogue</h2>
+<p>I extracted the katas from my internal presentation to a <a href="https://github.com/yrizos/leadership-micro-katas">public repository</a> you can clone, fork, or argue with.</p>
+<table>
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>Kata</th>
+          <th>Behavior</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>001</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/001-assumption-inventory.md">Assumption Inventory</a></td>
+          <td>Surface hidden assumptions before they become surprises</td>
+      </tr>
+      <tr>
+          <td>002</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/002-pre-mortem-minute.md">Pre-Mortem Minute</a></td>
+          <td>Anticipate failure before momentum silences doubt</td>
+      </tr>
+      <tr>
+          <td>003</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/003-opinion-or-observation.md">Opinion or Observation</a></td>
+          <td>Ground feedback in evidence, not preference</td>
+      </tr>
+      <tr>
+          <td>004</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/004-blocker-brief.md">The Blocker Brief</a></td>
+          <td>Explain a technical constraint so a non-engineer can act on it</td>
+      </tr>
+      <tr>
+          <td>005</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/005-tradeoff-statement.md">The Tradeoff Statement</a></td>
+          <td>Articulate what a decision costs, not just what it gains</td>
+      </tr>
+      <tr>
+          <td>006</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/006-question-before-answer.md">The Question Before the Answer</a></td>
+          <td>Develop others by resisting the urge to solve for them</td>
+      </tr>
+      <tr>
+          <td>007</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/007-line-before-pressure.md">The Line Before the Pressure</a></td>
+          <td>Turn escalation from a stress response into a deliberate decision</td>
+      </tr>
+      <tr>
+          <td>008</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/008-thing-you-did-not-say.md">The Thing You Did Not Say</a></td>
+          <td>Say on paper what you would not say out loud</td>
+      </tr>
+      <tr>
+          <td>009</td>
+          <td><a href="https://github.com/yrizos/leadership-micro-katas/blob/main/katas/009-debt-sentence.md">The Debt Sentence</a></td>
+          <td>Write down what is wrong before you ship it</td>
+      </tr>
+  </tbody>
+</table>
+<p>Each kata follows the same shape: one trigger, one short practice, one written output. The trigger is a moment already present in your engineering work, and the practice is short enough to run before that moment passes.</p>
+<h2 id="pre-mortem-minute">Pre-Mortem Minute</h2>
+<p>The kata that grew out of those beers twenty years ago is #002 (no idea why I didn&rsquo;t list it first):</p>
+<blockquote>
+<p>You are about to commit to a technical approach.</p>
+<ul>
+<li>Write: &ldquo;This has failed in production. Why?&rdquo;</li>
+<li>List 3 specific reasons</li>
+<li>Check if your plan addresses the most plausible one</li>
+</ul>
+<p><strong>Risk is visible before momentum makes it impolite to raise it.</strong></p>
+</blockquote>
+<p>The trigger is the moment you are about to commit to a technical approach. The kata applies most when you feel confident. It is not for moments of genuine unease; if you are uneasy, the answer is not a kata, it is a conversation. The kata is for the times when momentum is gathering, and the question of what could go wrong is starting to feel impolite.</p>
+<p>If &ldquo;I feel confident&rdquo; is too soft to act on, give yourself an objective trigger as well. Any change that touches more than one system. Any change you would describe as straightforward. Any time you are about to mark a design doc as decided. Pick one of those, or one of your own, and let the kata fire on it without negotiation.</p>
+<ol>
+<li>Write the failure statement first. <em>This has failed in production. Why?</em> Past tense matters; it puts you on the other side of the failure, looking back.</li>
+<li>Write three reasons in plain language. Short, specific, the way you would describe the problem to a colleague at the next desk. Not &ldquo;scalability concerns.&rdquo;</li>
+<li>Do it before momentum closes the door. Five minutes after the decision is announced, the cost of raising risk has already gone up.</li>
+</ol>
+<p>What you are left with is a note to your future self, not an Asana task, not a postmortem, not a runbook entry. Something close to this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>This has failed in production. Why?
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>- The new feature flag defaults to &#34;on&#34; for everyone, not just the cohort
+</span></span><span style="display:flex;"><span>  we agreed to roll out to. We notice when support tickets spike.
+</span></span><span style="display:flex;"><span>- The third-party we call inside the new endpoint rate-limits us under
+</span></span><span style="display:flex;"><span>  load. The retry loop turns one bad minute into ten.
+</span></span><span style="display:flex;"><span>- The cache key we changed is shared with the older service. We start
+</span></span><span style="display:flex;"><span>  serving stale data to customers, we have not even rolled out to yet.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Most plausible: the flag default. The PR currently flips it on at deploy.
+</span></span><span style="display:flex;"><span>Add a config check that requires the cohort list to be non-empty.
+</span></span></code></pre></div><p>When the note surfaces something useful, it is usually an unexamined assumption, a dependency you took for granted, or a rollback that depends on a state you cannot guarantee. Sometimes nothing surfaces and the plan is fine. The note still has value next week, when you can see what you considered before you committed.</p>
+<h2 id="the-note-i-did-not-write">The Note I Did Not Write</h2>
+<p>Which brings me back to that change twenty years ago. If I had run the kata against it, the most plausible reason on the list would have been the one that bit me. Something close to:</p>
+<blockquote>
+<p>The change includes a schema migration that runs on deploy, and there is no tested reverse migration. If anything goes wrong, the rollback is not a redeploy, it is a manual recovery.</p>
+</blockquote>
+<p>The mitigation would have been to split the migration from the code change and run it ahead of time.</p>
+<p>I do not know with certainty that I would have caught it. I know I never gave myself the chance to. That is the loop the kata closes. Not every time, not as a guarantee, but often enough that the ten minutes are repaid in the cases it does catch.</p>
+<h2 id="try-one">Try One</h2>
+<p>I am not going to promise results. I have seen these katas work, sometimes for me, sometimes for others I have passed them to over the years; I have also seen variants that worked for me fail to land for someone else, and I have abandoned a few myself.</p>
+<p>Pick one and stay with it for a week. For each time the trigger comes up, write down three things:</p>
+<ul>
+<li>Did the moment arise?</li>
+<li>What did I do?</li>
+<li>What would I change?</li>
+</ul>
+<p>If it never came up, that is also worth knowing. Either way, you will have spent a week practising something the role usually teaches over years.</p>
+]]></content:encoded></item><item><title>One Bloody Character</title><link>https://yrizos.com/writing/one-bloody-character/</link><guid>https://yrizos.com/writing/one-bloody-character/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Wed, 15 Apr 2026 12:53:04 UTC</pubDate><category>software-development</category><category>personal-growth</category><category>artificial-intelligence</category><category>future-of-work</category><description>&lt;p>The fix was a single character, and I was furious for the rest of the evening.&lt;/p>
+&lt;p>Cursor had written a perfect expectiminimax evaluator, all tests green. Or so I thought. The scores seemed slightly off on certain paths. Not obviously wrong. It made sensible decisions on most inputs. On the ones where it did not, the wrongness was faint enough that I was almost convinced I was misreading my own algorithm.&lt;/p></description><content:encoded><![CDATA[<p>The fix was a single character, and I was furious for the rest of the evening.</p>
+<p>Cursor had written a perfect expectiminimax evaluator, all tests green. Or so I thought. The scores seemed slightly off on certain paths. Not obviously wrong. It made sensible decisions on most inputs. On the ones where it did not, the wrongness was faint enough that I was almost convinced I was misreading my own algorithm.</p>
+<p>Forty minutes of uninterrupted time is what a Tuesday evening gives me after putting my baby girl to bed. I had already burned most of it staring at traces that looked <em>fine</em> when I pressed the tool to investigate. It found the sign flip in minutes, explained the inversion, and applied the fix.</p>
+<p><em>One bloody character</em>.</p>
+<p>I went back and looked at the test. It had been encoding the buggy sign from the start. The code and the test had been wrong in exactly the same way, and the green build had been proof of nothing. Mechanical compliance.</p>
+<p>Objectively, I lost less than an hour. The tool handed most of it back. The evaluator worked. By any reasonable measure, this was a trivial issue with a speedy recovery. I was livid, and I knew the anger made no sense at all.</p>
+<p>But I was livid anyway.</p>
+<h2 id="the-window"><strong>The Window</strong></h2>
+<p>The time for building had been shrinking for years. Architectural work, cross-functional coordination, the organizational lifting that never shows up on any dashboard but quietly consumes most of a working week: none of it was going away. What remained were fragments. The hour after bedtime. A Saturday morning before the house wakes up. Not days. Hours.</p>
+<p>Augmented coding changed whether those fragments were worth starting. I <a href="https://medium.com/@yrizos/the-end-of-coding-as-we-know-it-f5446f6c7806">wrote a while back</a> that this looked like progress, and I stand by it. The tool gave me something I had almost stopped expecting: a second life in the code.</p>
+<p>I could pick up an unfamiliar technology in the evening and have something running before midnight. Barriers that once required a couple of days simply disappeared. I remember the first time a fragment actually produced something real, not a half-started sketch I would need to re-enter the following week, but a working service in a language I had barely touched.</p>
+<p>The feeling was not productivity. It was closer to relief. The part of me that builds things, the part that had been going quiet under the weight of everything else a senior role demands, was still there. Augmented coding did not just make the hour more efficient. It made the hour possible.</p>
+<p>When a single-character bug eats the hour and the tool finds and applies the fix in minutes, the question is not just why I am furious at midnight. It is what exactly was lost that makes a trivial bug, in a recovered hour, in a personal project that nobody depends on, feel like something worth being furious about at all.</p>
+<h2 id="what-the-old-failures-leftbehind"><strong>What the Old Failures Left Behind</strong></h2>
+<p>I have been doing this for over twenty years. I have had my share of production incidents. Systems down for hours. Features rolled back on a Friday evening. Bugs that took days to trace, not because they were clever but because understanding them required understanding the system, and there was no shortcut to it.</p>
+<p>Those were objectively worse than a sign flip in a personal project on a Tuesday night. They cost more, took longer, and hurt more people.</p>
+<p>They did not make me this angry.</p>
+<p>When those incidents were over, there was something on the other side. A part of the codebase that was now known in a way it had not been before. The hour spent staring at a wrong function signature was also an hour spent learning why the abstraction had been shaped that way. The debugging revealed the design.</p>
+<p>The frustration was not separate from the learning. It was the mechanism through which the learning happened. I am not going to romanticize this. Those sessions were brutal, and anyone who has inherited a system that took days to understand just to fix a single defect knows there was nothing pleasant about the process.</p>
+<p>But the knowledge that came out of it was durable. It lived in the hands. You could feel it when you touched that part of the code again months later, the quiet confidence of having been inside the problem and coming out the other side knowing how it held together.</p>
+<p>The mess was the learning. That is what the old failures left behind. The new ones do not.</p>
+<h2 id="what-gets-compressed"><strong>What Gets Compressed</strong></h2>
+<p>Augmented coding compresses the process. What gets compressed is not the debugging but the slow hours where the code becomes familiar through building.</p>
+<p>Wax on, wax off.</p>
+<p>In a <a href="https://www.youtube.com/watch?v=vagyIcmIGOQ">conversation with Lex Fridman</a>, DHH described competence draining from his fingers. He found himself asking the AI for the same syntax patterns over and over, never learning them because he never typed them.</p>
+<p>Alexandru Nedelcu catalogues the same loss in <a href="https://alexn.org/blog/2025/10/27/ai-sucks-the-joy-out-of-programming/">AI Sucks the Joy Out of Programming</a>: an LLM-driven workflow that delivers all the bad parts, the stress of not being in control, the desperate trial-and-error, and none of the gratification that comes from the journey itself.</p>
+<p>The slow, frustrating work of the good old days was not waste to be eliminated. That was where psychological ownership of the work was built. Not just knowing what the code does, but the felt sense of having shaped it from the inside, of being the person who wrestled it into its current form.</p>
+<p>The fun of building was in the building itself. When that process is compressed, the understanding that would have come from it does not arrive through some other channel. It simply does not arrive.</p>
+<p>And the anger I felt staring at a one-character fix at eleven on a Tuesday night was not really about the bug. It was about the absence of everything that used to follow.</p>
+<h2 id="the-drift"><strong>The Drift</strong></h2>
+<p>There is another texture to the loss, and it comes with its own particular absurdity.</p>
+<p>Ask the tool to fix something specific and it may not adjust the specific thing. It may reimagine the surrounding structure entirely, like asking someone to move a chair and coming back to find they have redecorated the room. The result looks plausible, passes a quick scan, and is absolutely not what was intended.</p>
+<p>Ask again and it overcorrects in a different direction. You are now chasing the output rather than steering it, trying to recover a shape that existed three iterations ago and is gone.</p>
+<p>There is also a discipline to this nobody warned you about: you have to be calm. The moment your feedback carries any trace of frustration, the model interprets it as a signal that <em>everything</em> is wrong. Measured, specific, almost zen-like correction is what works. Anything that reads like impatience triggers a panicked reimagining that leaves you further from where you started.</p>
+<p>The tool is at its most destructive precisely when you are at your least patient, which, if you have forty minutes and the code just drifted sideways for the third time, is most of the time.</p>
+<p>Simon Willison has a <a href="https://simonwillison.net/2025/Mar/19/vibe-coding/">rule</a> for this:</p>
+<blockquote>
+<p>do not commit code you cannot explain to someone else</p>
+</blockquote>
+<p>The rule sounds simple. It is considerably harder to follow when the window is almost closed and the tool has just produced something that appears to work.</p>
+<p>A couple of weeks after the green test incident, an agent ran a destructive git restore mid-session. The safety protocols I had configured did precisely nothing. Gone. Everything I had built that session, gone. And the tool rebuilt it in minutes. That was somehow the worst part. The loss that had felt catastrophic was already undone, the fury left hanging with nowhere to land, because you cannot stay enraged at something that fixed itself before you finished swearing at it.</p>
+<p>Neither incident lasted more than a few hours. Neither left behind the durable knowledge that the old failures used to produce. They were small enough that there was nothing to learn from them, and the fury that followed was not proportionally small. That is the paradox. Augmented coding makes failures smaller, faster, and cheaper to recover from. The smaller failures feel worse than the expensive ones used to.</p>
+<h2 id="responsibility-without-authorship"><strong>Responsibility Without Authorship</strong></h2>
+<p>The knowing disappears. The responsibility does not go with it. I shipped the evaluator.</p>
+<p>I am accountable for it. That accountability has nothing to do with how much of the code I personally understood at the moment I committed it. Nobody downstream will ask whether the green test was machine-generated or hand-written. The failure belongs to the person who shipped it.</p>
+<p>Addy Osmani calls this the knowledge paradox in <a href="https://addyo.substack.com/p/the-70-problem-hard-truths-about">The 70% Problem</a>. AI tools help experienced developers more than beginners, because experienced developers can evaluate and constrain the output. But that same experienced developer is now evaluating output they did not build, and the understanding that would have come from building it was compressed out along with the process. The gap between what was shipped and what was understood widens with every cycle. The accountability does not narrow to match.</p>
+<p>You begin to feel like a reviewer of your own work. Not the builder who shaped the code, but the bureaucrat who approved it.</p>
+<p>It is impostor syndrome, except the impostor is real. You genuinely did not write most of this. You are genuinely uncertain whether you could have. The tool is lightning fast and you… a bottleneck?</p>
+<p>The thought that follows, the one you push away because it is irrational and premature, is that the tool that introduced the bug might eventually make you unnecessary. The fear does not survive examination. It survives anyway. And it colours everything else: the sign flip is not just a sign flip when part of you wonders whether you are watching your own obsolescence in slow motion.</p>
+<h2 id="both-live-in-the-samehour"><strong>Both Live in the Same Hour</strong></h2>
+<p>It is late on a Tuesday, the house quiet and the editor open. The hour is running out, the way it always does.</p>
+<p>The gains that made this hour worth starting are not rhetorical. Augmented coding gave me back something that was genuinely slipping away. I can pick up where I left off without the long re-entry cost that used to consume half the window. I can reach technologies that would have taken weeks to approach. The second life in the code is real, and I am not willing to give it up.</p>
+<p>What I cannot hold at the same time is how the hour feels when something goes wrong. Not worse in any absolute sense. Worse in the specific sense that matters: the mess is no longer the learning. The small failures leave no knowledge behind, no ownership, no quiet confidence for next time.</p>
+<p>A sign flip and a rogue git restore. Those are the only two incidents that came to mind across months of augmented building. Two small disruptions, both recovered in minutes. By any honest measure, the tool is doing its job. I am still furious.</p>
+<p>I have <a href="https://medium.com/@yrizos/the-fastest-engineer-in-the-room-44168a7570b8">written before</a> about the cost that speed imposes on the organization around the maker. This is the cost it imposes on the maker. What building means when the tool works and the anger persists and neither fact explains the other, I do not yet know.</p>
+<p>The window is closing. I start anyway.</p>
+]]></content:encoded><media:content url="https://yrizos.com/images/writing/one-bloody-character.png" type="image/png" medium="image"><media:title>Home</media:title></media:content></item><item><title>The Fastest Engineer in the Room</title><link>https://yrizos.com/writing/the-fastest-engineer-in-the-room/</link><guid>https://yrizos.com/writing/the-fastest-engineer-in-the-room/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Fri, 13 Mar 2026 16:44:20 UTC</pubDate><category>engineering-leadership</category><category>software-design</category><category>software-architecture</category><category>technical-debt</category><description><![CDATA[<p>A colleague mentioned the <strong>tactical tornado</strong> the other day. The phrase landed in a way it hadn’t in years, and I found myself back in two places at once: the pages of John Ousterhout’s <a href="https://www.amazon.com/Philosophy-Software-Design-2nd/dp/173210221X"><em>A Philosophy of Software Design</em></a>, and a meeting room where someone was asking me, as diplomatically as they could, to please slow down.</p>
 <p>I have… opinions about the book. Some of its prescriptions feel too neat for the messy reality of production systems. But the tactical tornado was a direct hit. Ousterhout named something I had seen repeatedly but never had a clean language for.</p>]]></description><content:encoded><![CDATA[<p>A colleague mentioned the <strong>tactical tornado</strong> the other day. The phrase landed in a way it hadn’t in years, and I found myself back in two places at once: the pages of John Ousterhout’s <a href="https://www.amazon.com/Philosophy-Software-Design-2nd/dp/173210221X"><em>A Philosophy of Software Design</em></a>, and a meeting room where someone was asking me, as diplomatically as they could, to please slow down.</p>
 <p>I have… opinions about the book. Some of its prescriptions feel too neat for the messy reality of production systems. But the tactical tornado was a direct hit. Ousterhout named something I had seen repeatedly but never had a clean language for.</p>
 <p>And more uncomfortably, he named something I had been.</p>
@@ -1113,9 +1403,9 @@ The position is made up of two integers and a letter separated by spaces, corres
 </span></span><span style="display:flex;"><span>3 3 E
 </span></span><span style="display:flex;"><span>MMRMMRMRRM
 </span></span></code></pre></div><h3 id="test-output">Test Output:</h3>
-<pre tabindex="0"><code>1 3 N
-5 1 E
-</code></pre><h2 id="breaking-down-the-requirements">Breaking Down the Requirements</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>1 3 N
+</span></span><span style="display:flex;"><span>5 1 E
+</span></span></code></pre></div><h2 id="breaking-down-the-requirements">Breaking Down the Requirements</h2>
 <p>Let&rsquo;s analyze what we&rsquo;re dealing with:</p>
 <ol>
 <li>
@@ -1175,25 +1465,25 @@ The position is made up of two integers and a letter separated by spaces, corres
 <ol>
 <li>
 <p>Open Terminal and create a new Rust project:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"></code></pre></div></li>
-</ol>
-<p>cargo new hello_world
-```</p>
-<ol start="2">
+<pre><code> ```sh
+</code></pre>
+<p>cargo new hello_world</p>
+<pre tabindex="0"><code></code></pre></li>
 <li>
 <p>Navigate into the project folder:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"></code></pre></div></li>
-</ol>
-<p>cd hello_world
-```</p>
-<ol start="3">
+<pre><code> ```sh
+</code></pre>
+<p>cd hello_world</p>
+<pre tabindex="0"><code></code></pre></li>
 <li>
 <p>Open the project in VS Code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"></code></pre></div></li>
+<pre><code> ```sh
+</code></pre>
+<p>code .</p>
+<pre tabindex="0"><code>
+If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type &#34;Shell Command,&#34; and select &#34;Install &#39;code&#39; command in PATH.&#34; Then try again.
+</code></pre></li>
 </ol>
-<p>code .
-```</p>
-<p>If this command doesn’t work, you may need to add VS Code to your PATH. Open the Command Palette (⇧ + ⌘ + P), type &ldquo;Shell Command,&rdquo; and select &ldquo;Install &lsquo;code&rsquo; command in PATH.&rdquo; Then try again.</p>
 <h3 id="step-3-add-the-rust-analyzer-extension">Step 3: Add the Rust Analyzer Extension</h3>
 <ol>
 <li>Open VS Code and press ⇧ + ⌘ + X to open the Extensions view.</li>
@@ -1230,21 +1520,21 @@ The position is made up of two integers and a letter separated by spaces, corres
 </span></span></code></pre></div><h3 id="step-5-run-your-program-with-cargo">Step 5: Run your program with cargo</h3>
 <ol>
 <li>
-<p>Open the integrated terminal in VS Code by pressing ⌃ + <code>`</code>  (Control and backtick).</p>
+<p>Open the integrated terminal in VS Code by pressing ⌃ + <code>`</code> (Control and backtick).</p>
 </li>
 <li>
 <p>Run the program:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"></code></pre></div></li>
-</ol>
-<p>cargo run
-```</p>
-<ol start="3">
+<pre><code> ```sh
+</code></pre>
+<p>cargo run</p>
+<pre tabindex="0"><code></code></pre></li>
 <li>
 <p>You should see the output:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"></code></pre></div></li>
+<pre><code> ```plaintext
+</code></pre>
+<p>Hello, world!</p>
+<pre tabindex="0"><code></code></pre></li>
 </ol>
-<p>Hello, world!
-```</p>
 <p>And there you have it. Your setup is ready, and you’re all set to dive into Rust development with VS Code. Time to build something amazing!</p>
 ]]></content:encoded></item><item><title>Installing Rust on macOS with Homebrew</title><link>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</link><guid>https://yrizos.com/writing/installing-rust-on-macos-with-homebrew/</guid><author>Yannis Rizos (https://yrizos.com/)</author><pubDate>Sun, 17 Nov 2024 09:28:59 UTC</pubDate><category>rust</category><category>homebrew</category><category>beginners</category><description><![CDATA[<p>This Sunday, I had a bit of extra time, so I decided to brush up on <a href="https://www.rust-lang.org/">Rust</a>. Whether you are a seasoned developer or just starting out, getting your tools set up is always the first step.</p>
 <p>While Rust’s official installation tool, <code>rustup</code>, is excellent and versatile, I prefer using <a href="https://brew.sh/">Homebrew</a> whenever possible. It is simple, familiar, and keeps everything neatly managed in one place.</p>
