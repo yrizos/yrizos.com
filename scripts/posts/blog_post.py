@@ -2,7 +2,6 @@
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List, Optional
 
 
 @dataclass
@@ -12,8 +11,8 @@ class BlogPost:
     date: datetime
     original_url: str
     markdown_body: str
-    tags: List[str] = field(default_factory=list)
-    image_url: Optional[str] = None
+    tags: list[str] = field(default_factory=list)
+    image_url: str | None = None
     image_alt: str = ""
-    series_title: Optional[str] = None
-    series_order: Optional[int] = None
+    series_title: str | None = None
+    series_order: int | None = None

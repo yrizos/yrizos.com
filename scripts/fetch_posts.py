@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """CLI utility that fetches Medium or Dev.to posts and converts them into Hugo content files."""
 
-from posts import main
 import sys
 from pathlib import Path
+
+from posts import main
 
 # Add scripts directory to path so we can import posts package
 scripts_dir = Path(__file__).resolve().parent

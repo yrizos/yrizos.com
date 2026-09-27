@@ -1,6 +1,7 @@
 """Dev.to-specific post fetching logic."""
 
-from typing import List, Optional
+import html
+import re
 from urllib.parse import urlsplit
 
 import feedparser
@@ -9,7 +10,7 @@ from rich.console import Console
 from rich.theme import Theme
 
 from .blog_post import BlogPost
-from .cli import clean_url, parse_publish_date, slugify
+from .cli import clean_url, extract_tags, parse_publish_date, slugify
 
 console = Console(
     theme=Theme({"prompt": "bold cyan", "choice": "bold green", "error": "bold red"})
@@ -18,7 +19,7 @@ console = Console(
 DEVTO_SKIP_SLUGS = {"building-a-chess-game-with-python-and-openai-3knn"}
 
 
-def extract_devto_article_id(url: str) -> Optional[str]:
+def extract_devto_article_id(url: str) -> str | None:
     """Extract the article path (username/slug) from a Dev.to URL."""
     path = urlsplit(url).path
     if not path:
@@ -40,61 +41,44 @@ def fetch_devto_article(article_id: str) -> dict:
     return response.json()
 
 
-def fetch_series_title(username: str, collection_id: int) -> Optional[str]:
+def fetch_series_title(username: str, collection_id: int) -> str | None:
     """Fetch series title from the Dev.to series page."""
+    series_url = f"https://dev.to/{username}/series/{collection_id}"
     try:
-        series_url = f"https://dev.to/{username}/series/{collection_id}"
         response = requests.get(series_url, timeout=30)
         response.raise_for_status()
+    except requests.RequestException:
+        return None
 
-        # Extract title from HTML <title> tag
-        import re
-        import html
-
-        match = re.search(r"<title>(.+?)</title>", response.text)
-        if match:
-            title = match.group(1)
-            # Decode HTML entities (e.g., &#39; -> ')
-            title = html.unescape(title)
-            # Remove "Series' Articles - DEV Community" suffix (handles ' or &#39;)
-            title = re.sub(
-                r"\s+Series['\u2019]?\s+Articles\s*-\s*DEV Community.*$", "", title
-            )
-            return title.strip()
-    except Exception:
-        # If we can't fetch series title, just return None
-        pass
-    return None
+    match = re.search(r"<title>(.+?)</title>", response.text)
+    if not match:
+        return None
+    title = html.unescape(match.group(1))
+    title = re.sub(r"\s+Series['\u2019]?\s+Articles\s*-\s*DEV Community.*$", "", title)
+    return title.strip()
 
 
 def calculate_series_order(
     username: str, collection_id: int, article_id: int
-) -> Optional[int]:
+) -> int | None:
     """Calculate the article's position in the series based on publish date."""
+    api_url = f"https://dev.to/api/articles?username={username}&per_page=1000"
     try:
-        # Fetch all articles for the user
-        api_url = f"https://dev.to/api/articles?username={username}&per_page=1000"
         response = requests.get(api_url, timeout=30)
         response.raise_for_status()
         articles = response.json()
+    except (requests.RequestException, ValueError):
+        return None
 
-        # Filter articles by collection_id and sort by published_at
-        series_articles = [
-            a for a in articles if a.get("collection_id") == collection_id
-        ]
-        series_articles.sort(key=lambda x: x.get("published_at", ""))
-
-        # Find the position of the current article
-        for index, article in enumerate(series_articles, start=1):
-            if article.get("id") == article_id:
-                return index
-    except Exception:
-        # If we can't determine order, return None
-        pass
+    series_articles = [a for a in articles if a.get("collection_id") == collection_id]
+    series_articles.sort(key=lambda x: x.get("published_at", ""))
+    for index, article in enumerate(series_articles, start=1):
+        if article.get("id") == article_id:
+            return index
     return None
 
 
-def extract_devto_slug(entry) -> Optional[str]:
+def extract_devto_slug(entry) -> str | None:
     """Extract the slug portion from a Dev.to entry link."""
     link = entry.get("link")
     if not link:
@@ -108,29 +92,13 @@ def extract_devto_slug(entry) -> Optional[str]:
     return parts[-1]
 
 
-def extract_tags(entry) -> List[str]:
-    """Extract tag terms from a feed entry."""
-    tags: List[str] = []
-    seen = set()
-    for tag in entry.get("tags", []):
-        term = tag.get("term") if isinstance(tag, dict) else getattr(tag, "term", None)
-        if not term:
-            continue
-        normalized = str(term).strip()
-        if not normalized or normalized in seen:
-            continue
-        seen.add(normalized)
-        tags.append(normalized)
-    return tags
-
-
-def fetch_devto_posts(feed_url: str) -> List[BlogPost]:
+def fetch_devto_posts(feed_url: str) -> list[BlogPost]:
     """Fetch Dev.to posts using the RSS feed."""
     parsed = feedparser.parse(feed_url)
     if parsed.bozo:
         raise ValueError(f"Failed to parse Dev.to feed: {parsed.bozo_exception}")
 
-    posts: List[BlogPost] = []
+    posts: list[BlogPost] = []
     for entry in parsed.entries:
         title = entry.get("title")
         if not title:

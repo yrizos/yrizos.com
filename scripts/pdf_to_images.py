@@ -4,7 +4,6 @@
 import argparse
 import pathlib
 import sys
-from typing import Optional
 
 try:
     import fitz  # PyMuPDF
@@ -23,7 +22,7 @@ def pdf_to_images(
     pdf_path: pathlib.Path,
     output_dir: pathlib.Path,
     dpi: int = DEFAULT_DPI,
-    prefix: Optional[str] = None,
+    prefix: str | None = None,
 ) -> None:
     """Convert PDF pages to JPG images.
 
@@ -37,7 +36,7 @@ def pdf_to_images(
         print(f"Error: PDF file not found: {pdf_path}")
         sys.exit(1)
 
-    if not pdf_path.suffix.lower() == ".pdf":
+    if pdf_path.suffix.lower() != ".pdf":
         print(f"Error: File is not a PDF: {pdf_path}")
         sys.exit(1)
 
@@ -91,7 +90,7 @@ def pdf_to_images(
 
         print(f"\nSuccessfully converted {page_count} pages to PNG images")
 
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - PyMuPDF has no stable exception hierarchy; any failure here should abort with a message
         print(f"Error converting PDF: {e}")
         sys.exit(1)
 

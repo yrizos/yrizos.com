@@ -5,6 +5,7 @@ from types import SimpleNamespace
 
 from scripts import fetch_books as fetch_books_mod
 from scripts import fetch_reading as fetch_reading_mod
+from scripts import goodreads as goodreads_mod
 
 
 class FakeEntry(dict):
@@ -97,6 +98,84 @@ def test_fetch_books_feed_and_process(monkeypatch, tmp_path: Path) -> None:
     title_file.write_text('book_id = "29630264"\nimage = "images/books/recommendations/skip.jpg"\ntitle = "Skip Me"\n', encoding="utf-8")
     fetch_books_mod.remove_skipped_books()
     assert not title_file.exists()
+
+
+def test_get_image_url_from_sources_falls_through_in_order(monkeypatch) -> None:
+    calls = []
+
+    def fake_head(url, timeout):
+        calls.append(("head", url))
+
+        class Response:
+            status_code = 404  # no direct ISBN cover
+
+        return Response()
+
+    def fake_get(url, timeout):
+        calls.append(("get", url))
+
+        class Response:
+            status_code = 200
+
+            def json(self):
+                if "googleapis" in url:
+                    return {"items": []}  # Google Books has nothing for either query
+                return {"docs": [{"cover_i": 12345}]}  # Open Library search hits
+
+        return Response()
+
+    monkeypatch.setattr(goodreads_mod.requests, "head", fake_head)
+    monkeypatch.setattr(goodreads_mod.requests, "get", fake_get)
+
+    result = goodreads_mod.get_image_url_from_sources(
+        "1", "9780132350884", "Clean Code", "Robert Martin"
+    )
+
+    assert result == "https://covers.openlibrary.org/b/id/12345-L.jpg"
+    assert [kind for kind, _ in calls] == ["head", "get", "get", "get"]
+    assert "covers.openlibrary.org/b/isbn" in calls[0][1]
+    assert "isbn:" in calls[1][1]
+    assert "isbn:" not in calls[2][1]
+    assert "openlibrary.org/search.json" in calls[3][1]
+
+
+def test_remove_duplicate_books_keeps_shared_image(monkeypatch, tmp_path: Path) -> None:
+    books_dir = tmp_path / "books"
+    images_dir = tmp_path / "images"
+    books_dir.mkdir()
+    images_dir.mkdir()
+
+    shared_image = images_dir / "shared.jpg"
+    shared_image.write_bytes(b"cover")
+    unique_image = images_dir / "unique.jpg"
+    unique_image.write_bytes(b"cover2")
+
+    (books_dir / "keep.md").write_text(
+        'book_id = "1"\nimage = "images/books/recommendations/shared.jpg"\n'
+        'title = "The Pragmatic Programmer: A Journey"\n',
+        encoding="utf-8",
+    )
+    (books_dir / "same-image-duplicate.md").write_text(
+        'book_id = "1"\nimage = "images/books/recommendations/shared.jpg"\n'
+        'title = "The Pragmatic Programmer"\n',
+        encoding="utf-8",
+    )
+    (books_dir / "different-image-duplicate.md").write_text(
+        'book_id = "1"\nimage = "images/books/recommendations/unique.jpg"\n'
+        'title = "Pragmatic Prog"\n',
+        encoding="utf-8",
+    )
+
+    monkeypatch.setattr(fetch_books_mod, "BOOKS_DIR", books_dir)
+    monkeypatch.setattr(fetch_books_mod, "IMAGES_DIR", images_dir)
+
+    fetch_books_mod.remove_duplicate_books()
+
+    assert (books_dir / "keep.md").exists()
+    assert not (books_dir / "same-image-duplicate.md").exists()
+    assert not (books_dir / "different-image-duplicate.md").exists()
+    assert shared_image.exists()
+    assert not unique_image.exists()
 
 
 def test_fetch_reading_helpers(monkeypatch) -> None:

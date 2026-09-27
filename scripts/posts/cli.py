@@ -4,8 +4,8 @@ import argparse
 import json
 import pathlib
 import re
+from collections.abc import Callable, Iterable
 from datetime import datetime
-from typing import Callable, Iterable, List, Optional
 from urllib.parse import urlsplit, urlunsplit
 
 import requests
@@ -35,6 +35,22 @@ def slugify(title: str) -> str:
     return collapsed or "post"
 
 
+def extract_tags(entry) -> list[str]:
+    """Extract unique tag terms from a feed entry, preserving order."""
+    tags: list[str] = []
+    seen = set()
+    for tag in entry.get("tags", []):
+        term = tag.get("term") if isinstance(tag, dict) else getattr(tag, "term", None)
+        if not term:
+            continue
+        normalized = str(term).strip()
+        if not normalized or normalized in seen:
+            continue
+        seen.add(normalized)
+        tags.append(normalized)
+    return tags
+
+
 def clean_url(url: str) -> str:
     """Remove query and fragment components from a URL."""
     split = urlsplit(url)
@@ -42,7 +58,7 @@ def clean_url(url: str) -> str:
 
 
 def parse_publish_date(
-    raw_value: Optional[str], fallback: Optional[str], title: str
+    raw_value: str | None, fallback: str | None, title: str
 ) -> datetime:
     """Parse publication date from the feed entry."""
     from datetime import timezone
@@ -57,7 +73,7 @@ def parse_publish_date(
     return parsed.astimezone(timezone.utc)
 
 
-def build_front_matter(post: BlogPost, image_web_path: Optional[pathlib.Path]) -> str:
+def build_front_matter(post: BlogPost, image_web_path: pathlib.Path | None) -> str:
     """Create TOML front matter for the Hugo post."""
     fields = {
         "title": post.title,
@@ -127,7 +143,7 @@ def write_post(post: BlogPost) -> None:
     POSTS_DIR.mkdir(parents=True, exist_ok=True)
 
     post_path = POSTS_DIR / f"{post.slug}.md"
-    image_web_path: Optional[pathlib.Path] = None
+    image_web_path: pathlib.Path | None = None
 
     if post.image_url:
         image_filename = determine_image_filename(post.slug, post.image_url)
@@ -175,7 +191,7 @@ def process_posts(posts: Iterable[BlogPost]) -> None:
             console.print(f"Failed to save '{post.title}': {err}", style="error")
 
 
-def run(feed_fetcher: Callable[[str], List[BlogPost]], feed_url: str) -> None:
+def run(feed_fetcher: Callable[[str], list[BlogPost]], feed_url: str) -> None:
     """Fetch posts from the selected feed and process them."""
     posts = feed_fetcher(feed_url)
     if not posts:

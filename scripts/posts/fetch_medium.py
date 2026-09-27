@@ -2,9 +2,6 @@
 
 import re
 from datetime import datetime, timezone
-from email.utils import parsedate_to_datetime
-from typing import List, Optional, Tuple
-from urllib.parse import urlsplit, urlunsplit
 
 import feedparser
 from bs4 import BeautifulSoup
@@ -13,7 +10,7 @@ from rich.console import Console
 from rich.theme import Theme
 
 from .blog_post import BlogPost
-from .cli import clean_url, parse_publish_date, slugify
+from .cli import clean_url, extract_tags, parse_publish_date, slugify
 
 console = Console(
     theme=Theme({"prompt": "bold cyan", "choice": "bold green", "error": "bold red"})
@@ -30,7 +27,7 @@ TRACKING_IMAGE_PATTERNS = [
 
 def normalize_headings(soup: BeautifulSoup) -> None:
     """Normalize headings so the highest-level heading becomes H2, preserving hierarchy."""
-    heading_nodes: List[Tuple[int, BeautifulSoup]] = []
+    heading_nodes: list[tuple[int, BeautifulSoup]] = []
     for level in range(1, 7):
         for heading in soup.find_all(f"h{level}"):
             heading_nodes.append((level, heading))
@@ -47,7 +44,7 @@ def normalize_headings(soup: BeautifulSoup) -> None:
         heading.name = f"h{new_level}"
 
 
-def pop_first_image(soup: BeautifulSoup) -> Tuple[Optional[str], str]:
+def pop_first_image(soup: BeautifulSoup) -> tuple[str | None, str]:
     """Remove and return the first non-tracking image from the article body."""
     for img in soup.find_all("img"):
         src = img.get("src")
@@ -62,7 +59,7 @@ def pop_first_image(soup: BeautifulSoup) -> Tuple[Optional[str], str]:
 
 def extract_original_metadata(
     soup: BeautifulSoup,
-) -> Tuple[Optional[str], Optional[datetime]]:
+) -> tuple[str | None, datetime | None]:
     """Extract original publication URL and date from the article body."""
     for element in soup.find_all(["p", "div", "section"]):
         text = element.get_text(separator=" ", strip=True)
@@ -72,7 +69,7 @@ def extract_original_metadata(
             anchor = element.find("a", href=True)
             raw_url = anchor["href"] if anchor else None
             date_match = ORIGINAL_DATE_PATTERN.search(text)
-            parsed_date: Optional[datetime] = None
+            parsed_date: datetime | None = None
             if date_match:
                 date_str = date_match.group(1)
                 try:
@@ -103,29 +100,13 @@ def remove_tracking_images(soup: BeautifulSoup) -> None:
             img.decompose()
 
 
-def extract_tags(entry) -> List[str]:
-    """Extract tag terms from a feed entry."""
-    tags: List[str] = []
-    seen = set()
-    for tag in entry.get("tags", []):
-        term = tag.get("term") if isinstance(tag, dict) else getattr(tag, "term", None)
-        if not term:
-            continue
-        normalized = str(term).strip()
-        if not normalized or normalized in seen:
-            continue
-        seen.add(normalized)
-        tags.append(normalized)
-    return tags
-
-
-def fetch_medium_posts(feed_url: str) -> List[BlogPost]:
+def fetch_medium_posts(feed_url: str) -> list[BlogPost]:
     """Fetch Medium posts using the RSS feed."""
     parsed = feedparser.parse(feed_url)
     if parsed.bozo:
         raise ValueError(f"Failed to parse Medium feed: {parsed.bozo_exception}")
 
-    posts: List[BlogPost] = []
+    posts: list[BlogPost] = []
     for entry in parsed.entries:
         title = entry.get("title")
         if not title:
@@ -146,7 +127,7 @@ def parse_medium_entry(entry) -> BlogPost:
 
     published = parse_publish_date(entry.get("published"), entry.get("updated"), title)
 
-    content_html: Optional[str] = None
+    content_html: str | None = None
     if entry.get("content"):
         content_html = entry.content[0].value
     elif entry.get("summary"):
